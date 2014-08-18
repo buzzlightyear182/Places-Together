@@ -13,16 +13,27 @@ user4 = User.create username: "bentarenne", fullname:"Ben Tarenne", password: '1
 user5 = User.create username: "cat1788", fullname:"Cat Burston", password: '12345678', email: "cat1788@gmail.com"
 user6 = User.create username: "rogerbriz", fullname:"Roger Briz", password: '12345678', email: "rogerbriz@gmail.com"
 
-place1 = Place.create city: 'Manila', country: 'Philippines', user_id: user1.id
-place2 = Place.create city: 'Montpellier', country: 'France', user_id: user5.id
-place3 = Place.create city: 'Barcelona', country: 'Spain', user_id: user2.id
-place4 = Place.create city: 'Bilbao', country: 'Spain', user_id: user6.id
-place5 = Place.create city: 'Oslo', country: 'Norway', user_id: user3.id
+place1 = Place.create city: 'Manila', country: 'Philippines'
+place2 = Place.create city: 'Montpellier', country: 'France'
+place3 = Place.create city: 'Barcelona', country: 'Spain'
+place4 = Place.create city: 'Bilbao', country: 'Spain'
+place5 = Place.create city: 'Oslo', country: 'Norway'
 
-activity1 = Activity.create activity_name: "Diving", category: "Water Sport", user_id: user1.id
-activity2 = Activity.create activity_name: "Hackathon", category: "Indoor", user_id: user2.id
-activity3 = Activity.create activity_name: "Fiesta", category: "Nightlife", user_id: user3.id
-activity4 = Activity.create activity_name: "Trek", category: "Outdoor", user_id: user6.id
+activity1 = Activity.create activity_name: "Diving", category: "Water Sport"
+activity2 = Activity.create activity_name: "Hackathon", category: "Indoor"
+activity3 = Activity.create activity_name: "Fiesta", category: "Nightlife"
+activity4 = Activity.create activity_name: "Trek", category: "Outdoor"
+
+# place1.activities = [activity1]
+# place2.activities = [activity4]
+# place3.activities = [activity2, activity3]
+# place4.activities = [activity4]
+# place5.activities = [activity1, activity3]
+
+# activity1.places = [place1, place5]
+# activity2.places = [place3]
+# activity3.places = [place5, place3]
+# activity4.places = [place4, place2]
 
 Trip.create organizer: user1.id, place_id: place1.id, activity_id: activity1.id, from_date: Date.today+30, to_date: Date.today+32, member: user4.id, description: "Wreck dive", verified: false, capacity: 10
 

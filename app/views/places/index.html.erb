@@ -1,0 +1,7 @@
+This is the Place index page
+
+<ul>
+<% @places.each do |place| %>
+	<li><%= link_to place.city, place_path(place.id) %></li>
+<% end %>
+</ul>
