@@ -1,6 +1,5 @@
 class Place < ActiveRecord::Base
-	has_and_belongs_to_many :activities
-	has_many :trips
+	has_many :activities, through: :trips
 
 	validates :city, presence: true
 

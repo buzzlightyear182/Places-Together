@@ -1,7 +1,7 @@
 class Trip < ActiveRecord::Base
-	# has_many_and_belongs_to_many :users
-	belongs_to :place
+	has_one :place
 	has_one :activity
+	belongs_to :user
 
 	validates :place_id, presence: true
 	validates :activity_id, presence: true
@@ -12,7 +12,6 @@ class Trip < ActiveRecord::Base
 	validate :from_date_before_to_date
 
 #custom ActiveRecord validations
-
 	def from_date_is_in_future
 		if from_date == nil
 			return
