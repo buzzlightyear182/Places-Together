@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20140818141306) do
   create_table "places", force: true do |t|
     t.string  "city"
     t.string  "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "trips", force: true do |t|
@@ -34,9 +36,7 @@ ActiveRecord::Schema.define(version: 20140818141306) do
     t.integer  "activity_id"
     t.date     "from_date"
     t.date     "to_date"
-    t.integer  "member"
     t.string   "description"
-    t.boolean  "verified"
     t.integer  "capacity"
     t.datetime "created_at"
     t.datetime "updated_at"

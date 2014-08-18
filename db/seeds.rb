@@ -24,21 +24,10 @@ activity2 = Activity.create activity_name: "Hackathon", category: "Indoor"
 activity3 = Activity.create activity_name: "Fiesta", category: "Nightlife"
 activity4 = Activity.create activity_name: "Trek", category: "Outdoor"
 
-# place1.activities = [activity1]
-# place2.activities = [activity4]
-# place3.activities = [activity2, activity3]
-# place4.activities = [activity4]
-# place5.activities = [activity1, activity3]
+Trip.create organizer: user1.id, place_id: place1.id, activity_id: activity1.id, from_date: Date.today+30, to_date: Date.today+32, description: "Wreck dive", capacity: 10
 
-# activity1.places = [place1, place5]
-# activity2.places = [place3]
-# activity3.places = [place5, place3]
-# activity4.places = [place4, place2]
+Trip.create organizer: user2.id, place_id: place3.id, activity_id: activity2.id, from_date: Date.today+1, to_date: Date.today+2, description: "Code kata", capacity: 5
 
-Trip.create organizer: user1.id, place_id: place1.id, activity_id: activity1.id, from_date: Date.today+30, to_date: Date.today+32, member: user4.id, description: "Wreck dive", verified: false, capacity: 10
+Trip.create organizer: user3.id, place_id: place5.id, activity_id: activity3.id, from_date: Date.today+2, to_date: Date.today+3, description: "Night out", capacity: 8
 
-Trip.create organizer: user2.id, place_id: place3.id, activity_id: activity2.id, from_date: Date.today+1, to_date: Date.today+2, member: user4.id, description: "Code kata", verified: false, capacity: 5
-
-Trip.create organizer: user3.id, place_id: place5.id, activity_id: activity3.id, from_date: Date.today+2, to_date: Date.today+3, member: user6.id, description: "Night out", verified: false
-
-Trip.create organizer: user6.id, place_id: place4.id, activity_id: activity4.id, from_date: Date.today+6, to_date: Date.today+9, member: user5.id, description: "Climb mountains", verified: false, capacity: 4
+Trip.create organizer: user6.id, place_id: place4.id, activity_id: activity4.id, from_date: Date.today+6, to_date: Date.today+9, description: "Climb mountains", capacity: 4
