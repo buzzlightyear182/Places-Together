@@ -6,3 +6,7 @@ Organized by: <%= User.find(@trip.organizer).username %><br/>
 From Date: <%= @trip.from_date %><br/>
 To Date: <%= @trip.to_date %><br/>
 Capacity: <%= @trip.capacity %><br/>
+
+<button>
+	<%=link_to "Go back to trip list", place_trips_path(@trip.place_id) %>
+</button>
