@@ -31,10 +31,11 @@ class Trip < ActiveRecord::Base
 	end
 
 #custom trip creation method
-	def self.create_new_trip params
+	def self.create_new_trip (params, user_id)
 		@trip = Trip.new
 		@trip.place_id = check_place(params["place"])
 		@trip.activity_id = check_activity(params["activity"])
+		@trip.organizer = user_id
 
 		date = {"date(3i)"=>params["from_date(3i)"],
 						"date(2i)"=>params["from_date(2i)"],
@@ -48,6 +49,7 @@ class Trip < ActiveRecord::Base
 
 		@trip.capacity = params["capacity"]
 		@trip.description = params["description"]
+		binding.pry
 		@trip
 	end
 

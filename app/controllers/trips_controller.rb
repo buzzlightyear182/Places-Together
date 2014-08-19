@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+	require 'pry'
 
 	before_action :authenticate_user!, except: [:index]
 
@@ -16,9 +17,10 @@ class TripsController < ApplicationController
 	end
 
 	def create
-		@trip = Trip.create_new_trip trip_params
+		organizer_id = current_user.id
+		@trip = Trip.create_new_trip(trip_params, organizer_id)
 		@trip.save
-		if @trip
+		if @trip.save
 			flash[:notice] = "Trip created!"
 			render 'show'
 		else
@@ -30,7 +32,7 @@ class TripsController < ApplicationController
 private
 
 	def trip_params
-		params.require(:trip).permit(:organizer, :place, :activity, :from_date, :to_date, :capacity, :description)
+		params.require(:trip).permit(:place, :activity, :from_date, :to_date, :capacity, :description)
 	end
 
 end
