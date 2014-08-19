@@ -19,6 +19,9 @@ gem 'capybara', group: [:test, :development]
 
 gem 'factory_girl_rails', group: [:test, :development]
 
+gem 'carmen-rails', '~> 1.0.0'
+gem 'geocoder'
+
 gem 'unicorn'
 
 gem 'devise'

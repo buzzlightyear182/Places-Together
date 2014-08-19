@@ -1,6 +1,8 @@
 <%= form_for @trip do |f| %>
 	<%= f.label "Where do you want to go?" %></br>
 	<%= f.text_field :place %></br></br>
+	<%= f.label "What do you want to do?" %></br>
+	<%= f.text_field :activity %></br></br>
 	<%= f.datetime_select (:from_date) %> <br/>
 	<%= f.datetime_select (:to_date) %> <br/></br>
 	<%= f.label "How many people do you need?" %></br>

@@ -31,20 +31,34 @@ class Trip < ActiveRecord::Base
 	end
 
 #custom trip creation method
-def self.create_new_trip params
-	binding.pry
-	check_place(params["place"])
-	redirect to action: 'show'
-end
-
-def self.check_place city
-	place_city = Place.where(city: city)
-	binding.pry
-	if place_city.exists?
-		return
-	else
-		Place.create(city: city, country: "Default")
+	def self.create_new_trip params
+		trip = Trip.new
+		trip.place_id = check_place(params["place"])
+		trip.activity_id = check_activity(params["activity"])
+		binding.pry
+		redirect to action: 'show'
 	end
-end
+
+	def self.check_place city
+		current_city = Place.where(city: city)
+		binding.pry
+		if current_city.exists?
+			current_city.id
+		else
+			new_place = Place.create(city: city)
+			new_place.id
+		end
+	end
+
+	def self.check_activity activity
+		current_activity = Activity.where(activity_name: activity)
+		binding.pry
+		if current_activity.exists?
+			current_activity.id
+		else
+			new_activity = Activity.create(activity_name: activity)
+			new_activity.id
+		end
+	end
 
 end
