@@ -2,6 +2,7 @@ This is the Trip show page
 
 <h3><%= trip_title = Activity.find(@trip.activity_id).activity_name + " in " + Place.find(@trip.place_id).city %></h3>
 
+Organized by: <%= User.find(@trip.organizer).username %><br/>
 From Date: <%= @trip.from_date %><br/>
 To Date: <%= @trip.to_date %><br/>
 Capacity: <%= @trip.capacity %><br/>

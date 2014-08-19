@@ -21,7 +21,6 @@ class TripsController < ApplicationController
 		@trip = Trip.create_new_trip(trip_params, organizer_id)
 		@trip.save
 		if @trip.save
-			flash[:notice] = "Trip created!"
 			render 'show'
 		else
 			@errors = @trip.errors.full_messages
