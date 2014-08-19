@@ -3,6 +3,7 @@ class Trip < ActiveRecord::Base
 	has_one :activity
 	belongs_to :user
 
+	validates :organizer, presence: true
 	validates :place_id, presence: true
 	validates :activity_id, presence: true
 	validates :from_date, presence: true

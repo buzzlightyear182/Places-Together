@@ -15,5 +15,5 @@ Welcome! This is the Place index page
 
 <ul>
 <% @places.each do |place| %>
-	<li><%= link_to place.city, place_trips_path(place.id) %></li>
+<li><%= link_to place.city, place_trips_path(place.id) %></li>
 <% end %>

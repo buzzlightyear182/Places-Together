@@ -13,19 +13,6 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
-gem 'pry', group: [:test, :development]
-
-gem 'capybara', group: [:test, :development]
-
-gem 'factory_girl_rails', group: [:test, :development]
-
-gem 'carmen-rails', '~> 1.0.0'
-gem 'geocoder'
-
-gem 'unicorn'
-
-gem 'devise'
-
 gem 'rails_12factor', group: :production
 
 gem 'rspec-rails', group: [:test, :development]
@@ -53,4 +40,16 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'pry', group: [:test, :development]
+
+gem 'capybara', group: [:test, :development]
+
+gem 'factory_girl_rails', group: [:test, :development]
+
+gem 'carmen-rails', '~> 1.0.0'
+
+gem 'faker'
+
+gem 'devise'
 
