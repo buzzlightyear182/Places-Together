@@ -1,5 +1,7 @@
 class TripsController < ApplicationController
 
+	before_action :authenticate_user!, except: [:index]
+
 	def index
 		@place = Place.find(params[:place_id])
 		@trips = Trip.where(place_id: @place.id).all
@@ -15,13 +17,20 @@ class TripsController < ApplicationController
 
 	def create
 		@trip = Trip.create_new_trip trip_params
-		render 'show'
+		@trip.save
+		if @trip
+			flash[:notice] = "Trip created!"
+			render 'show'
+		else
+			@errors = @trip.errors.full_messages
+			render 'new'
+		end
 	end
 
 private
 
 	def trip_params
-		params.require(:trip).permit(:place, :activity, :from_date, :to_date, :capacity, :description)
+		params.require(:trip).permit(:organizer, :place, :activity, :from_date, :to_date, :capacity, :description)
 	end
 
 end

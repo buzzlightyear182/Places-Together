@@ -48,9 +48,7 @@ class Trip < ActiveRecord::Base
 
 		@trip.capacity = params["capacity"]
 		@trip.description = params["description"]
-		binding.pry
-		@trip.save
-		return @trip
+		@trip
 	end
 
 	def self.check_place city
