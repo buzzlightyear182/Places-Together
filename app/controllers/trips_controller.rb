@@ -6,7 +6,21 @@ class TripsController < ApplicationController
 	end
 
 	def show
-		# place = Place.find_by(params[:place_id])
 		@trip = Trip.find(params[:id])
 	end
+
+	def new
+		@trip = Trip.new
+	end
+
+	def create
+		@trip = Trip.create_new_trip(trip_params)
+	end
+
+private
+
+	def trip_params
+		params.require(:trip).permit(:place, :activity, :from_date, :to_date, :capacity, :description)
+	end
+
 end

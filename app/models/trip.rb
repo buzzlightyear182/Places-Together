@@ -1,3 +1,5 @@
+require 'pry'
+
 class Trip < ActiveRecord::Base
 	has_one :place
 	has_one :activity
@@ -27,5 +29,22 @@ class Trip < ActiveRecord::Base
 			errors.add(:to_date, "should be after its beginning")
 		end
 	end
+
+#custom trip creation method
+def self.create_new_trip params
+	binding.pry
+	check_place(params["place"])
+	redirect to action: 'show'
+end
+
+def self.check_place city
+	place_city = Place.where(city: city)
+	binding.pry
+	if place_city.exists?
+		return
+	else
+		Place.create(city: city, country: "Default")
+	end
+end
 
 end
