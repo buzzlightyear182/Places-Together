@@ -14,7 +14,8 @@ class TripsController < ApplicationController
 	end
 
 	def create
-		@trip = Trip.create_new_trip(trip_params)
+		@trip = Trip.create_new_trip trip_params
+		render 'show'
 	end
 
 private

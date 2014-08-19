@@ -9,13 +9,13 @@ Rails.application.routes.draw do
 root 'places#index'
 
 resources :places, only: [:index] do
-  resources :trips, only: [:index, :show]
+  resources :trips, only: [:index]
 end
 
-resources :trips, only: [:new, :create]
+resources :trips, only: [:show, :new, :create]
 
 resources :activities, only: [:index] do
-  resources :trips, only: [:index, :show]
+  resources :trips, only: [:index]
 end
 
   # Example of regular route:

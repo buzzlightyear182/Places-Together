@@ -32,18 +32,31 @@ class Trip < ActiveRecord::Base
 
 #custom trip creation method
 	def self.create_new_trip params
-		trip = Trip.new
-		trip.place_id = check_place(params["place"])
-		trip.activity_id = check_activity(params["activity"])
+		@trip = Trip.new
+		@trip.place_id = check_place(params["place"])
+		@trip.activity_id = check_activity(params["activity"])
+
+		date = {"date(3i)"=>params["from_date(3i)"],
+						"date(2i)"=>params["from_date(2i)"],
+						"date(1i)"=> params["from_date(1i)"]}
+		@trip.from_date = date.map{|k,v| v}.join("-").to_date
+
+		date = {"date(3i)"=>params["to_date(3i)"],
+						"date(2i)"=>params["to_date(2i)"],
+						"date(1i)"=> params["to_date(1i)"]}
+		@trip.to_date = date.map{|k,v| v}.join("-").to_date
+
+		@trip.capacity = params["capacity"]
+		@trip.description = params["description"]
 		binding.pry
-		redirect to action: 'show'
+		@trip.save
+		return @trip
 	end
 
 	def self.check_place city
-		current_city = Place.where(city: city)
-		binding.pry
-		if current_city.exists?
-			current_city.id
+		current_place = Place.where(city: city)
+		if current_place.exists?
+			current_place[0].id
 		else
 			new_place = Place.create(city: city)
 			new_place.id
@@ -52,9 +65,8 @@ class Trip < ActiveRecord::Base
 
 	def self.check_activity activity
 		current_activity = Activity.where(activity_name: activity)
-		binding.pry
 		if current_activity.exists?
-			current_activity.id
+			current_activity[0].id
 		else
 			new_activity = Activity.create(activity_name: activity)
 			new_activity.id
