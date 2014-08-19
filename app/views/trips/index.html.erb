@@ -1,0 +1,15 @@
+Welcome! This is the Trips index page
+
+<ul>
+<% @trips.each do |trip| %>
+	<li>
+		<h3>
+			<% trip_title = Activity.find(trip.activity_id).activity_name + " in " + Place.find(trip.place_id).city %>
+			<%=link_to trip_title, place_trip_path(:id => trip.id)%>
+		</h3>
+		Organized by: <%= User.find(trip.organizer).username %><br/>
+		From Date: <%= trip.from_date %><br/>
+		To Date: <%= trip.to_date %><br/>
+	</li>
+<% end %>
+</ul>

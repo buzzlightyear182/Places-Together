@@ -8,7 +8,13 @@ Rails.application.routes.draw do
 
 root 'places#index'
 
-resources :places, only: [:index, :show]
+resources :places, only: [:index] do
+  resources :trips
+end
+
+resources :activities, only: [:index] do
+  resources :trips
+end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

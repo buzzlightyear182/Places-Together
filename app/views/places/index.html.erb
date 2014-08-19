@@ -1,7 +1,8 @@
 Welcome! This is the Place index page
-<!-- 
+
+<p>Where are you planning to go?</p>
+
 <ul>
 <% @places.each do |place| %>
-	<li><%= link_to place.city, place_path(place.id) %></li>
+	<li><%= link_to place.city, place_trips_path(place.id) %></li>
 <% end %>
-</ul> -->
