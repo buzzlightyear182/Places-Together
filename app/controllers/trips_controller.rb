@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
 
-	# before_action :authenticate_user!, except: [:index]
+	before_action :authenticate_user!, except: [:index]
 
 	def index
 		if params[:place_id]
