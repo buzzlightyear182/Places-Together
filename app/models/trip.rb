@@ -1,5 +1,3 @@
-require 'pry'
-
 class Trip < ActiveRecord::Base
 	has_one :place
 	has_one :activity
