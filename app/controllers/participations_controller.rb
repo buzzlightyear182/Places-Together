@@ -17,6 +17,7 @@ class ParticipationsController < ApplicationController
 		@participation = Participation.find(params[:id])
 		if @participation
 			@participation.update!(confirmed: true)
+			SendEmail.to_notify_joiner(@participation).deliver
 			redirect_to action: 'show', controller: 'trips', id: @participation.trip_id
 		else
 			redirect_to action: 'new', controller: 'sessions'

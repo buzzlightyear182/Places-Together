@@ -34,5 +34,10 @@ RSpec.describe Trip, :type => :model do
 		trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today-5, capacity: 3, description: "Web Development Intensive Bootcamp"
 		expect(trip.errors.full_messages).to eq(["To date should be after its beginning"])
 	end
+
+	it "capacity should be greater than 0" do
+		trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+5, capacity: 0, description: "Web Development Intensive Bootcamp"
+		expect(trip.errors.full_messages).to eq(["Capacity must be greater than or equal to 1",])
+	end
 end
 end

@@ -11,6 +11,7 @@ class Trip < ActiveRecord::Base
 	validates :activity_id, presence: true
 	validates :from_date, presence: true
 	validates :to_date, presence: true
+	validates :capacity, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
 
 	validate :from_date_is_in_future
 	validate :from_date_before_to_date
@@ -53,16 +54,18 @@ class Trip < ActiveRecord::Base
 	end
 
 	def self.check_place city
+		city.capitalize!
 		current_place = Place.where(city: city)
 		if current_place.exists?
 			current_place[0].id
 		else
-			new_place = Place.create(city: city)
+			new_place = Place.create(city: city).capitalize!
 			new_place.id
 		end
 	end
 
 	def self.check_activity activity
+		activity.capitalize!
 		current_activity = Activity.where(activity_name: activity)
 		if current_activity.exists?
 			current_activity[0].id
