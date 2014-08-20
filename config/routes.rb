@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
 root 'places#index'
 
+get 'activities/:activity_id/trips' => 'trips#index', as: :activity_trips
+
 resources :places, only: [:index] do
   resources :trips, only: [:index]
 end

@@ -21,20 +21,18 @@ describe "When a member wants to join a trip" do
 
 	it "it should add joiner to the trip" do
 		@participation = Participation.create(trip_id: @trip.id, user_id: @test_user.id, confirmed: false)
-
-		get :add_joiner, :id => @participation.id
-		binding.pry
+		get :add_joiner, id: @participation
+		@participation.reload
 		expect(@participation.confirmed).to eq(true)
 	end
 
 end
 
-  it "should go back to show the trip details" do
-  	@participation = Participation.create(trip_id: @trip.id, user_id: @test_user.id)
-
-  	get :show, :controller =>'trips', 'id' => @trip.id
-    expect(response).to redirect_to(action: 'show', :controller =>'trips')
-  end
+  # it "should go back to show the trip details" do
+  # 	@participation = Participation.create(trip_id: @trip.id, user_id: @test_user.id)
+  # 	get :show, :controller =>'trips', 'id' => @trip.id
+  #   expect(response).to redirect_to(action: 'show', :controller =>'trips')
+  # end
 
 end
 
