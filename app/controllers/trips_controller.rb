@@ -4,8 +4,13 @@ class TripsController < ApplicationController
 	# before_action :authenticate_user!, except: [:index]
 
 	def index
-		@place = Place.find(params[:place_id])
-		@trips = Trip.where(place_id: @place.id).all
+		if @place_id
+			@place = Place.find(params[:place_id])
+			@trips = Trip.where(place_id: @place.id).all
+		else
+			@activity= Activity.find(params[:activity_id])
+			@trips = Trip.where(activity_id: @activity.id).all
+		end
 	end
 
 	def show

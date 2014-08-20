@@ -17,3 +17,12 @@ Welcome! This is the Place index page
 <% @places.each do |place| %>
 <li><%= link_to place.city, place_trips_path(place.id) %></li>
 <% end %>
+</ul>
+
+<p>What do you want to do?</p>
+
+<ul>
+<% @activities.each do |activity| %>
+<li><%= link_to activity.activity_name, activity_trips_path(activity.id) %></li>
+<% end %>
+</ul>
