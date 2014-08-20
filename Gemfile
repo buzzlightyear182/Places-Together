@@ -51,5 +51,9 @@ gem 'carmen-rails', '~> 1.0.0'
 
 gem 'faker'
 
+gem 'awesome_print'
+
+gem 'letter_opener'
+
 gem 'devise'
 

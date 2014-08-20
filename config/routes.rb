@@ -12,16 +12,19 @@ resources :places, only: [:index] do
   resources :trips, only: [:index]
 end
 
-resources :trips, only: [:new, :create, :edit, :update]
-
-resources :trips, only: [:show] do
-  resources :participations, only: [:new, :create, :update, :edit, :delete]
-end
-
 resources :activities, only: [:index] do
   resources :trips, only: [:index]
 end
 
+resources :trips, only: [:new, :create, :edit, :update]
+
+resources :trips, only: [:show] do
+  resources :participations, only: [:create]
+end
+
+resources :participations, only: [:update, :delete]
+
+# patch 'confirm_joiner/:id' => 'participations#update'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

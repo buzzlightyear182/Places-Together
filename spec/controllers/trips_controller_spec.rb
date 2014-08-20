@@ -9,8 +9,12 @@ RSpec.describe TripsController, :type => :controller do
 	end
 
 	it "shows all the trips from a specific place" do
-  	trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
     get :index, place_id: @place.id
+    expect(response).to render_template(:index)
+  end
+
+  it "shows all the trips for a specific activity" do
+    get :index, activity_id: @activity.id
     expect(response).to render_template(:index)
   end
 

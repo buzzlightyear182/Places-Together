@@ -3,7 +3,7 @@ require 'pry'
 
 RSpec.describe ParticipationsController, :type => :controller do
 
-describe "When a member joins a trip" do
+describe "When a member wants to join a trip" do
 
 	before(:each)do
 		@test_user = User.create(username: "username01", fullname: "Test User", password: "12345678", email: "test_user@gmail.com")
@@ -12,7 +12,7 @@ describe "When a member joins a trip" do
 		@trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
 	end
 
-	it "records the member who wants to join that trip" do
+	it "it records the member who wants to join that trip" do
 		@participation = Participation.create(trip_id: @trip.id, user_id: @test_user.id)
     expect(Participation.all.count).to eq(1)
   end

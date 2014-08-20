@@ -1,3 +1,5 @@
+require 'pry'
+
 class SendEmail < ActionMailer::Base
   default from: "janeheatherdee@gmail.com"
 
@@ -5,17 +7,21 @@ class SendEmail < ActionMailer::Base
   	@trip = Trip.find(participation.trip_id)
   	@joiner = User.find(participation.user_id)
 
-  	organizer = User.find(@trip.user_id)
-  	@email = organizer.email
+  	@organizer = User.find(@trip.organizer)
+  	@email = @organizer.email
 
-  	@subject = "Someone wants to join you in " + Place.where(place_id: trip.place_id).city
+  	@city = Place.where(id: @trip.place_id).first.city
+  	@activity = Activity.where(id: @trip.activity_id).first.activity_name
 
-  	mail(to: @email, subject: @subject)
+		@link = accept_joiner(participation)
+
+  	mail(to: @email, subject: "Someone wants to join you in #{@city}")
   end
 
-  # private
+  private
 
-  # def accept_participant()
-
-  # end
+  def accept_joiner(participation)
+		"http://localhost:3000/participations/#{participation.id}"
+  end
 end
+# "http://localhost:3000/participations/#{@participation.id}"

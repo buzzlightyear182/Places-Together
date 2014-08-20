@@ -14,4 +14,15 @@ class ParticipationsController < ApplicationController
 		flash[:notice] = "Organizer has been notified."
 		redirect_to action:'show', :controller =>'trips', id: @trip.id
 	end
+
+	def update
+		p = Participation.find(params[:id])
+		if p
+			p.update_attributes!(confirmed: true)
+			redirect_to action: 'show', controller: 'trips'
+		else
+			redirect_to action: 'new', controller: 'sessions'
+		end
+
+	end
 end

@@ -1,0 +1,10 @@
+<h3>Hello there! <%= @organizer.fullname %></h3>
+
+<p><%= @joiner.username %> wants to join your trip:</p>
+<h4><%= @activity %> in <%= @city %></h4>
+
+<p>Check out their profile to know more about them. If you think they will be a good fit, then click on the button below:</p>
+
+<button><%= link_to "Add to trip!", @link %></button>
+
+<p>Thanks a lot!</p>
