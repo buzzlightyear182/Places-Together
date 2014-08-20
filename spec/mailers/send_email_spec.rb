@@ -16,7 +16,7 @@ describe "A notification to the trip organizer" do
 
 		@trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
 
-		@participation = Participation.create(trip_id: @trip.id, user_id: @p_user.id)
+		@participation = Participation.create(trip_id: @trip.id, user_id: @p_user.id, confirmed: false)
 
     ActionMailer::Base.delivery_method = :test
     ActionMailer::Base.perform_deliveries = true
@@ -43,17 +43,6 @@ describe "A notification to the trip organizer" do
 	it 'renders the sender email' do
     expect(ActionMailer::Base.deliveries.first.from).to eq(["janeheatherdee@gmail.com"])
   end
-end
-
-describe "When an organizer responds to an email" do
-
-	it "should receive back @participation.id" do
-		p = instance_double('SendEmail')
-		p.stub(:accept_joiner){"http://localhost:3000/participations/#{@participation.id}"}
-		binding.pry
-		expect(p).to receive(:update) {@participation.id}
-	end
-
 end
 
 end

@@ -21,7 +21,6 @@ class SendEmail < ActionMailer::Base
   private
 
   def accept_joiner(participation)
-		"http://localhost:3000/participations/#{participation.id}"
+		"http://localhost:3000/confirm_joiner/#{participation.id}"
   end
 end
-# "http://localhost:3000/participations/#{@participation.id}"

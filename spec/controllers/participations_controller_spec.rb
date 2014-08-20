@@ -17,12 +17,24 @@ describe "When a member wants to join a trip" do
     expect(Participation.all.count).to eq(1)
   end
 
-  # it "should go back to show the trip details" do
-  # 	@participation = Participation.create(trip_id: @trip.id, user_id: @test_user.id)
+  describe "When an organizer clicks the add to trip button in email" do
 
-  # 	get :show, :controller =>'trips', 'id' => @trip.id
-  #   expect(response).to redirect_to(action: 'show', :controller =>'trips')
-  # end
+	it "it should add joiner to the trip" do
+		@participation = Participation.create(trip_id: @trip.id, user_id: @test_user.id, confirmed: false)
+
+		get :add_joiner, :id => @participation.id
+		binding.pry
+		expect(@participation.confirmed).to eq(true)
+	end
+
+end
+
+  it "should go back to show the trip details" do
+  	@participation = Participation.create(trip_id: @trip.id, user_id: @test_user.id)
+
+  	get :show, :controller =>'trips', 'id' => @trip.id
+    expect(response).to redirect_to(action: 'show', :controller =>'trips')
+  end
 
 end
 
