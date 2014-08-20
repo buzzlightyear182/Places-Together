@@ -1,5 +1,3 @@
-require 'pry'
-
 class SendEmail < ActionMailer::Base
   default from: "janeheatherdee@gmail.com"
 

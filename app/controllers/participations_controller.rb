@@ -1,5 +1,3 @@
-require 'pry'
-
 class ParticipationsController < ApplicationController
 
 	def new
@@ -19,7 +17,7 @@ class ParticipationsController < ApplicationController
 		@participation = Participation.find(params[:id])
 		if @participation
 			@participation.update!(confirmed: true)
-			redirect_to action: 'show', controller: 'trips'
+			redirect_to action: 'show', controller: 'trips', id: @participation.trip_id
 		else
 			redirect_to action: 'new', controller: 'sessions'
 		end

@@ -1,5 +1,4 @@
 class TripsController < ApplicationController
-	require 'pry'
 
 	# before_action :authenticate_user!, except: [:index]
 
