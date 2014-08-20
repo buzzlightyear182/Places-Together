@@ -41,7 +41,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'pry', group: [:test, :development]
+gem 'pry', group: [:test]
 
 gem 'capybara', group: [:test, :development]
 
