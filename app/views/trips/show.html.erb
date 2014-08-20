@@ -7,6 +7,14 @@ From Date: <%= @trip.from_date %><br/>
 To Date: <%= @trip.to_date %><br/>
 Capacity: <%= @trip.capacity %><br/>
 
+Status: <br/>
+Pending: <%= @pending_people %></br>
+Confirmed: <%= @confirmed_people %><br/>
+
+<button>
+	<%=link_to "Join this trip", trip_participations_path(:trip_id => @trip.id), method: 'post' %>
+</button>
+
 <button>
 	<%=link_to "Go back to trip list", place_trips_path(@trip.place_id) %>
 </button>

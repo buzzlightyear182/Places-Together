@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-	has_many :trips
+	has_many :trips, through: :participation
 
 	validates :username, presence: true, length: {maximum: 20}, format: {with: /\A[a-zA-Z0-9]+\z/}
 	validates :encrypted_password, presence: true

@@ -10,6 +10,8 @@ class TripsController < ApplicationController
 
 	def show
 		@trip = Trip.find(params[:id])
+		@pending_people = Participation.where(trip_id: @trip.id, confirmed: false).all.count
+		@confirmed_people = Participation.where(trip_id: @trip.id, confirmed: true).all.count
 	end
 
 	def new

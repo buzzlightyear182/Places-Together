@@ -4,6 +4,7 @@ class Trip < ActiveRecord::Base
 	has_one :place
 	has_one :activity
 	belongs_to :user
+	has_many :users, through: :participation
 
 	validates :organizer, presence: true
 	validates :place_id, presence: true
@@ -14,7 +15,6 @@ class Trip < ActiveRecord::Base
 	validate :from_date_is_in_future
 	validate :from_date_before_to_date
 
-#custom ActiveRecord validations
 	def from_date_is_in_future
 		if from_date == nil
 			return

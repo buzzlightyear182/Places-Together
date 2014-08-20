@@ -12,11 +12,16 @@ resources :places, only: [:index] do
   resources :trips, only: [:index]
 end
 
-resources :trips, only: [:show, :new, :create]
+resources :trips, only: [:new, :create, :edit, :update]
+
+resources :trips, only: [:show] do
+  resources :participations, only: [:new, :create, :update, :edit, :delete]
+end
 
 resources :activities, only: [:index] do
   resources :trips, only: [:index]
 end
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
