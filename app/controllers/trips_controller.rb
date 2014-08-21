@@ -24,14 +24,14 @@ class TripsController < ApplicationController
 
 	def create
 		organizer_id = current_user.id
-		@trip = Trip.create_new_trip(trip_params, organizer_id)
-		@trip.save
-		if @trip.save
-			render 'show'
-		else
-			@errors = @trip.errors.full_messages
-			render 'new'
-		end
+			@trip = Trip.create_new_trip(trip_params, organizer_id)
+			@trip.save
+			if @trip.save
+				render 'show'
+			else
+				@errors = @trip.errors.full_messages
+				render 'new'
+			end
 	end
 
 private

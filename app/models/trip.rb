@@ -57,7 +57,7 @@ class Trip < ActiveRecord::Base
 		if current_place.exists?
 			current_place[0].id
 		else
-			new_place = Place.create(city: city).capitalize!
+			new_place = Place.create(city: city)
 			new_place.id
 		end
 	end

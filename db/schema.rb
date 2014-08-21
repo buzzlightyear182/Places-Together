@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140820080751) do
+ActiveRecord::Schema.define(version: 20140821133144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,19 @@ ActiveRecord::Schema.define(version: 20140820080751) do
     t.datetime "updated_at"
   end
 
+  create_table "profiles", force: true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "surname"
+    t.float    "rating"
+    t.string   "language"
+    t.string   "occupation"
+    t.date     "birthday"
+    t.string   "hometown"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "trips", force: true do |t|
     t.integer  "organizer"
     t.integer  "place_id"
@@ -50,9 +63,23 @@ ActiveRecord::Schema.define(version: 20140820080751) do
     t.datetime "updated_at"
   end
 
+  create_table "user_profiles", force: true do |t|
+    t.string   "first_name"
+    t.string   "surname"
+    t.integer  "age"
+    t.string   "home_base"
+    t.string   "country"
+    t.string   "languages"
+    t.string   "about_me"
+    t.string   "occupation"
+    t.string   "links"
+    t.string   "traveller"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "username"
-    t.string   "fullname"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email",                  default: "", null: false
