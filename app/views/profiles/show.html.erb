@@ -1,0 +1,12 @@
+This is the profile show page
+<br/>
+First name <%= @profile.first_name %><br/>
+Last name <%= @profile.surname %><br/>
+Rating <%= @profile.rating %><br/>
+Occupation <%= @profile.occupation %><br/>
+Birthday <%= @profile.birthday %><br/>
+Hometown <%= @profile.hometown %><br/>
+
+<% if @profile.user_id == current_user.id %>
+<button><%= link_to "Edit my profile", edit_profile_path(@profile.id) %></button>
+<% end %>

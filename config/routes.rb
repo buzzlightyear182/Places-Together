@@ -20,6 +20,8 @@ resources :trips, only: [:show] do
   resources :participations, only: [:create]
 end
 
+resources :profiles, only: [:edit, :update, :show]
+
 get 'confirm_joiner/:id' => 'participations#add_joiner'
 
 

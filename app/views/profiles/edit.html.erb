@@ -1,0 +1,27 @@
+This is the edit a profile form!
+
+<%= form_for @profile do |f| %>
+  <%= f.label "What's your name?" %></br>
+  First name: <%= f.text_field :first_name %></br>
+  Last name: <%= f.text_field :surname %></br></br>
+
+  <%= f.label "Where do you live?" %></br>
+  Hometown: <%= f.text_field :hometown %><br/><br/>
+
+  <%= f.label "When is your birthday?" %></br>
+  <%= f.date_field :birthday %><br/><br/>
+
+  <%= f.label "What do you do?" %></br>
+  <%= f.text_field :occupation %> <br/><br/>
+
+  Any links? </br>
+  <% @profile.links.each do |key, value| %>
+    <%= f.label key %>
+    <%= f.text_field :links[key], value: value %><br/>
+  <% end %><br/>
+
+  <%= f.label "What do you speak?" %></br>
+  <%= f.text_field :languages, value: @profile.languages.join(',') %> <br/><br/>
+
+  <%= f.submit "Save" %>
+<% end %>

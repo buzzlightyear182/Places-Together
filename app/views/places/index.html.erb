@@ -8,6 +8,7 @@ Welcome! This is the Place index page
 <% end %>
 </ul>
 
+
 <p>What do you want to do?</p>
 
 <ul>
@@ -15,3 +16,9 @@ Welcome! This is the Place index page
 <li><%= link_to activity.activity_name, activity_trips_path(activity.id) %></li>
 <% end %>
 </ul>
+
+<button><%=link_to "Create a new trip", new_trip_path%></button>
+
+<button>
+  <%= link_to "Edit my profile", edit_profile_path(id: Profile.where(user_id: current_user.id).first.user_id) %>
+</button>
