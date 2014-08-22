@@ -14,11 +14,13 @@ This is the edit a profile form!
   <%= f.label "What do you do?" %></br>
   <%= f.text_field :occupation %> <br/><br/>
 
-  Any links? </br>
-  <% @profile.links.each do |key, value| %>
-    <%= f.label key %>
-    <%= f.text_field :links[key], value: value %><br/>
-  <% end %><br/>
+   <!-- Any links? </br>
+    <%= f.fields_for :links do |f| %>
+      <% @profile.links.each do |key, value| %>
+        <%= f.label key %>
+        <%= f.text_field :links, value: value %>
+      <% end %>
+    <% end %> -->
 
   <%= f.label "What do you speak?" %></br>
   <%= f.text_field :languages, value: @profile.languages.join(',') %> <br/><br/>

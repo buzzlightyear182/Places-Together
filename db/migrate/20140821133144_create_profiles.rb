@@ -5,7 +5,6 @@ class CreateProfiles < ActiveRecord::Migration
       t.string  :first_name
       t.string  :surname
       t.float   :rating
-      t.string  :language
       t.string  :occupation
       t.date    :birthday
       t.string  :hometown

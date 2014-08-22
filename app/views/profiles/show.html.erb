@@ -6,6 +6,7 @@ Rating <%= @profile.rating %><br/>
 Occupation <%= @profile.occupation %><br/>
 Birthday <%= @profile.birthday %><br/>
 Hometown <%= @profile.hometown %><br/>
+Languages <%= @profile.languages.join(",") %><br/>
 
 <% if @profile.user_id == current_user.id %>
 <button><%= link_to "Edit my profile", edit_profile_path(@profile.id) %></button>

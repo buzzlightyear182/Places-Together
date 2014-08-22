@@ -1,7 +1,5 @@
 require 'pry'
 
-  # <%= input name="profile[links][<%= key %>]" type="text" value="<%= value %>" %>
-
 class ProfilesController < ApplicationController
 
   def show
@@ -13,15 +11,15 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @profile_id = Profile.where(user_id: current_user.id).first.id
-    @profile = Profile.update_profile(profile_params, @profile_id)
-    binding.pry
-    if @profile
-        redirect_to action: 'show', id: @profile.id
-        flash[:notice] = "Profile updated!"
+    @profile = Profile.where(user_id: current_user.id).first
+    @profile.update_attributes! profile_params
+    @profile.languages = profile_params["languages"].split(",")
+    if @profile.save
+      flash[:notice] = "Profile updated!"
+      render 'show'
     else
-        @errors = @profile.errors.full_messages
-        render 'edit'
+      @errors = @profile.errors.full_messages
+      render 'edit'
     end
   end
 

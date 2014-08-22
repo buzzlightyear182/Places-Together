@@ -19,6 +19,8 @@ Welcome! This is the Place index page
 
 <button><%=link_to "Create a new trip", new_trip_path%></button>
 
+<% if user_signed_in? %>
 <button>
   <%= link_to "Edit my profile", edit_profile_path(id: Profile.where(user_id: current_user.id).first.user_id) %>
 </button>
+  <% end %>
