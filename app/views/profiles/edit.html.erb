@@ -14,16 +14,16 @@ This is the edit a profile form!
   <%= f.label "What do you do?" %></br>
   <%= f.text_field :occupation %> <br/><br/>
 
-   <!-- Any links? </br>
-    <%= f.fields_for :links do |f| %>
-      <% @profile.links.each do |key, value| %>
-        <%= f.label key %>
-        <%= f.text_field :links, value: value %>
-      <% end %>
-    <% end %> -->
-
   <%= f.label "What do you speak?" %></br>
   <%= f.text_field :languages, value: @profile.languages.join(',') %> <br/><br/>
 
-  <%= f.submit "Save" %>
+  Share your links:<br/>
+  <%= f.label "Facebook" %><%= f.text_field :facebook %> <br/>
+  <%= f.label "Twitter" %><%= f.text_field :twitter %> <br/>
+  <%= f.label "Instagram" %><%= f.text_field :instagram %> <br/>
+  <%= f.label "Google+" %><%= f.text_field :google %> <br/>
+  <%= f.label "Blog" %><%= f.text_field :blog %> <br/>
+  <%= f.label "Others" %><%= f.text_field :others %> <br/>
+
+      <%= f.submit "Save" %>
 <% end %>

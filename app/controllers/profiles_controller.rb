@@ -26,7 +26,7 @@ class ProfilesController < ApplicationController
 private
 
   def profile_params
-    params.require(:profile).permit(:first_name, :surname, :hometown, :birthday, :occupation, :languages, links: [:Facebook, :Twitter, :Instagram, :Google, :Blog])
+    params.require(:profile).permit(:first_name, :surname, :hometown, :birthday, :occupation, :languages, :facebook, :twitter, :instagram, :google, :blog)
   end
 
 end

@@ -7,6 +7,14 @@ Occupation <%= @profile.occupation %><br/>
 Birthday <%= @profile.birthday %><br/>
 Hometown <%= @profile.hometown %><br/>
 Languages <%= @profile.languages.join(",") %><br/>
+<br/>
+Links:<br/>
+Facebook <%= @profile.facebook %><br/>
+Twitter <%= @profile.twitter %><br/>
+Instagram <%= @profile.instagram %><br/>
+Google <%= @profile.google %><br/>
+Blog <%= @profile.blog %><br/>
+Others <%= @profile.others %><br/>
 
 <% if @profile.user_id == current_user.id %>
 <button><%= link_to "Edit my profile", edit_profile_path(@profile.id) %></button>
