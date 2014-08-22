@@ -4,9 +4,9 @@ require 'pry'
 RSpec.describe SendEmail, :type => :mailer do
 
   before(:each) do
-    @test_user = User.create(username: "username01", fullname: "Test User", password: "12345678", email: "test_user@gmail.com")
+    @test_user = User.create(username: "username01", password: "12345678", email: "test_user@gmail.com")
 
-    @p_user = User.create(username: "participant", fullname: "Test Participant", password: "12345678", email: "test_participant@gmail.com")
+    @p_user = User.create(username: "participant", password: "12345678", email: "test_participant@gmail.com")
 
     @place = Place.create(city: "Barcelona", country: "Spain")
 

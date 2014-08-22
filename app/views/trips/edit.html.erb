@@ -1,18 +1,11 @@
-This is the create a new trip form!
+This is the edit a trip form!
 
 <%= form_for @trip do |f| %>
   <%= f.label "Where do you want to go?" %></br>
-  <%= f.text_field :place, :value => @temporary_place %></br></br>
+  <%= f.text_field :place, :value => @trip.place.city %>
 
   <%= f.label "What do you want to do?" %></br>
-  <% @activities.each do |a| %>
-    <%= f.radio_button :activity, a.activity_name %>
-    <%= a.activity_name %> <br/>
-    <% end %>
-    Or create your own:<br/>
-    <%= f.text_field :activity_create, :value => @temporary_activity  %>
-
-  </br></br>
+  <%= f.text_field :activity, :value => @trip.activity.activity_name %></br></br>
 
   <%= f.label "From when?" %></br>
   <%= f.date_field :from_date %> <br/>

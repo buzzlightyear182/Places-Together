@@ -8,6 +8,18 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :username
+   devise_parameter_sanitizer.for(:sign_up) do |u|
+     u.permit(:username, :email, :password, :password_confirmation, :remember_me)
+   end
+
+   devise_parameter_sanitizer.for(:account_update) do |u|
+     u.permit(:username, :email, :current_password, :password, :password_confirmation, :remember_me)
+   end
+ end
+
+  def create_profile(sign_up_params)
+    @profile = Profile.create
   end
+  :create_profile
+
 end

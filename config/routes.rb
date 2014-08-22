@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  # devise_for :users, :controllers => {:registrations => "registrations"}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -7,7 +8,6 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
 root 'places#index'
-
 get 'activities/:activity_id/trips' => 'trips#index', as: :activity_trips
 
 resources :places, only: [:index] do

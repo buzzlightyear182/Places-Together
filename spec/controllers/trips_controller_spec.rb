@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TripsController, :type => :controller do
 
 	before(:each)do
-		@test_user = User.create(username: "username01", fullname: "Test User", password: "12345678", email: "test_user@gmail.com")
+		@test_user = User.create(username: "username01", password: "12345678", email: "test_user@gmail.com")
 		@place = Place.create(city: "Barcelona", country: "Spain")
 		@activity = Activity.create(activity_name: "Ironhack", category: "Studies")
 	end
@@ -28,13 +28,10 @@ RSpec.describe TripsController, :type => :controller do
     organizer_id = nil
     trip_params = {
     	"place" => @place.city,
-    	"activity" => @activity.activity_name,
-			"from_date(1i)"=>"2014",
-			"from_date(2i)"=>"8",
-			"from_date(3i)"=>"26",
-			"to_date(1i)"=>"2014",
-			"to_date(2i)"=>"8",
-			"to_date(3i)"=>"30",
+      "activity" => "",
+    	"activity_create" => @activity.activity_name,
+      "from_date"=>"2015-10-21",
+      "to_date"=>"2015-11-21",
     	"capacity" => "3",
     	"description" => "Web Development Intensive Bootcamp"
     	}
@@ -52,19 +49,15 @@ RSpec.describe TripsController, :type => :controller do
     @new_place = Place.create city: "Madrid", country: "Spain"
     trip_params = {
     	"place" => @new_place.city,
-    	"activity" => @activity.activity_name,
-			"from_date(1i)"=>"2014",
-			"from_date(2i)"=>"8",
-			"from_date(3i)"=>"26",
-			"to_date(1i)"=>"2014",
-			"to_date(2i)"=>"8",
-			"to_date(3i)"=>"30",
+      "activity" => @activity.activity_name,
+    	"activity_create" => "",
+			"from_date"=>"2015-10-21",
+      "to_date"=>"2015-11-21",
     	"capacity" => "3",
     	"description" => "Web Development Intensive Bootcamp"
     	}
 
     previous_trip_count = Trip.all.count
-
   	@trip = Trip.create_new_trip(trip_params, organizer_id)
   	@trip.save
 
@@ -78,12 +71,9 @@ RSpec.describe TripsController, :type => :controller do
     trip_params = {
       "place" => @new_place.city,
       "activity" => @activity.activity_name,
-      "from_date(1i)"=>"2014",
-      "from_date(2i)"=>"8",
-      "from_date(3i)"=>"26",
-      "to_date(1i)"=>"2014",
-      "to_date(2i)"=>"8",
-      "to_date(3i)"=>"30",
+      "activity_create" => "",
+      "from_date"=>"2015-10-21",
+      "to_date"=>"2015-11-21",
       "capacity" => "3",
       "description" => "Web Development Intensive Bootcamp"
       }
@@ -102,13 +92,10 @@ RSpec.describe TripsController, :type => :controller do
     @new_activity = Activity.create activity_name: "Writing code", category: "Geek"
     trip_params = {
     	"place" => @place.city,
-    	"activity" => @new_activity.activity_name,
-			"from_date(1i)"=>"2014",
-			"from_date(2i)"=>"8",
-			"from_date(3i)"=>"26",
-			"to_date(1i)"=>"2014",
-			"to_date(2i)"=>"8",
-			"to_date(3i)"=>"30",
+      "activity" => "",
+    	"activity_create" => @new_activity.activity_name,
+			"from_date"=>"2015-10-21",
+      "to_date"=>"2015-11-21",
     	"capacity" => "3",
     	"description" => "Web Development Intensive Bootcamp"
     	}
@@ -126,13 +113,10 @@ RSpec.describe TripsController, :type => :controller do
     @new_activity = Activity.create activity_name: "ironhack", category: "Geek"
     trip_params = {
       "place" => @place.city,
-      "activity" => @new_activity.activity_name,
-      "from_date(1i)"=>"2014",
-      "from_date(2i)"=>"8",
-      "from_date(3i)"=>"26",
-      "to_date(1i)"=>"2014",
-      "to_date(2i)"=>"8",
-      "to_date(3i)"=>"30",
+      "activity" => "",
+      "activity_create" => @new_activity.activity_name,
+      "from_date"=>"2015-10-21",
+      "to_date"=>"2015-11-21",
       "capacity" => "3",
       "description" => "Web Development Intensive Bootcamp"
       }
@@ -152,13 +136,10 @@ RSpec.describe TripsController, :type => :controller do
     @new_activity = Activity.create activity_name: "Writing code", category: "Geek"
     trip_params = {
     	"place" => @new_place.city,
-    	"activity" => @new_activity.activity_name,
-			"from_date(1i)"=>"2014",
-			"from_date(2i)"=>"8",
-			"from_date(3i)"=>"26",
-			"to_date(1i)"=>"2014",
-			"to_date(2i)"=>"8",
-			"to_date(3i)"=>"30",
+      "activity" => "",
+    	"activity_create" => @new_activity.activity_name,
+			"from_date"=>"2015-10-21",
+      "to_date"=>"2015-11-21",
     	"capacity" => "3",
     	"description" => "Web Development Intensive Bootcamp"
     	}
@@ -177,13 +158,10 @@ RSpec.describe TripsController, :type => :controller do
     organizer_id = @test_user.id
     trip_params = {
     	"place" => @place.city,
-    	"activity" => @activity.activity_name,
-			"from_date(1i)"=>"2014",
-			"from_date(2i)"=>"8",
-			"from_date(3i)"=>"26",
-			"to_date(1i)"=>"2014",
-			"to_date(2i)"=>"8",
-			"to_date(3i)"=>"30",
+      "activity" => @activity.activity_name,
+    	"activity_create" => "",
+			"from_date"=>"2015-10-21",
+      "to_date"=>"2015-11-21",
     	"capacity" => "3",
     	"description" => "Web Development Intensive Bootcamp"
     	}

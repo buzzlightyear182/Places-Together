@@ -16,5 +16,9 @@ Confirmed: <%= @confirmed_people %><br/>
 </button>
 
 <button>
+  <%=link_to "Edit this trip", edit_trip_path(@trip.id) %>
+</button>
+
+<button>
 	<%=link_to "See other trips in the same place", place_trips_path(@trip.place_id) %>
 </button>

@@ -1,6 +1,6 @@
 class Trip < ActiveRecord::Base
-	has_one :place
-	has_one :activity
+	belongs_to :place
+	belongs_to :activity
 	belongs_to :user
 	has_many :users, through: :participation
 
@@ -30,22 +30,25 @@ class Trip < ActiveRecord::Base
 		end
 	end
 
+	# def reviewable?(user)
+	# 	to_date < Time.now && dvdsvs
+	# end
+
 	def self.create_new_trip (params, user_id)
 		@trip = Trip.new
-		@trip.place_id = check_place(params["place"])
-		@trip.activity_id = check_activity(params["activity"])
+		@trip.place_id = check_place params["place"]
+
+		activity =
+			if (params["activity_create"] == "")
+				params["activity"]
+			else
+				params["activity_create"]
+			end
+
+		@trip.activity_id = check_activity activity
 		@trip.organizer = user_id
-
-		date = {"date(3i)"=>params["from_date(3i)"],
-						"date(2i)"=>params["from_date(2i)"],
-						"date(1i)"=> params["from_date(1i)"]}
-		@trip.from_date = date.map{|k,v| v}.join("-").to_date
-
-		date = {"date(3i)"=>params["to_date(3i)"],
-						"date(2i)"=>params["to_date(2i)"],
-						"date(1i)"=> params["to_date(1i)"]}
-		@trip.to_date = date.map{|k,v| v}.join("-").to_date
-
+		@trip.from_date = params["from_date"]
+		@trip.to_date = params["to_date"]
 		@trip.capacity = params["capacity"]
 		@trip.description = params["description"]
 		@trip
@@ -63,7 +66,7 @@ class Trip < ActiveRecord::Base
 	end
 
 	def self.check_activity activity
-		activity.capitalize!
+		activity = activity.capitalize
 		current_activity = Activity.where(activity_name: activity)
 		if current_activity.exists?
 			current_activity[0].id

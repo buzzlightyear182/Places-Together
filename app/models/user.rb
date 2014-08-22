@@ -10,4 +10,12 @@ class User < ActiveRecord::Base
 	validates :encrypted_password, presence: true
 	validates :email, presence: true, format: {with: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/}, uniqueness: true
 
+  after_create :create_profile
+
+  private
+
+  def create_profile
+    self.profile = Profile.create
+  end
+
 end

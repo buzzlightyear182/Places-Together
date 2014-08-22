@@ -5,7 +5,7 @@ RSpec.describe Trip, :type => :model do
 	describe "should be valid when" do
 
 	before(:each)do
-		@test_user = User.create(username: "username01", fullname: "Test User", password: "12345678", email: "test_user@gmail.com")
+		@test_user = User.create(username: "username01", password: "12345678", email: "test_user@gmail.com")
 		@place = Place.create(city: "Barcelona", country: "Spain")
 		@activity = Activity.create(activity_name: "Ironhack", category: "Studies")
 	end
