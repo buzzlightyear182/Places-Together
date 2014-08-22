@@ -1,5 +1,3 @@
-require 'pry'
-
 class TripsController < ApplicationController
 
 	# before_action :authenticate_user!, except: [:index]
@@ -42,19 +40,22 @@ class TripsController < ApplicationController
 
 	def edit #only if current_user = organizer
 		@trip = Trip.find(params[:id])
+		@activities = Activity.all.limit(10)
 		if @trip.organizer == current_user.id
 			@place = Place.find(@trip.place_id).city
 			@activity = Activity.find(@trip.activity_id).activity_name
 			render 'edit'
 		else
-			"Sorry you are not the organizer of this trip."
+			flash[:alert] = "Sorry you are not the organizer of this trip."
 			redirect_to action: 'show', id: @trip.id
 		end
 	end
 
 	def update
-		@trip = Trip.find(params[:id])
-		if @trip.update_attributes trip_params
+		@activities = Activity.all.limit(10)
+		organizer_id = current_user.id
+		@trip = Trip.update_trip(trip_params, params[:id], organizer_id)
+		if @trip.save
 				redirect_to	action: 'show', id: @trip.id
 				flash[:notice] = "Trip updated!"
 		else
@@ -66,7 +67,7 @@ class TripsController < ApplicationController
 private
 
 	def trip_params
-		params.require(:trip).permit(:place, :activity, :from_date, :to_date, :capacity, :description)
+		params.require(:trip).permit(:place, :activity, :activity_create, :from_date, :to_date, :capacity, :description)
 	end
 
 end

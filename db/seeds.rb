@@ -6,13 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-user1 = User.create username: "buzzlightyear182", fullname: "Jane Dee", password: '12345678', email: "jane.buzzlightyear@gmail.com"
-user2 = User.create username: "rcsole", fullname:"Ricard Sole", password: '12345678', email: "rcsole@gmail.com"
-user3 = User.create username: "kristiankiwi", fullname:"Kristian Kyvik", password: '12345678', email: "kristiankyvik@gmail.com"
-user4 = User.create username: "bentarenne", fullname:"Ben Tarenne", password: '12345678', email: "bentarenne@gmail.com"
-user5 = User.create username: "cat1788", fullname:"Cat Burston", password: '12345678', email: "cat1788@gmail.com"
-user6 = User.create username: "rogerbriz", fullname:"Roger Briz", password: '12345678', email: "rogerbriz@gmail.com"
-user7 = User.create username: "mentor", fullname: "Wojtek Ogrodowczyk", password: '12345678', email: "wojtek.ogrodowczyk@gmail.com"
+user1 = User.create username: "buzzlightyear182",  password: '12345678', email: "jane.buzzlightyear@gmail.com"
+user2 = User.create username: "rcsole", password: '12345678', email: "rcsole@gmail.com"
+user3 = User.create username: "kristiankiwi", password: '12345678', email: "kristiankyvik@gmail.com"
+user4 = User.create username: "bentarenne", password: '12345678', email: "bentarenne@gmail.com"
+user5 = User.create username: "cat1788", password: '12345678', email: "cat1788@gmail.com"
+user6 = User.create username: "rogerbriz", password: '12345678', email: "rogerbriz@gmail.com"
+user7 = User.create username: "mentor", password: '12345678', email: "wojtek.ogrodowczyk@gmail.com"
 
 place1 = Place.create city: 'Manila', country: 'Philippines'
 place2 = Place.create city: 'Montpellier', country: 'France'

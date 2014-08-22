@@ -34,6 +34,26 @@ class Trip < ActiveRecord::Base
 	# 	to_date < Time.now && dvdsvs
 	# end
 
+	def self.update_trip (params, trip_id, organizer)
+		@trip = Trip.find(trip_id)
+		@trip.place_id = check_place params["place"]
+
+		activity =
+			if (params["activity_create"] == "")
+				params["activity"]
+			else
+				params["activity_create"]
+			end
+
+		@trip.activity_id = check_activity activity
+		@trip.organizer = organizer
+		@trip.from_date = params["from_date"]
+		@trip.to_date = params["to_date"]
+		@trip.capacity = params["capacity"]
+		@trip.description = params["description"]
+		@trip
+	end
+
 	def self.create_new_trip (params, user_id)
 		@trip = Trip.new
 		@trip.place_id = check_place params["place"]
