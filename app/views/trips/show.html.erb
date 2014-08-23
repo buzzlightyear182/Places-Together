@@ -11,9 +11,20 @@ Status: <br/>
 Pending: <%= @pending_people %></br>
 Confirmed: <%= @confirmed_people %><br/>
 
+<% if @review_members != [] %>
+Review your tripmates:<br/>
+  <% @review_members.each do |review| %>
+    <%=link_to User.find(review).username, trip_participations_path(:trip_id => @trip.id), method: 'post' %><br/>
+  <% end %>
+<% end %>
+
+<% if @trip.capacity >= @confirmed_people %>
 <button>
 	<%=link_to "Join this trip", trip_participations_path(:trip_id => @trip.id), method: 'post' %>
 </button>
+<% else %>
+  <%= "Sorry this trip is full!" %>
+<% end %>
 
 <button>
   <%=link_to "Edit this trip", edit_trip_path(@trip.id) %>

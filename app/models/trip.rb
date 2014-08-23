@@ -1,3 +1,5 @@
+require 'pry'
+
 class Trip < ActiveRecord::Base
 	belongs_to :place
 	belongs_to :activity
@@ -30,9 +32,31 @@ class Trip < ActiveRecord::Base
 		end
 	end
 
-	# def reviewable?(user)
-	# 	to_date < Time.now && dvdsvs
-	# end
+	def reviewable? current_user
+		if trip_has_passed && (if_participant? current_user)
+			@can_review
+		else
+			[]
+		end
+	end
+
+	def trip_has_passed
+		Date.today-1 <= Date.today+1
+	end
+
+	def if_participant? current_user
+		get_trip_participants
+		@can_review.include? current_user.id
+	end
+
+	def get_trip_participants
+		@participations = Participation.where(trip_id: id, confirmed: true)
+		@can_review = []
+		@participations.each do |p|
+			@can_review << p.user_id
+		end
+		@can_review.uniq!
+	end
 
 	def self.update_trip (params, trip_id, organizer)
 		@trip = Trip.find(trip_id)

@@ -1,5 +1,3 @@
-require 'pry'
-
 class ProfilesController < ApplicationController
 
   def show
