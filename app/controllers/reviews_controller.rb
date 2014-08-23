@@ -7,6 +7,7 @@ class ReviewsController < ApplicationController
     @review = Review.new
     @reviewee = User.find(@profile.id)
     @common_trips = Review.find_common_trip(current_user.id, params[:profile_id])
+    @trip_names = @common_trips.values
   end
 
   def create

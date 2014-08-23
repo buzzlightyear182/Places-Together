@@ -8,7 +8,7 @@ This is the create a new review form!
 
 <%= form_for [@profile, @review] do |f| %>
   You are reviewing: <%= @reviewee.username %> for trip:
-  <%= f.select :trip, options_for_select(@common_trips) %>
+  <%= f.select :trip_id, options_for_select(@common_trips) %>
   <br/>
   <br/>
   <%= f.label "Please leave an honest review" %>
@@ -16,8 +16,6 @@ This is the create a new review form!
   <br/>
   <br/>
   <%= f.label "How would you rate this person?" %><br/>
-  1<%= f.range_field :rating, in: 1..10 %>
-  <output></output>10<br/><br/>
+  1<%= f.range_field :rating, in: 1..10 %>10<br/><br/>
   <%= f.button :submit %>
 <% end %>
-

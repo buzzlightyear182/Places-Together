@@ -42,6 +42,7 @@ class TripsController < ApplicationController
 	def edit #only if current_user = organizer
 		@trip = Trip.find(params[:id])
 		@activities = Activity.all.limit(10)
+		binding.pry
 		if @trip.organizer == current_user.id
 			@place = Place.find(@trip.place_id).city
 			@activity = Activity.find(@trip.activity_id).activity_name

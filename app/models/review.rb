@@ -9,30 +9,29 @@ class Review < ActiveRecord::Base
   validates :rating, presence: true, numericality: true
 
   def self.find_common_trip(reviewer_id, reviewee_id)
-    reviewer_participation = Participation.where(user_id: reviewer_id).all
-    reviewer_trips = []
-    reviewer_participation.each do |reviewer|
-      reviewer_trips << reviewer.trip_id
-    end
-    reviewer_trips.uniq! ? reviewer.trips.length > 1 : reviewer_trips
+    reviewer_trips = find_participation_of reviewer_id
+    reviewee_trips = find_participation_of reviewee_id
 
-    reviewee_participation = Participation.where(user_id: reviewee_id).all
-    reviewee_trips = []
-    reviewee_participation.each do |reviewee|
-      reviewee_trips << reviewee.trip_id
-    end
-    reviewee_trips.uniq! ? reviewee.trips.length > 1 : reviewee_trips
-
-    @common_trips_id = reviewer_trips & reviewee_trips
-    get_trip_names @common_trips_id
-  end
-
-  def self.get_trip_names id_array
-    id_array.map! do |trip_id|
+    @common_trip_ids = reviewer_trips & reviewee_trips
+    @common_trips = {}
+    @common_trip_ids.map do |trip_id|
+      h = {}
       place = Place.find(Trip.find(trip_id).place_id).city
       activity = Activity.find(Trip.find(trip_id).activity_id).activity_name
-      activity + " in " + place
+      h[activity + " in " + place] = trip_id
+        # binding.pry
+      @common_trips.merge! h
     end
-    @common_trips = id_array
+    @common_trips
   end
+
+  def self.find_participation_of user_id
+    user_participation = Participation.where(user_id: user_id).all
+    @user_trips = []
+    user_participation.each do |user|
+      @user_trips << user.trip_id
+    end
+    @user_trips
+  end
+
 end
