@@ -16,6 +16,10 @@ class Trip < ActiveRecord::Base
 	validate :from_date_is_in_future
 	validate :from_date_before_to_date
 
+  def create_participation organizer
+    Participation.create user_id: organizer.id, trip_id: self.id, confirmed: true
+  end
+
 	def from_date_is_in_future
 		if from_date == nil
 			return
@@ -34,7 +38,7 @@ class Trip < ActiveRecord::Base
 
 	def reviewable? current_user
 		if trip_has_passed && (if_participant? current_user)
-			@can_review
+			@can_review.delete_if {|id_is| current_user.id }
 		else
 			[]
 		end

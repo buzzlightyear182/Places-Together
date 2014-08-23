@@ -14,7 +14,7 @@ class TripsController < ApplicationController
 
 	def show
 		@trip = Trip.find(params[:id])
-		@pending_people = Participation.where(trip_id: @trip.id, confirmed: false).all.count
+		@pending_people = Participation.where(trip_id: @trip.id, confirmed: false).all.count #excluding organizer
 		@confirmed_people = Participation.where(trip_id: @trip.id, confirmed: true).all.count
 		@review_members = @trip.reviewable? current_user
 	end
@@ -31,6 +31,7 @@ class TripsController < ApplicationController
 		organizer_id = current_user.id
 		@trip = Trip.create_new_trip(trip_params, organizer_id)
 			if @trip.save
+				@trip.create_participation current_user
 				render 'show'
 			else
 			@errors = @trip.errors.full_messages

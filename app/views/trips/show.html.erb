@@ -11,14 +11,14 @@ Status: <br/>
 Pending: <%= @pending_people %></br>
 Confirmed: <%= @confirmed_people %><br/>
 
-<% if @review_members != [] %>
+<% unless @review_members == nil %>
 Review your tripmates:<br/>
   <% @review_members.each do |review| %>
     <%=link_to User.find(review).username, trip_participations_path(:trip_id => @trip.id), method: 'post' %><br/>
   <% end %>
 <% end %>
 
-<% if @trip.capacity >= @confirmed_people %>
+<% if (@confirmed_people == nil) || @trip.capacity >= @confirmed_people %>
 <button>
 	<%=link_to "Join this trip", trip_participations_path(:trip_id => @trip.id), method: 'post' %>
 </button>
