@@ -47,9 +47,9 @@ gem 'capybara', group: [:test, :development]
 
 gem 'factory_girl_rails', group: [:test, :development]
 
-gem 'carmen-rails', '~> 1.0.0'
+# gem 'carmen-rails', '~> 1.0.0'
 
-gem 'faker'
+# gem 'faker'
 
 gem 'awesome_print'
 
@@ -57,3 +57,6 @@ gem 'letter_opener'
 
 gem 'devise'
 
+gem 'country_select'
+
+gem 'simple_form'

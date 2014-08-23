@@ -11,10 +11,12 @@ Status: <br/>
 Pending: <%= @pending_people %></br>
 Confirmed: <%= @confirmed_people %><br/>
 
-<% unless @review_members == nil %>
+<% unless @review_members == [] %>
 Review your tripmates:<br/>
-  <% @review_members.each do |review| %>
-    <%=link_to User.find(review).username, trip_participations_path(:trip_id => @trip.id), method: 'post' %><br/>
+  <% @review_members.each do |profile| %>
+    <% unless profile == current_user.id %>
+      <%=link_to User.find(profile).username, new_profile_review_path(:profile_id => Profile.where(user_id: profile).first) %><br/>
+     <% end %>
   <% end %>
 <% end %>
 

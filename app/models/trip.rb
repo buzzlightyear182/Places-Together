@@ -38,13 +38,15 @@ class Trip < ActiveRecord::Base
 
 	def reviewable? current_user
 		if trip_has_passed && (if_participant? current_user)
-			@can_review.delete_if {|id_is| current_user.id }
+			# @can_review.delete_if {|id_is| current_user.id }
+			@can_review #how to delete current_user?
 		else
 			[]
 		end
 	end
 
 	def trip_has_passed
+		# to_date <= Date.today+1
 		Date.today-1 <= Date.today+1
 	end
 
