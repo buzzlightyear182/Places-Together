@@ -12,12 +12,15 @@ class ReviewsController < ApplicationController
   def create
     @profile = Profile.find(params[:profile_id])
     review_params[:trip] = review_params[:trip].to_i
-    # binding.pry
     @review = Review.create_review(review_params, current_user.id, params[:profile_id])
     if @review.save
       redirect_to action:'show', :controller =>'profiles', id: @profile.id
+    else
+      @errors = @review.errors.full_messages
+      render 'new'
     end
   end
+
 
   private
 

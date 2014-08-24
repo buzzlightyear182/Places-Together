@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find(params[:id])
+    @reviews = Review.where(reviewee_id: params[:id])
   end
 
   def edit

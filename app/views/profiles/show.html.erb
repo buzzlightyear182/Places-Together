@@ -16,6 +16,14 @@ Google <%= @profile.google %><br/>
 Blog <%= @profile.blog %><br/>
 Others <%= @profile.others %><br/>
 
+<% if @reviews != [] %>
+<% @reviews.each do |review| %>
+  <%= review.content %><br/>
+  by <%= User.find(review.author_id).username %><br/><br/>
+<% end %>
+<% end %>
+
+
 <% if @profile.user_id == current_user.id %>
 <button><%= link_to "Edit my profile", edit_profile_path(@profile.id) %></button>
 <% end %>
