@@ -32,6 +32,9 @@ Review your tripmates:<br/>
 <button>
   <%=link_to "Edit this trip", edit_trip_path(@trip.id) %>
 </button>
+<button>
+  <%=link_to "Cancel this trip", trip_path(@trip.id), method: 'delete', confirm: 'Are you sure?' %>
+</button>
 <% end %>
 
 <button>

@@ -1,3 +1,4 @@
+require 'pry'
 class TripsController < ApplicationController
 
 	before_action :authenticate_user!, except: [:index]
@@ -34,7 +35,7 @@ class TripsController < ApplicationController
 		@trip = Trip.create_new_trip(trip_params, organizer_id)
 			if @trip.save
 				@trip.create_participation current_user
-				render 'show'
+				redirect_to action: 'show', id: @trip.id
 			else
 			@errors = @trip.errors.full_messages
 			render 'new'
@@ -44,7 +45,6 @@ class TripsController < ApplicationController
 	def edit #only if current_user = organizer
 		@trip = Trip.find(params[:id])
 		@activities = Activity.all.limit(10)
-		binding.pry
 		if @trip.organizer == current_user.id
 			@place = Place.find(@trip.place_id).city
 			@activity = Activity.find(@trip.activity_id).activity_name
@@ -68,12 +68,12 @@ class TripsController < ApplicationController
 		end
 	end
 
-	# def destroy
-	# 	@trip = Trip.find(params[:id])
-	# 	participation = Participation.destroy_all(trip_id: @trip.id)
-	# 	@trip.destroy
-	# 	redirect_to action: 'index'
-	# end
+	def destroy
+		@trip = Trip.find(params[:id])
+		participation = Participation.destroy_all(trip_id: @trip.id)
+		@trip.destroy
+		redirect_to action: 'index', controller: 'places'
+	end
 
 private
 
