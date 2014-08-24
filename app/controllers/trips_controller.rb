@@ -68,6 +68,13 @@ class TripsController < ApplicationController
 		end
 	end
 
+	# def destroy
+	# 	@trip = Trip.find(params[:id])
+	# 	participation = Participation.destroy_all(trip_id: @trip.id)
+	# 	@trip.destroy
+	# 	redirect_to action: 'index'
+	# end
+
 private
 
 	def trip_params

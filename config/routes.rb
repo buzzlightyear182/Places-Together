@@ -14,7 +14,7 @@ resources :places, only: [:index] do
   resources :trips, only: [:index]
 end
 
-resources :trips, only: [:new, :create, :edit, :update]
+resources :trips, only: [:new, :create, :edit, :update, :destroy]
 
 resources :trips, only: [:show] do
   resources :participations, only: [:create]
