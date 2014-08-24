@@ -16,9 +16,11 @@ Google <%= @profile.google %><br/>
 Blog <%= @profile.blog %><br/>
 Others <%= @profile.others %><br/>
 
-<% @reviews.each do |review| %>
-  <%= review.content %><br/>
-  by <%= User.find(review.author_id).username %><br/><br/>
+<% if @reviews != nil %>
+  <% @reviews.each do |review| %>
+    <%= review.content %><br/>
+    by <%= User.find(review.author_id).username %><br/><br/>
+  <% end %>
 <% end %>
 
 <% if @profile.user_id == current_user.id %>

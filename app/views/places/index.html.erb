@@ -3,11 +3,10 @@ Welcome! This is the Place index page
 <p>Where are you planning to go?</p>
 
 <ul>
-<% @places.each do |place| %>
-<li><%= link_to place.city, place_trips_path(place.id) %></li>
-<% end %>
+  <% @places.each do |place| %>
+  <li><%= link_to place.city, place_trips_path(place.id) %></li>
+  <% end %>
 </ul>
-
 
 <p>What do you want to do?</p>
 
@@ -19,8 +18,8 @@ Welcome! This is the Place index page
 
 <button><%=link_to "Create a new trip", new_trip_path%></button>
 
-<% if user_signed_in? %>
+<% if user_signed_in?%>
 <button>
-  <%= link_to "Edit my profile", edit_profile_path(id: Profile.where(user_id: current_user.id).first.user_id) %>
+  <%= link_to "Edit my profile", edit_profile_path(id: @profile_id) %>
 </button>
   <% end %>
