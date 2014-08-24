@@ -14,8 +14,9 @@ class TripsController < ApplicationController
 
 	def show
 		@trip = Trip.find(params[:id])
-		@pending_people = Participation.where(trip_id: @trip.id, confirmed: false).all.count #excluding organizer
-		@confirmed_people = Participation.where(trip_id: @trip.id, confirmed: true).all.count
+		pending_people = Participation.where(trip_id: @trip.id, confirmed: false).all.count #excluding organizer
+		confirmed_people = Participation.where(trip_id: @trip.id, confirmed: true).all.count
+		@count_of_people = [pending_people, confirmed_people]
 		@review_members = @trip.reviewable? current_user
 	end
 

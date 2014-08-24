@@ -1,9 +1,14 @@
 class ProfilesController < ApplicationController
 
+    before_action :authenticate_user!, except: [:show]
+
+
   def show
     @profile = Profile.find(params[:id])
     @reviews = Review.where(reviewee_id: params[:id])
     @reviews if @reviews != []
+    user_participations = Review.find_participation_of params[:id]
+    @profile_trips = Review.connect_trip_name user_participations
   end
 
   def edit

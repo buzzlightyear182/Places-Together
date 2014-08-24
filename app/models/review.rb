@@ -12,8 +12,12 @@ class Review < ActiveRecord::Base
     reviewee_trips = find_participation_of reviewee_id
 
     @common_trip_ids = reviewer_trips & reviewee_trips
+    @common_trips = connect_trip_name @common_trip_ids
+  end
+
+  def self.connect_trip_name common_trip_ids
     @common_trips = {}
-    @common_trip_ids.map do |trip_id|
+    common_trip_ids.map do |trip_id|
       h = {}
       place = Place.find(Trip.find(trip_id).place_id).city
       activity = Activity.find(Trip.find(trip_id).activity_id).activity_name

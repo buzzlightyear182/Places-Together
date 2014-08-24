@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry'
 
 RSpec.describe TripsController, :type => :controller do
 
@@ -6,6 +7,7 @@ RSpec.describe TripsController, :type => :controller do
 		@test_user = User.create(username: "username01", password: "12345678", email: "test_user@gmail.com")
 		@place = Place.create(city: "Barcelona", country: "Spain")
 		@activity = Activity.create(activity_name: "Ironhack", category: "Studies")
+    current_user = @test_user
 	end
 
 	it "shows all the trips from a specific place" do
@@ -176,6 +178,83 @@ RSpec.describe TripsController, :type => :controller do
     expect(Trip.all.count).to eq(previous_trip_count+1)
   end
 
+  it "and automatically generates a trip name" do
+    organizer_id = @test_user.id
+    trip_params = {
+      "place" => @place.city,
+      "activity" => @activity.activity_name,
+      "activity_create" => "",
+      "from_date"=>"2015-10-21",
+      "to_date"=>"2015-11-21",
+      "capacity" => "3",
+      "description" => "Web Development Intensive Bootcamp"
+      }
+
+    @trip = Trip.create_new_trip(trip_params, organizer_id)
+    @trip.save
+
+    expect(@trip.name).to eq("Ironhack in Barcelona")
+  end
 end
+
+  xdescribe "display trip details" do
+
+    before :each do
+      @organizer = @test_user
+      @p_user = User.create(username: "participant", password: "12345678", email: "p_user@gmail.com")
+      @sure_user = User.create(username: "surejoiner", password: "12345678", email: "sure_user@gmail.com")
+      current_user = @test_user
+    end
+
+    it "and number of people confirmed and pending approval" do
+
+      trip_params = {
+        "place" => @place.city,
+        "activity" => @activity.activity_name,
+        "activity_create" => "",
+        "from_date"=>"2014-09-01",
+        "to_date"=>"2014-09-03",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+
+      @trip = Trip.create_new_trip(trip_params, @organizer.id)
+      @trip.create_participation @organizer
+      @trip.save
+
+      @pending = Participation.create trip_id: @trip.id, user_id: @p_user.id, confirmed: false
+      @sure = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
+      get :show, id: @trip.id
+      expect(@count_of_people).to eq([1,1])
+    end
+
+    it "but not confirmed participants when to_date is not passed" do
+      trip_params = {
+        "place" => @place.city,
+        "activity" => @activity.activity_name,
+        "activity_create" => "",
+        "from_date"=>"2014-08-25",
+        "to_date"=>"2014-08-26",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+
+      @trip = Trip.create_new_trip(trip_params, @organizer.id)
+      @trip.create_participation @organizer
+      @trip.save
+
+      @pending = Participation.create trip_id: @trip.id, user_id: @p_user.id, confirmed: false
+      @sure = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
+      get :show, id: @trip.id
+      expect(@review_members).to eq(nil)
+
+    end
+
+    it "but not confirmed participants when current_user is not part of the trip" do
+    end
+
+    it "and confirmed participants when reviewable" do
+    end
+  end
 
 end

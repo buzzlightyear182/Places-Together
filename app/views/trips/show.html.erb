@@ -8,8 +8,8 @@ To Date: <%= @trip.to_date %><br/>
 Capacity: <%= @trip.capacity %><br/>
 
 Status: <br/>
-Pending: <%= @pending_people %></br>
-Confirmed: <%= @confirmed_people %><br/>
+Pending: <%= @count_of_people[0] %></br>
+Confirmed: <%= @count_of_people[1] %><br/>
 
 <% if @review_members.length >= 2 %>
 Review your tripmates:<br/>
@@ -20,7 +20,7 @@ Review your tripmates:<br/>
   <% end %>
 <% end %>
 
-<% if (@confirmed_people == nil) || @trip.capacity == @confirmed_people+1 %>
+<% if (@count_of_people[1] == nil) || @trip.capacity == @count_of_people[1]+1 %>
 <button>
 	<%=link_to "Join this trip", trip_participations_path(:trip_id => @trip.id), method: 'post' %>
 </button>

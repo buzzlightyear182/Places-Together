@@ -16,6 +16,10 @@ Google <%= @profile.google %><br/>
 Blog <%= @profile.blog %><br/>
 Others <%= @profile.others %><br/>
 
+<% @profile_trips.each do |key, value| %>
+<%= link_to key, trip_path(value) %></br>
+<% end %>
+
 <% @reviews.each do |review| %>
   <%= review.content %><br/>
   by <%= User.find(review.author_id).username %><br/><br/>

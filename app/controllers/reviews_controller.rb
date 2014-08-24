@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def new
     @profile = Profile.find(params[:profile_id])
     @review = Review.new
