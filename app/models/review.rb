@@ -1,4 +1,3 @@
-require 'pry'
 class Review < ActiveRecord::Base
   belongs_to :profile
   belongs_to :trip
@@ -19,7 +18,6 @@ class Review < ActiveRecord::Base
       place = Place.find(Trip.find(trip_id).place_id).city
       activity = Activity.find(Trip.find(trip_id).activity_id).activity_name
       h[activity + " in " + place] = trip_id
-        # binding.pry
       @common_trips.merge! h
     end
     @common_trips

@@ -1,5 +1,5 @@
 class SendEmail < ActionMailer::Base
-  default from: "janeheatherdee@gmail.com"
+  default from: "placestogether@gmail.com"
 
   def to_notify_organizer(participation)
   	@trip = Trip.find(participation.trip_id)
@@ -34,12 +34,12 @@ class SendEmail < ActionMailer::Base
   private
 
   def accept_joiner(participation)
-		"http://localhost:3000/confirm_joiner/#{participation.id}"
-    # "http://vast-spire-2783.herokuapp.com/confirm_joiner/#{participation.id}"
+		# "http://localhost:3000/confirm_joiner/#{participation.id}"
+    "http://placestogether.herokuapp.com/confirm_joiner/#{participation.id}"
   end
 
   def show_trip_from_email(trip)
-  	"http://localhost:3000/trips/#{trip.id}"
-    # "http://vast-spire-2783.herokuapp.com/trips/#{trip.id}"
+  	# "http://localhost:3000/trips/#{trip.id}"
+    "http://placestogether.herokuapp.com/trips/#{trip.id}"
   end
 end
