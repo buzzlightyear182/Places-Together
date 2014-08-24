@@ -1,5 +1,4 @@
 require 'pry'
-require 'simple_form'
 class ReviewsController < ApplicationController
 
   def new
@@ -11,10 +10,13 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    puts params
-    binding.pry
     @profile = Profile.find(params[:profile_id])
-    @review = Review.new
+    review_params[:trip] = review_params[:trip].to_i
+    # binding.pry
+    @review = Review.create_review(review_params, current_user.id, params[:profile_id])
+    if @review.save
+      redirect_to action:'show', :controller =>'profiles', id: @profile.id
+    end
   end
 
   private
@@ -23,11 +25,3 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:content, :rating, :trip)
   end
 end
-
-{"utf8"=>"✓",
- "authenticity_token"=>"Uj9WIbSZGxHvqg3SIZlT50gkelLb8ku21fQi6CSYrqk=",
- "review"=>{"trip"=>"Trek in Bilbao", "content"=>"", "rating"=>"10"},
- "button"=>"",
- "action"=>"create",
- "controller"=>"reviews",
- "profile_id"=>"3"}

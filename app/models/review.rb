@@ -34,4 +34,14 @@ class Review < ActiveRecord::Base
     @user_trips
   end
 
+  def self.create_review(params, author_id, reviewee_id)
+    @review = Review.new
+    @review.author_id = author_id
+    @review.reviewee_id = reviewee_id
+    @review.trip_id = params[:trip].to_i
+    @review.content = params[:content]
+    @review.rating = params[:rating]
+    @review
+  end
+
 end
