@@ -8,7 +8,7 @@ This is the create a new trip form!
 
 <%= form_for @trip do |f| %>
   <%= f.label "Where do you want to go?" %></br>
-  <%= f.text_field :place, :value => @temporary_place %></br></br>
+  <%= f.text_field :place, :value => @filler[0] %></br></br>
 
   <%= f.label "What do you want to do?" %></br>
   <% @activities.each do |a| %>
@@ -17,7 +17,7 @@ This is the create a new trip form!
     <% end %>
     <%= f.radio_button :activity, "" %>
     <%= "Or create your own:"%> <br/>
-    <%= f.text_field :activity_create, :value => @temporary_activity  %>
+    <%= f.text_field :activity_create, :value => @filler[1]  %>
 
   </br></br>
 

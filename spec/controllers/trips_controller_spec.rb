@@ -18,7 +18,7 @@ RSpec.describe TripsController, :type => :controller do
     expect(response).to render_template(:index)
   end
 
-	it "show the trip details from a specific trip" do
+	xit "show the trip details from a specific trip" do
   	trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
     get :show, id: trip.id
     expect(response).to render_template(:show)

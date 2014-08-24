@@ -21,8 +21,9 @@ class TripsController < ApplicationController
 
 	def new
 		@trip = Trip.new
-		@temporary_place = params[:place]
-		@temporary_activity = params[:activity]
+		place = params[:place]
+		activity = params[:activity]
+		@filler = [place, activity]
 		@activities = Activity.all.limit(10)
 	end
 

@@ -44,7 +44,7 @@ describe "When someone wants to join a trip, it" do
   end
 
 	it 'renders the sender email' do
-    expect(ActionMailer::Base.deliveries.first.from).to eq(["janeheatherdee@gmail.com"])
+    expect(ActionMailer::Base.deliveries.first.from).to eq(["placestogether@gmail.com"])
   end
 end
 
@@ -67,7 +67,7 @@ describe "When the trip organizer adds you to the trip, it" do
   end
 
   it 'renders the sender email' do
-    expect(ActionMailer::Base.deliveries.first.from).to eq(["janeheatherdee@gmail.com"])
+    expect(ActionMailer::Base.deliveries.first.from).to eq(["placestogether@gmail.com"])
   end
 end
 
