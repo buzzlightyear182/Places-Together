@@ -29,7 +29,7 @@ button a {
 .header_wrapper {
   background-color: $red;
   color: white;
-  padding: 20px;
+  padding: 10px;
   margin: 0px;
   text-align: right;
   @include clearfix;
@@ -38,16 +38,22 @@ button a {
   z-index: 9999;
   $horizontal-bar-mode: $large-screen;
 
-  // .logo {
-  //   float: left;
-  //   max-height: $navigation-height;
-  //   padding-left: $navigation-padding;
-  //   padding-right: 2em;
+  .logo {
+    float: left;
+    max-height: $navigation-height;
+    // padding-left: $navigation-padding;
+    // padding-right: 2em;
 
-  //   img {
-  //     max-height: $navigation-height;
-  //     padding: .8em 0;
-  //   }
+    img {
+      max-height: $navigation-height;
+      // padding: .8em 0;
+    }
+  }
+}
+
+.user_signin {
+  vertical-align: middle;
+  margin-top: 15px;
 }
 
 .user_signin a {
@@ -56,7 +62,7 @@ button a {
   padding: 10px;
   font-family: $accent-font-family;
   margin: 0px 5px;
-  border-radius: 10px;
+  // border-radius: 10px;
 }
 
 .user_signin a:hover{
@@ -64,15 +70,51 @@ button a {
   background-color: white;
 }
 
+.main_container {
+  @include clearfix;
+  @include outer-container;
+}
+
 #sidemenu {
-  @include span-columns(3);
+  @include span-columns(3 of 12);
+  display: inline;
+  float: left;
 }
 
 #sidemenu li{
-  padding: 10px;
+  // padding: 10px;
 }
 
-.body-container {
+.body_container {
   float: right;
-  @include span-columns(9);
+  display: inline;
+  @include span-columns(9 of 12);
+}
+
+.js-accordion-trigger {
+  background-color: white;
+  color: $blue;
+  @include span-columns(3 of 3);
+  padding: 20px 15px;
+  border-bottom: 1px solid $blue;
+  font-family: $accent-font-family;
+}
+
+.js-accordion-trigger:hover {
+  background-color: $blue;
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.submenu a {
+  @include span-columns(3 of 3);
+  padding: 20px 30px;
+  // border-bottom: 1px solid $blue;
+}
+
+.submenu a:hover {
+  background-color: $blue;
+  color: white;
+  // border-bottom: 1px solid white;
+
 }

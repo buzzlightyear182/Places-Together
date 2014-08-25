@@ -5,8 +5,7 @@ Welcome! This is the Trips index page
 <% @trips.each do |trip| %>
 	<li>
 		<h3>
-			<% trip_title = Activity.find(trip.activity_id).activity_name + " in " + Place.find(trip.place_id).city %>
-			<%=link_to trip_title, trip_path(:id => trip.id)%>
+			<%=link_to trip.name, trip_path(:id => trip.id)%>
 		</h3>
 		From Date: <%= trip.from_date %><br/>
 		To Date: <%= trip.to_date %><br/>

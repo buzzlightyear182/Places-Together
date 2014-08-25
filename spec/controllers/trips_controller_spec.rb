@@ -7,7 +7,7 @@ RSpec.describe TripsController, :type => :controller do
 		@test_user = User.create(username: "username01", password: "12345678", email: "test_user@gmail.com")
 		@place = Place.create(city: "Barcelona", country: "Spain")
 		@activity = Activity.create(activity_name: "Ironhack", category: "Studies")
-    current_user = @test_user
+    # current_user = @test_user
 	end
 
 	it "shows all the trips from a specific place" do
@@ -191,6 +191,7 @@ RSpec.describe TripsController, :type => :controller do
       }
 
     @trip = Trip.create_new_trip(trip_params, organizer_id)
+    @trip.generate_trip_name
     @trip.save
 
     expect(@trip.name).to eq("Ironhack in Barcelona")
@@ -247,7 +248,6 @@ end
       @sure = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
       get :show, id: @trip.id
       expect(@review_members).to eq(nil)
-
     end
 
     it "but not confirmed participants when current_user is not part of the trip" do

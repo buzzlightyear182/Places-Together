@@ -1,14 +1,17 @@
+require 'pry'
 class Profile < ActiveRecord::Base
   belongs_to :user
   serialize :links
   serialize :languages
 
-  # def get_trip_names_of user_participations
-  #   @profile_trips = []
-  #   user_participations.each do |trip_id|
-  #     trip = Trip.find(trip_id)
-  #     @profile_trips << trip.name
-  #   end
-  #   self
-  # end
+  def update_rating
+    @profile = Profile.find(self.id)
+    @reviews = Review.where(reviewee_id: self.id).all
+    scores = []
+    @reviews.each do |r|
+      scores << r.rating
+    end
+    @profile.rating = scores.inject(0.0) { |sum, el| sum + el }/scores.size
+    return @profile.save
+  end
 end

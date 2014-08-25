@@ -3,7 +3,7 @@ $sans-serif: 'Source Sans Pro', $helvetica;
 $serif: $georgia;
 $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
-$accent-font-family: 'Fjalla One', $sans-serif;
+$accent-font-family: 'Signika', $sans-serif;
 
 // Sizes
 $base-font-size: 1em;
@@ -11,10 +11,12 @@ $base-line-height: $base-font-size * 1.5;
 $unitless-line-height: $base-line-height / ($base-line-height * 0 + 1); // Strip units from line-height: https://developer.mozilla.org/en-US/docs/Web/CSS/line-height#Prefer_unitless_numbers_for_line-height_values
 $header-line-height: $base-font-size * 1.25;
 $base-border-radius: em(3);
+$navigation-height: 60px;
+$navigation-padding: 0px;
 
 // Colors
 $red: #F64747;
-$blue: #477DCA;
+$blue: #22A7F0;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #DDD;

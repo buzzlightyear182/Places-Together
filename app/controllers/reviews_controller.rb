@@ -16,6 +16,7 @@ class ReviewsController < ApplicationController
     review_params[:trip] = review_params[:trip].to_i
     @review = Review.create_review(review_params, current_user.id, params[:profile_id])
     if @review.save
+      @profile.update_rating
       redirect_to action:'show', controller:'profiles', id: @profile.id
     else
       @errors = @review.errors.full_messages

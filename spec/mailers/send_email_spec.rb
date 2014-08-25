@@ -11,7 +11,7 @@ RSpec.describe SendEmail, :type => :mailer do
 
     @activity = Activity.create(activity_name: "Ironhack", category: "Studies")
 
-    @trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
+    @trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp", name: "#{@activity.activity_name} in #{@place.city}"
 
     @participation = Participation.create(trip_id: @trip.id, user_id: @p_user.id, confirmed: false)
 
@@ -43,7 +43,7 @@ describe "When someone wants to join a trip, it" do
   end
 
 	it 'renders the sender email' do
-    expect(ActionMailer::Base.deliveries.first.from).to eq(["placestogether@gmail.com"])
+    expect(ActionMailer::Base.deliveries.first.from).to eq(["places-together@heroku.com"])
   end
 end
 
@@ -66,7 +66,7 @@ describe "When the trip organizer adds you to the trip, it" do
   end
 
   it 'renders the sender email' do
-    expect(ActionMailer::Base.deliveries.first.from).to eq(["placestogether@gmail.com"])
+    expect(ActionMailer::Base.deliveries.first.from).to eq(["places-together@heroku.com"])
   end
 end
 
