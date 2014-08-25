@@ -62,7 +62,7 @@ gem 'devise'
 
 gem 'simple_form'
 
-gem 'postmark-rails'
+# gem 'postmark-rails'
 
 gem 'bourbon'
 
@@ -71,3 +71,5 @@ gem 'neat', '~> 1.6.0'
 gem 'refills'
 
 gem 'normalize-rails'
+
+gem 'mandrill-api'

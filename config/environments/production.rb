@@ -71,6 +71,20 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.smtp_settings = {
+   :enable_starttls_auto =>  true,
+   :address              =>  'smtp.mandrillapp.com',
+   :port                 =>  '587',               # '465',
+   :tls                  =>  true,
+   :domain               =>  'mandrillapp.com',
+   :authentication       =>  :plain,             # :login,
+   :user_name => 'places-together@heroku.com',
+  :password => ENV['MANDRILLA_API_KEY'],
+ }
+   config.action_mailer.delivery_method = :smtp
+
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 
@@ -79,13 +93,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  ActionMailer::Base.smtp_settings = {
-      :address => "smtp.gmail.com",
-      :port => 587,
-      :authentication => :plain,
-      :domain => ENV['GMAIL_SMTP_USER'],
-      :user_name => ENV['GMAIL_SMTP_USER'],
-      :password => ENV['GMAIL_SMTP_PASSWORD'],
-    }
+
 
 end
