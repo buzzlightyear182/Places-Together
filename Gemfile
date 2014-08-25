@@ -60,7 +60,7 @@ gem 'devise'
 
 # gem 'country_select'
 
-# gem 'simple_form'
+gem 'simple_form'
 
 gem 'postmark-rails'
 
