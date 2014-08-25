@@ -12,6 +12,6 @@ class Profile < ActiveRecord::Base
       scores << r.rating
     end
     @profile.rating = scores.inject(0.0) { |sum, el| sum + el }/scores.size
-    return @profile.save
+    @profile.save
   end
 end

@@ -51,6 +51,7 @@ RSpec.describe ReviewsController, :type => :controller do
       @review2 = Review.create_review(review_params2, @test_user.id, @profile.id)
       @review2.save
       @profile.update_rating
+      @profile.reload
       expect(@profile.rating).to eq(9)
     end
   end
