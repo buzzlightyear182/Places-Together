@@ -26,7 +26,18 @@ module Project
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    config.action_mailer.delivery_method   = :postmark
-    config.action_mailer.postmark_settings = { :api_key => ENV['POSTMARK_API_KEY'] }
+
+    ActionMailer::Base.smtp_settings = {
+      :port           => '25',
+      :address        => ENV['POSTMARK_SMTP_SERVER'],
+      :user_name      => ENV['POSTMARK_API_KEY'],
+      :password       => ENV['POSTMARK_API_KEY'],
+      :domain         => 'places-together.heroku.com',
+      :authentication => :plain,
+    }
+    ActionMailer::Base.delivery_method = :smtp
+
+    # config.action_mailer.delivery_method   = :postmark
+    # config.action_mailer.postmark_settings = { :api_key => ENV['POSTMARK_API_KEY'] }
   end
 end
