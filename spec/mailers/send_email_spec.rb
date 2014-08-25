@@ -1,5 +1,4 @@
-require "rails_helper"
-require 'pry'
+# require "rails_helper"
 
 RSpec.describe SendEmail, :type => :mailer do
 
