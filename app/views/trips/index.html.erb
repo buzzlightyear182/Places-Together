@@ -18,9 +18,9 @@ Welcome! This is the Trips index page
 <button><%=link_to "Go back to main", places_path %></button>
 
 
-<% if user_signed_in? %>
+<% if user_signed_in? && current_user %>
   <button>
-    <%= link_to "Edit my profile", edit_profile_path(id: Profile.where(user_id: current_user.id).first.user_id) %>
+    <%= link_to "Edit my profile", edit_profile_path(id: Profile.where(user_id: current_user.id).first.id) %>
   </button>
 <% end %>
 
