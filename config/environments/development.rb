@@ -25,8 +25,8 @@ Rails.application.configure do
    :tls                  =>  true,
    :domain               =>  'gmail.com',
    :authentication       =>  :plain,             # :login,
-   :user_name            =>  'placestogether@gmail.com',
-   :password             =>  ENV['EMAIL_PASSWORD']
+   :user_name => ENV['GMAIL_SMTP_USER'],
+  :password => ENV['GMAIL_SMTP_PASSWORD'],
  }
 
   # Print deprecation notices to the Rails logger.
