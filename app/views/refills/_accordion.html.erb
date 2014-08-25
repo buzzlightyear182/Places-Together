@@ -3,11 +3,19 @@
     <a href="javascript:void(0)" class="js-accordion-trigger">Search</a>
     <ul class="submenu">
       <li>
-        <a href="javascript:void(0)">Find by place</a>
+      <div class="search-bar">
+        <div class="search-and-submit">
+          <%= form_for @search do |f| %>
+            <%= f.label "Find by city or activity" %>
+            <%= f.text_field :keyword, type: "search", placeholder: "Enter search" %>
+            <%= f.submit "Find me a trip!"%>
+        </div>
+      </div>
+      <% end %>
       </li>
-      <li>
+      <!-- <li>
         <a href="javascript:void(0)">Find by activity</a>
-      </li>
+      </li> -->
     </ul>
   </li>
   <li>

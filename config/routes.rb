@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-root 'places#index'
-get 'activities/:activity_id/trips' => 'trips#index', as: :activity_trips
+root 'home#welcome'
 
 resources :places, only: [:index] do
+  resources :trips, only: [:index]
+end
+
+resources :activities, only: [:index] do
   resources :trips, only: [:index]
 end
 
@@ -22,6 +25,8 @@ end
 
 resources :profiles, only: [:edit, :update, :show] do resources :reviews, only: [:index, :new, :create, :edit, :update, :destroy]
 end
+
+post 'search' => 'search#create'
 
 get 'confirm_joiner/:id' => 'participations#add_joiner'
 

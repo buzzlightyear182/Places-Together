@@ -3,6 +3,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    @search = Search.new
     @profile = Profile.find(params[:profile_id])
     @review = Review.new
     @reviewee = User.find(@profile.id)

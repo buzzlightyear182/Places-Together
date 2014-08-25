@@ -79,7 +79,6 @@ class Trip < ActiveRecord::Base
 		@trip.to_date = params["to_date"]
 		@trip.capacity = params["capacity"]
 		@trip.description = params["description"]
-		@trip.name = generate_trip_name
 		@trip
 	end
 
@@ -100,15 +99,14 @@ class Trip < ActiveRecord::Base
 		@trip.to_date = params["to_date"]
 		@trip.capacity = params["capacity"]
 		@trip.description = params["description"]
-		@trip.name = generate_trip_name(@trip.place_id, @trip.activity_id)
 		@trip
 	end
 
-	def self.generate_trip_name(place_id,activity_id)
-		place = Place.find(place_id).city
-		activity = Activity.find(activity_id).activity_name
-		@name = "#{activity} in #{place}"
-		@name
+	def generate_trip_name
+		place = Place.find(self.place_id).city
+		activity = Activity.find(self.activity_id).activity_name
+		self.name = "#{activity} in #{place}"
+		self.save
 	end
 
 	def self.check_place city

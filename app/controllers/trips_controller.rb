@@ -3,6 +3,7 @@ class TripsController < ApplicationController
 	before_action :authenticate_user!, except: [:index]
 
 	def index
+		 @search = Search.new
 		if params[:place_id]
 			@place = Place.find(params[:place_id])
 			@trips = Trip.where(place_id: @place.id).all
@@ -13,6 +14,7 @@ class TripsController < ApplicationController
 	end
 
 	def show
+		@search = Search.new
 		@trip = Trip.find(params[:id])
 		pending_people = Participation.where(trip_id: @trip.id, confirmed: false).all.count #excluding organizer
 		confirmed_people = Participation.where(trip_id: @trip.id, confirmed: true).all.count
@@ -21,6 +23,7 @@ class TripsController < ApplicationController
 	end
 
 	def new
+		@search = Search.new
 		@trip = Trip.new
 		place = params[:place]
 		activity = params[:activity]
@@ -34,6 +37,7 @@ class TripsController < ApplicationController
 		@trip = Trip.create_new_trip(trip_params, organizer_id)
 			if @trip.save
 				@trip.create_participation current_user
+				@trip.generate_trip_name
 				redirect_to action: 'show', id: @trip.id
 			else
 			@errors = @trip.errors.full_messages
@@ -42,6 +46,7 @@ class TripsController < ApplicationController
 	end
 
 	def edit #only if current_user = organizer
+		@search = Search.new
 		@trip = Trip.find(params[:id])
 		@activities = Activity.all.limit(10)
 		if @trip.organizer == current_user.id
@@ -59,6 +64,7 @@ class TripsController < ApplicationController
 		organizer_id = current_user.id
 		@trip = Trip.update_trip(trip_params, params[:id], organizer_id)
 		if @trip.save
+				@trip.generate_trip_name
 				redirect_to	action: 'show', id: @trip.id
 				flash[:notice] = "Trip updated!"
 		else

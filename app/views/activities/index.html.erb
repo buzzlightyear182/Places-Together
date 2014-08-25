@@ -1,10 +1,11 @@
-Welcome! This is the Place index page
+Welcome! This is the Activities index page
+
+<p>What do you want to do?</p>
 
 <ul>
-<p>Where are you planning to go?</p>
-  <% @places.each do |place| %>
-  <li><%= link_to place.city, place_trips_path(place.id) %></li>
-  <% end %>
+<% @activities.each do |activity| %>
+<li><%= link_to activity.activity_name, activity_trips_path(activity.id) %></li>
+<% end %>
 </ul>
 
 <button><%=link_to "Create a new trip", new_trip_path%></button>

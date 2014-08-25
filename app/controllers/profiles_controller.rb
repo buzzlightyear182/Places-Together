@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
 
 
   def show
+    @search = Search.new
     @profile = Profile.find(params[:id])
     @reviews = Review.where(reviewee_id: params[:id])
     @reviews if @reviews != []
@@ -12,6 +13,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    @search = Search.new
     @profile = Profile.where(user_id: current_user.id).first
   end
 
