@@ -13,13 +13,14 @@ Trip.delete_all
 Review.delete_all
 Activity.delete_all
 
-user1 = User.create username: "buzzlightyear182",  password: '12345678', email: "jane.buzzlightyear@gmail.com"
-user2 = User.create username: "rcsole", password: '12345678', email: "rcsole@gmail.com"
-user3 = User.create username: "kristiankiwi", password: '12345678', email: "kristiankyvik@gmail.com"
-user4 = User.create username: "bentarenne", password: '12345678', email: "bentarenne@gmail.com"
-user5 = User.create username: "cat1788", password: '12345678', email: "cat1788@gmail.com"
-user6 = User.create username: "rogerbriz", password: '12345678', email: "rogerbriz@gmail.com"
-user7 = User.create username: "mentor", password: '12345678', email: "wojtek.ogrodowczyk@gmail.com"
+user1 = User.create username: "buzzlightyear182",  password: '123456', email: "jane.buzzlightyear@gmail.com"
+user2 = User.create username: "rcsole", password: '123456', email: "rcsole@gmail.com"
+user3 = User.create username: "kristiankiwi", password: '123456', email: "kristianruizkyvik@gmail.com"
+user4 = User.create username: "bentarenne", password: '123456', email: "tarennebenjamin@gmail.com"
+user5 = User.create username: "cat1788", password: '123456', email: "cat1788@gmail.com"
+user6 = User.create username: "rogerbriz", password: '123456', email: "rjb_infynyte@hotmail.com"
+user7 = User.create username: "mentor", password: '123456', email: "wojtek.ogrodowczyk@gmail.com"
+user8 = User.create username: "darioc", password: '123456', email: "dariocavanillas@gmail.com"
 
 place1 = Place.create city: 'Manila', country: 'Philippines'
 place2 = Place.create city: 'Montpellier', country: 'France'
@@ -44,6 +45,7 @@ trip4 = Trip.create organizer: user6.id, place_id: place4.id, activity_id: activ
 
 trip5 = Trip.create organizer: user4.id, place_id: place2.id, activity_id: activity5.id, from_date: Date.today+4, to_date: Date.today+7, description: "Eat french cheese", capacity: 4, name: "#{activity5.activity_name} in #{place2.city}"
 
+Participation.create user_id: user1.id, trip_id: trip1.id, confirmed: true
 Participation.create user_id: user2.id, trip_id: trip1.id, confirmed: true
 Participation.create user_id: user3.id, trip_id: trip1.id, confirmed: true
 Participation.create user_id: user4.id, trip_id: trip1.id, confirmed: true
@@ -51,7 +53,8 @@ Participation.create user_id: user5.id, trip_id: trip1.id, confirmed: true
 Participation.create user_id: user6.id, trip_id: trip1.id, confirmed: true
 Participation.create user_id: user7.id, trip_id: trip1.id, confirmed: true
 
-Participation.create user_id: user1.id, trip_id: trip2.id, confirmed: true
+Participation.create user_id: user2.id, trip_id: trip2.id, confirmed: true
+Participation.create user_id: user8.id, trip_id: trip2.id, confirmed: true
 Participation.create user_id: user3.id, trip_id: trip2.id, confirmed: true
 Participation.create user_id: user4.id, trip_id: trip2.id, confirmed: true
 Participation.create user_id: user5.id, trip_id: trip2.id, confirmed: true
@@ -60,6 +63,7 @@ Participation.create user_id: user7.id, trip_id: trip2.id, confirmed: true
 
 Participation.create user_id: user1.id, trip_id: trip3.id, confirmed: true
 Participation.create user_id: user2.id, trip_id: trip3.id, confirmed: true
+Participation.create user_id: user3.id, trip_id: trip3.id, confirmed: true
 Participation.create user_id: user4.id, trip_id: trip3.id, confirmed: true
 Participation.create user_id: user5.id, trip_id: trip3.id, confirmed: true
 Participation.create user_id: user6.id, trip_id: trip3.id, confirmed: true
