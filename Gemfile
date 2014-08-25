@@ -54,7 +54,7 @@ gem 'capybara', group: [:test, :development]
 
 gem 'awesome_print'
 
-gem 'letter_opener'
+gem 'letter_opener', group: [:test, :development]
 
 gem 'devise'
 
