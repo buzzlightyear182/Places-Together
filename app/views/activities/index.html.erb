@@ -10,8 +10,10 @@ Welcome! This is the Activities index page
 
 <button><%=link_to "Create a new trip", new_trip_path%></button>
 
+
 <% if user_signed_in? && current_user %>
-<button>
+  <button>
   <%= link_to "Edit my profile", edit_profile_path(id: current_user.id) %>
-</button>
-  <% end %>
+  </button>
+<% end %>
+

@@ -1,5 +1,16 @@
 <ul class="accordion">
   <li>
+    <a href="javascript:void(0)" class="js-accordion-trigger">Browse</a>
+    <ul class="submenu">
+      <li>
+        <%= link_to "by City", places_path %>
+      </li>
+      <li>
+        <%= link_to "by Activity", activities_path %>
+      </li>
+    </ul>
+  </li>
+  <li>
     <a href="javascript:void(0)" class="js-accordion-trigger">Search</a>
     <ul class="submenu">
       <li>
@@ -13,23 +24,10 @@
       </div>
       <% end %>
       </li>
-      <!-- <li>
-        <a href="javascript:void(0)">Find by activity</a>
-      </li> -->
-    </ul>
-  </li>
-  <li>
-    <a href="javascript:void(0)" class="js-accordion-trigger">Another Item</a>
-    <ul class="submenu">
-      <li>
-        <a href="javascript:void(0)">Sub Item 1</a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">Sub Item 2</a>
-      </li>
     </ul>
   </li>
 </ul>
+
 
 <script>
   jQuery('.js-accordion-trigger') // find the trigger

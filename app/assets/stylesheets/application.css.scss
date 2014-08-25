@@ -18,8 +18,12 @@
 @import "neat";
 
 body {
-	// font-family: $body-font;
   @include outer-container;
+  margin-top: 0px;
+}
+
+button a {
+  color: white;
 }
 
 .header_wrapper {
@@ -66,4 +70,9 @@ body {
 
 #sidemenu li{
   padding: 10px;
+}
+
+.body-container {
+  float: right;
+  @include span-columns(9);
 }

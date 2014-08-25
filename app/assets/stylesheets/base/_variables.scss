@@ -1,9 +1,9 @@
 // Typography
-$sans-serif: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+$sans-serif: 'Source Sans Pro', $helvetica;
 $serif: $georgia;
-$accent-font-family: 'Fjalla One', $sans-serif;
 $base-font-family: $sans-serif;
-$header-font-family: $accent-font-family;
+$header-font-family: $base-font-family;
+$accent-font-family: 'Fjalla One', $sans-serif;
 
 // Sizes
 $base-font-size: 1em;
@@ -11,8 +11,6 @@ $base-line-height: $base-font-size * 1.5;
 $unitless-line-height: $base-line-height / ($base-line-height * 0 + 1); // Strip units from line-height: https://developer.mozilla.org/en-US/docs/Web/CSS/line-height#Prefer_unitless_numbers_for_line-height_values
 $header-line-height: $base-font-size * 1.25;
 $base-border-radius: em(3);
-$navigation-height: 60px;
-$navigation-padding: 1em;
 
 // Colors
 $red: #F64747;

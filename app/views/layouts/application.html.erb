@@ -8,11 +8,10 @@
   <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
-
-
   <header class="header_wrapper">
-    <div class="user_signin"
+    <div class="user_signin">
     <% if user_signed_in? %>
       <div class="loggedin">
         Welcome <%= current_user.username %>
@@ -30,8 +29,9 @@
     <%= render '/refills/accordion' %>
   </nav>
 
-<%= flash_message %>
-<%= yield %>
-
-</body>
+  <section class="body_container">
+    <%= flash_message %>
+    <%= yield %>
+  </section>
+  </body>
 </html>
