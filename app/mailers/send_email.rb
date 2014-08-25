@@ -1,5 +1,5 @@
 class SendEmail < ActionMailer::Base
-  # default from: "placestogether@gmail.com"
+  default from: "placestogether@gmail.com"
 
   def to_notify_organizer(participation)
   	@trip = Trip.find(participation.trip_id)
