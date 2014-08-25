@@ -5,7 +5,8 @@ gem 'rails', '4.1.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+# gem 'sass-rails', '~> 4.0.3'
+# gem 'sass'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -45,7 +46,7 @@ gem 'pry', group: [:test]
 
 gem 'capybara', group: [:test, :development]
 
-gem 'factory_girl_rails', group: [:test, :development]
+# gem 'factory_girl_rails', group: [:test, :development]
 
 # gem 'carmen-rails', '~> 1.0.0'
 
@@ -57,8 +58,16 @@ gem 'letter_opener'
 
 gem 'devise'
 
-gem 'country_select'
+# gem 'country_select'
 
-gem 'simple_form'
+# gem 'simple_form'
 
 gem 'postmark-rails'
+
+gem 'bourbon'
+
+gem 'neat', '~> 1.6.0'
+
+gem 'refills'
+
+gem 'normalize-rails'
