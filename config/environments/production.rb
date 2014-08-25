@@ -81,7 +81,7 @@ Rails.application.configure do
    :domain               =>  'mandrillapp.com',
    :authentication       =>  :plain,             # :login,
    :user_name => 'places-together@heroku.com',
-  :password => ENV['MANDRILLA_API_KEY'],
+  :password => ENV['MANDRILL_APIKEY'],
  }
    config.action_mailer.delivery_method = :smtp
 

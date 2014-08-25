@@ -26,10 +26,10 @@ Rails.application.configure do
    :domain               =>  'mandrillapp.com',
    :authentication       =>  :plain,             # :login,
    :user_name => 'places-together@heroku.com',
-  :password => ENV['MANDRILLA_API_KEY'],
+  :password => ENV['MANDRILL_APIKEY'],
  }
 
-  ENV['MANDRILLA_API_KEY'] = "PCvO6cVrlBA5_V0Makiv6A"
+  ENV['MANDRILL_APIKEY'] = "PCvO6cVrlBA5_V0Makiv6A"
 
 
   # Print deprecation notices to the Rails logger.

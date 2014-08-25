@@ -1,4 +1,6 @@
 class SendEmail < ActionMailer::Base
+  require 'mandrill'
+  mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
   default from: "placestogether@gmail.com"
 
   def to_notify_organizer(participation)
