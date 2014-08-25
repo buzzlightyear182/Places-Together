@@ -4,8 +4,6 @@ class SendEmail < ActionMailer::Base
   default from: "placestogether@gmail.com"
   # default from: "app28633921@heroku.com"
 
-  end
-
   def to_notify_organizer(participation)
   	@trip = Trip.find(participation.trip_id)
   	@joiner = User.find(participation.user_id)
