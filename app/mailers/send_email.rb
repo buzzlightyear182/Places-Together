@@ -35,11 +35,11 @@ class SendEmail < ActionMailer::Base
 
   def accept_joiner(participation)
 		# "http://localhost:3000/confirm_joiner/#{participation.id}"
-    "http://placestogether.herokuapp.com/confirm_joiner/#{participation.id}"
+    "http://places-together.herokuapp.com/confirm_joiner/#{participation.id}"
   end
 
   def show_trip_from_email(trip)
   	# "http://localhost:3000/trips/#{trip.id}"
-    "http://placestogether.herokuapp.com/trips/#{trip.id}"
+    "http://places-together.herokuapp.com/trips/#{trip.id}"
   end
 end

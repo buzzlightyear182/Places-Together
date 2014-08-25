@@ -20,7 +20,7 @@ Review your tripmates:<br/>
   <% end %>
 <% end %>
 
-<% if (@count_of_people[1] == nil) || @trip.capacity == @count_of_people[1]+1 %>
+<% if (@count_of_people[1] != nil) || @trip.capacity == @count_of_people[1]+1 %>
 <button>
 	<%=link_to "Join this trip", trip_participations_path(:trip_id => @trip.id), method: 'post' %>
 </button>
