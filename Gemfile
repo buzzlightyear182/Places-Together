@@ -72,4 +72,4 @@ gem 'refills'
 
 gem 'normalize-rails'
 
-# gem 'mandrill-api'
+gem 'mandrill-api'
