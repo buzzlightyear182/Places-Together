@@ -21,7 +21,7 @@ class ProfilesController < ApplicationController
     @profile.languages = profile_params["languages"].split(",")
     if @profile.save
       flash[:notice] = "Profile updated!"
-      render 'show'
+      redirect_to action: 'show', id: @profile.id
     else
       @errors = @profile.errors.full_messages
       render 'edit'

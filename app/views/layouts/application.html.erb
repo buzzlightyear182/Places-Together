@@ -2,23 +2,33 @@
 <html>
 <head>
   <title>Project</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <% if user_signed_in? %>
-    <div class="loggedin">
-    Welcome <%= current_user.username %>
-    <%= link_to "Logout?", destroy_user_session_path, method: 'delete', confirm: 'Are you sure?' %>
+
+  <header class="header_wrapper">
+    <div class="user_signin"
+    <% if user_signed_in? %>
+      <div class="loggedin">
+        Welcome <%= current_user.username %>
+        <%= link_to "Logout?", destroy_user_session_path, method: 'delete', confirm: 'Are you sure?' %>
+      </div>
+    <% else %>
+      <div class="notloggedin">
+        <%= link_to "Sign-up now", new_user_registration_path, method: 'get' %> or  <%= link_to "Login", new_user_session_path %>
+      </div>
+    <% end %>
     </div>
-  <% else %>
-    <div class="notloggedin">
-    <%= link_to "Sign-up now", new_user_registration_path, method: 'get' %> or  <%= link_to "Login", new_user_session_path %>
-    </div>
-  <% end %>
+  </header>
+
+  <nav id="sidemenu">
+    <%= render '/refills/accordion' %>
+  </nav>
 
 <%= flash_message %>
 <%= yield %>

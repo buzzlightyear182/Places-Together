@@ -14,7 +14,56 @@
  */
 
 @import "bourbon";
+@import "base/base";
+@import "neat";
 
 body {
-	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+	// font-family: $body-font;
+  @include outer-container;
+}
+
+.header_wrapper {
+  background-color: $red;
+  color: white;
+  padding: 20px;
+  margin: 0px;
+  text-align: right;
+  @include clearfix;
+  @include outer-container;
+  position: relative;
+  z-index: 9999;
+  $horizontal-bar-mode: $large-screen;
+
+  // .logo {
+  //   float: left;
+  //   max-height: $navigation-height;
+  //   padding-left: $navigation-padding;
+  //   padding-right: 2em;
+
+  //   img {
+  //     max-height: $navigation-height;
+  //     padding: .8em 0;
+  //   }
+}
+
+.user_signin a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-family: $accent-font-family;
+  margin: 0px 5px;
+  border-radius: 10px;
+}
+
+.user_signin a:hover{
+  color: $red;
+  background-color: white;
+}
+
+#sidemenu {
+  @include span-columns(3);
+}
+
+#sidemenu li{
+  padding: 10px;
 }
