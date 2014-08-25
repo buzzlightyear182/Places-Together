@@ -18,18 +18,18 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :letter_opener
 
-  config.action_mailer.smtp_settings = {
-   :enable_starttls_auto =>  true,
-   :address              =>  'smtp.mandrillapp.com',
-   :port                 =>  '587',               # '465',
-   :tls                  =>  true,
-   :domain               =>  'mandrillapp.com',
-   :authentication       =>  :plain,             # :login,
-   :user_name => 'places-together@heroku.com',
-  :password => ENV['MANDRILL_APIKEY'],
- }
+ #  config.action_mailer.smtp_settings = {
+ #   :enable_starttls_auto =>  true,
+ #   :address              =>  'smtp.mandrillapp.com',
+ #   :port                 =>  '587',               # '465',
+ #   :tls                  =>  true,
+ #   :domain               =>  'mandrillapp.com',
+ #   :authentication       =>  :plain,             # :login,
+ #   :user_name => 'places-together@heroku.com',
+ #  :password => ENV['MANDRILL_APIKEY'],
+ # }
 
-  ENV['MANDRILL_APIKEY'] = "PCvO6cVrlBA5_V0Makiv6A"
+ #  ENV['MANDRILL_APIKEY'] = "PCvO6cVrlBA5_V0Makiv6A"
 
 
   # Print deprecation notices to the Rails logger.

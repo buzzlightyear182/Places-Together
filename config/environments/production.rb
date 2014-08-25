@@ -73,16 +73,16 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
 
-  config.action_mailer.smtp_settings = {
-   :enable_starttls_auto =>  true,
-   :address              =>  'smtp.mandrillapp.com',
-   :port                 =>  '587',               # '465',
-   :tls                  =>  true,
-   :domain               =>  'mandrillapp.com',
-   :authentication       =>  :plain,             # :login,
-   :user_name => 'places-together@heroku.com',
-  :password => ENV['MANDRILL_APIKEY'],
- }
+ #  config.action_mailer.smtp_settings = {
+ #   :enable_starttls_auto =>  true,
+ #   :address              =>  'smtp.mandrillapp.com',
+ #   :port                 =>  '587',               # '465',
+ #   :tls                  =>  true,
+ #   :domain               =>  'mandrillapp.com',
+ #   :authentication       =>  :plain,             # :login,
+ #   :user_name => 'places-together@heroku.com',
+ #  :password => ENV['MANDRILL_APIKEY'],
+ # }
    config.action_mailer.delivery_method = :smtp
 
   # Disable automatic flushing of the log to improve performance.

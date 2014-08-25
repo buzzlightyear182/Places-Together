@@ -1,7 +1,10 @@
 class SendEmail < ActionMailer::Base
-  require 'mandrill'
-  mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+  # require 'mandrill'
+  # mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
   default from: "placestogether@gmail.com"
+  # default from: "app28633921@heroku.com"
+
+  end
 
   def to_notify_organizer(participation)
   	@trip = Trip.find(participation.trip_id)
