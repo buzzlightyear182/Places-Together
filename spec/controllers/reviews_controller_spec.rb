@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'pry'
+
 RSpec.describe ReviewsController, :type => :controller do
 
   before :each do

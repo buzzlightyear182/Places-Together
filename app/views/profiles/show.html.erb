@@ -16,6 +16,7 @@ Google <%= @profile.google %><br/>
 Blog <%= @profile.blog %><br/>
 Others <%= @profile.others %><br/>
 
+Previous trips completed:<br/>
 <% @profile_trips.each do |key, value| %>
 <%= link_to key, trip_path(value) %></br>
 <% end %>

@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry'
 
 RSpec.describe TripsController, :type => :controller do
 
@@ -204,7 +203,7 @@ end
       @organizer = @test_user
       @p_user = User.create(username: "participant", password: "12345678", email: "p_user@gmail.com")
       @sure_user = User.create(username: "surejoiner", password: "12345678", email: "sure_user@gmail.com")
-      current_user = @test_user
+      # current_user = @test_user
     end
 
     it "and number of people confirmed and pending approval" do
