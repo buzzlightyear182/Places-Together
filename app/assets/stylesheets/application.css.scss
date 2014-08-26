@@ -23,6 +23,10 @@ body {
   margin-top: 0px;
 }
 
+table {
+  border: none;
+}
+
 button a {
   color: white;
 }
@@ -141,6 +145,7 @@ button a {
 .trip_card {
   @include span-columns(6);
   border: 2px solid $blue;
+  margin: 4px;
 }
 
 .trip_text {
@@ -179,7 +184,18 @@ button a {
 // }
 
 .trip_info {
-  margin: 0px 10px 0px 10px;
   color: white;
+  margin-bottom: 0px;
+  border-collapse: collapse;
+  border-spacing: 0px;
+  padding-left: 0px;
   font-family: $accent-font-family;
+}
+
+.trip_info td {
+  padding-left: 10px;
+}
+
+.trip_info th {
+  padding-left: 10px;
 }
