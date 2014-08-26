@@ -1,18 +1,17 @@
 class SendEmail < ActionMailer::Base
-  require 'mandrill'
-  mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+  mandrill = Mandrill::API.new(ENV['MANDRILL_APIKEY'] || 'gjXW9zjyNAJqUKmM2XVCYQ')
   default from: "places-together@heroku.com"
   # default from: "app28633921@heroku.com"
 
   def to_notify_organizer(participation)
-  	@trip = Trip.find(participation.trip_id)
-  	@joiner = User.find(participation.user_id)
+  	@trip = participation.trip
+  	@joiner = participation.user
 
   	@organizer = User.find(@trip.organizer)
   	@email = @organizer.email
 
-  	@city = Place.where(id: @trip.place_id).first.city
-  	@activity = Activity.where(id: @trip.activity_id).first.activity_name
+  	@city = @trip.place.city
+  	@activity = @trip.activity.activity_name
 
 		@link = accept_joiner(participation)
 
@@ -20,14 +19,14 @@ class SendEmail < ActionMailer::Base
   end
 
   def to_notify_joiner(participation)
-  	@trip = Trip.find(participation.trip_id)
-  	@joiner = User.find(participation.user_id)
+    @trip = participation.trip
+    @joiner = participation.user
 
   	@organizer = User.find(@trip.organizer)
   	@email = @joiner.email
 
-  	@city = Place.where(id: @trip.place_id).first.city
-  	@activity = Activity.where(id: @trip.activity_id).first.activity_name
+  	@city = @trip.place.city
+  	@activity = @trip.activity.activity_name
 
   	@link = show_trip_from_email(@trip)
 

@@ -26,7 +26,7 @@ Rails.application.configure do
    :domain               =>  'mandrillapp.com',
    :authentication       =>  :plain,             # :login,
    :user_name => 'places-together@heroku.com',
-  :password => ENV['MANDRILL_APIKEY'],
+   :password => ENV['MANDRILL_APIKEY'],
  }
 
   ENV['MANDRILL_APIKEY'] = "gjXW9zjyNAJqUKmM2XVCYQ"

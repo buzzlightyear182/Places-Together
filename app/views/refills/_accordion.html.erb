@@ -1,5 +1,5 @@
 <ul class="accordion">
-  <li>
+  <li = "accordion_first">
     <a href="javascript:void(0)" class="js-accordion-trigger">Browse</a>
     <ul class="submenu">
       <li><%= link_to "by City", places_path %></li>
@@ -31,6 +31,13 @@
     </ul>
   </li>
   <% end %>
+  <li = "accordion_first">
+    <a href="javascript:void(0)" class="js-accordion-trigger">Trips</a>
+    <ul class="submenu">
+      <li><%=link_to "Create a new trip", new_trip_path%></li>
+      <li><%= link_to "View my trips", activities_path %></li>
+    </ul>
+  </li>
 </ul>
 
 <script>

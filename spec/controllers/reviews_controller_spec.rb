@@ -8,15 +8,14 @@ RSpec.describe ReviewsController, :type => :controller do
     @second_place = Place.create(city: "Madrid", country: "Spain")
     @activity = Activity.create(activity_name: "Ironhack", category: "Studies")
     @trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
-    @trip.generate_trip_name
     @trip.create_participation @test_user
     @p_user = User.create(username: "participant", password: "12345678", email: "p_user@gmail.com")
     @member01 = Participation.create trip_id: @trip.id, user_id: @p_user.id, confirmed: true
 
     @second = Trip.create organizer: @test_user.id, place_id: @second_place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Practicing everyday, let's meet at Parque del Retiro"
-    @second.generate_trip_name
     @second.create_participation @test_user
     @member02 = Participation.create trip_id: @second.id, user_id: @p_user.id, confirmed: true
+    sign_in @test_user
   end
 
   it "finds common trips of the author and reviewee" do

@@ -72,7 +72,7 @@ gem 'refills'
 
 gem 'normalize-rails'
 
-gem 'mandrill-api'
+gem 'mandrill-api', require: 'mandrill'
 
 gem 'fullcalendar-rails'
 

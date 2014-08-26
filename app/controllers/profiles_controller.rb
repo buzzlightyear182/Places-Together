@@ -13,11 +13,11 @@ class ProfilesController < ApplicationController
 
   def edit
     @search = Search.new
-    @profile = Profile.where(user_id: current_user.id).first
+    @profile = Profile.find(user_id: current_user.id)
   end
 
   def update
-    @profile = Profile.where(user_id: current_user.id).first
+    @profile = Profile.find(user_id: current_user.id)
     @profile.update_attributes! profile_params
     @profile.languages = profile_params["languages"].split(",")
     if @profile.save

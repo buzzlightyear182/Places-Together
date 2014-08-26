@@ -1,16 +1,9 @@
-Welcome! This is the Place index page
+<h1>Where are you planning to go?</h1>
 
 <ul>
-<p>Where are you planning to go?</p>
   <% @places.each do |place| %>
   <li><%= link_to place.city, place_trips_path(place.id) %></li>
   <% end %>
 </ul>
 
 <button><%=link_to "Create a new trip", new_trip_path%></button>
-
-<% if user_signed_in? && current_user %>
-<button>
-  <%= link_to "Edit my profile", edit_profile_path(id: current_user.id) %>
-</button>
-  <% end %>

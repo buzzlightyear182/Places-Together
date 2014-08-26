@@ -23,6 +23,8 @@ require 'capybara/rspec'
 require 'capybara/rails'
 
 RSpec.configure do |config|
+  config.include Devise::TestHelpers, type: :controller
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
@@ -83,4 +85,19 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 =end
+end
+
+def unsaved_test_trip
+  @test_user = User.create(username: "username01", password: "12345678", email: "test_user@gmail.com")
+  @place = Place.create(city: "Barcelona", country: "Spain")
+  @activity = Activity.create(activity_name: "Ironhack", category: "Studies")
+  trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
+  trip
+end
+
+def test_trip
+  t = unsaved_test_trip
+  t.save!
+
+  t
 end

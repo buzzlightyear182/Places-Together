@@ -1,7 +1,7 @@
 class ActivitiesController < ApplicationController
 
   def index
-    @activities = Activity.all
+    @activities = Activity.all.limit(10)
     @search = Search.new
   end
 

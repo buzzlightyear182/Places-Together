@@ -30,9 +30,9 @@ class TripsController < ApplicationController
 	def show
 		@search = Search.new
 		@trip = Trip.find(params[:id])
-		pending_people = Participation.where(trip_id: @trip.id, confirmed: false).all.count #excluding organizer
-		confirmed_people = Participation.where(trip_id: @trip.id, confirmed: true).all.count
-		@count_of_people = [pending_people, confirmed_people]
+		pending_people = @trip.get_trip_participants false
+		confirmed_people = @trip.get_trip_participants true
+		@count_of_people = [pending_people.length, confirmed_people.length]
 		@review_members = @trip.reviewable? current_user
 	end
 
@@ -51,8 +51,6 @@ class TripsController < ApplicationController
 		@trip = Trip.create_new_trip(trip_params, organizer_id)
 			if @trip.save
 				@trip.create_participation current_user
-				@trip.generate_trip_name
-				@trip.reload
 				flash[:notice] = "Trip has been created!"
 				redirect_to action: 'show', id: @trip.id
 			else
@@ -66,8 +64,8 @@ class TripsController < ApplicationController
 		@trip = Trip.find(params[:id])
 		@activities = Activity.all.limit(10)
 		if @trip.organizer == current_user.id
-			@place = Place.find(@trip.place_id).city
-			@activity = Activity.find(@trip.activity_id).activity_name
+			@place = @trip.place.city
+			@activity = @trip.activity.activity_name
 			render 'edit'
 		else
 			flash[:alert] = "Sorry you are not the organizer of this trip."
@@ -80,7 +78,6 @@ class TripsController < ApplicationController
 		organizer_id = current_user.id
 		@trip = Trip.update_trip(trip_params, params[:id], organizer_id)
 		if @trip.save
-				@trip.generate_trip_name
 				redirect_to	action: 'show', id: @trip.id
 				flash[:notice] = "Trip updated!"
 		else

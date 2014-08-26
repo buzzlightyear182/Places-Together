@@ -11,7 +11,7 @@ RSpec.describe ProfilesController, :type => :controller do
     @sure_user = User.create(username: "surejoiner", password: "12345678", email: "sure_user@gmail.com")
     @pending = Participation.create trip_id: @trip.id, user_id: @p_user.id, confirmed: false
     @sure = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
-    current_user = @test_user
+    sign_in @test_user
   end
 
   it "automatically creates a profile when a user signs-up" do

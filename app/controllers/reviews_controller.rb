@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     @search = Search.new
     @profile = Profile.find(params[:profile_id])
     @review = Review.new
-    @reviewee = User.find(@profile.id)
+    @reviewee = @profile.user
     @common_trips = Review.find_common_trip(current_user.id, params[:profile_id])
     @trip_names = @common_trips.values
   end
@@ -17,7 +17,6 @@ class ReviewsController < ApplicationController
     @review = Review.create_review(review_params, current_user.id, params[:profile_id])
     if @review.save
       @profile.update_rating
-      @profile.reload
       flash[:notice] = "Your review has been saved. Thank you!"
       redirect_to action:'show', controller:'profiles', id: @profile.id
     else

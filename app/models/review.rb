@@ -7,6 +7,14 @@ class Review < ActiveRecord::Base
   validates :trip_id, presence: true
   validates :rating, presence: true, numericality: true
 
+  validate :check_to_date_of_trip
+
+  def check_to_date_of_trip
+    unless trip.has_passed
+      errors.add(:trip, "Must be finished")
+    end
+  end
+
   def self.find_common_trip(reviewer_id, reviewee_id)
     reviewer_trips = find_participation_of reviewer_id
     reviewee_trips = find_participation_of reviewee_id
@@ -19,19 +27,18 @@ class Review < ActiveRecord::Base
     @common_trips = {}
     common_trip_ids.map do |trip_id|
       h = {}
-      place = Place.find(Trip.find(trip_id).place_id).city
-      activity = Activity.find(Trip.find(trip_id).activity_id).activity_name
-      h[activity + " in " + place] = trip_id
+      trip = Trip.find(trip_id)
+      h[trip.name] = trip_id
       @common_trips.merge! h
     end
     @common_trips
   end
 
   def self.find_participation_of user_id
-    user_participation = Participation.where(user_id: user_id).all
+    user_participations = Participation.where(user_id: user_id).all
     @user_trips = []
-    user_participation.each do |user|
-      @user_trips << user.trip_id
+    user_participations.each do |p|
+      @user_trips << p.trip_id
     end
     @user_trips
   end

@@ -35,37 +35,48 @@ class Trip < ActiveRecord::Base
 	end
 
 	def reviewable? current_user
-		if trip_has_passed && (if_participant? current_user)
+		if has_passed && (if_participant? current_user)
 			# @can_review.delete_if {|id_is| current_user.id }
-			@can_review #how to delete current_user?
+			@can_review
+			#how to delete current_user?
 		else
 			[]
 		end
 	end
 
-	def trip_has_passed
-		# to_date <= Date.today+1
+	def has_passed
+		# to_date <= Date.today + 1
 		Date.today-1 <= Date.today+1
 	end
 
 	def if_participant? current_user
-		get_trip_participants
+		get_trip_participants true
 		@can_review.include? current_user.id
 	end
 
-	def get_trip_participants
-		@participations = Participation.where(trip_id: id, confirmed: true)
+	def get_trip_participants status
+		@participations = Participation.where(trip_id: self.id, confirmed: status)
 		@can_review = []
 		@participations.each do |p|
 			@can_review << p.user_id
 		end
-		@can_review.uniq!
+		(@can_review.uniq! == nil) ? @can_review : @can_review.uniq!
 	end
 
-	def self.update_trip (params, trip_id, organizer)
-		@trip = Trip.find(trip_id)
-		@trip.place_id = check_place params["place"]
+	def self.update_trip (params, trip_id, organizer_id)
+		trip = Trip.find(trip_id)
+		trip.save_trip_info(params, organizer_id)
+		trip
+	end
 
+	def self.create_new_trip (params, organizer_id)
+		trip = Trip.new
+		trip.save_trip_info(params, organizer_id)
+		trip
+	end
+
+	def save_trip_info(params, organizer_id)
+		self.place_id = check_place params["place"]
 		activity =
 			if (params["activity_create"] == "")
 				params["activity"]
@@ -73,43 +84,21 @@ class Trip < ActiveRecord::Base
 				params["activity_create"]
 			end
 
-		@trip.activity_id = check_activity activity
-		@trip.organizer = organizer
-		@trip.from_date = params["from_date"]
-		@trip.to_date = params["to_date"]
-		@trip.capacity = params["capacity"]
-		@trip.description = params["description"]
-		@trip
+		self.activity_id = check_activity activity
+		self.organizer = organizer_id
+		self.from_date = params["from_date"]
+		self.to_date = params["to_date"]
+		self.capacity = params["capacity"]
+		self.description = params["description"]
 	end
 
-	def self.create_new_trip (params, user_id)
-		@trip = Trip.new
-		@trip.place_id = check_place params["place"]
-
-		activity =
-			if (params["activity_create"] == "")
-				params["activity"]
-			else
-				params["activity_create"]
-			end
-
-		@trip.activity_id = check_activity activity
-		@trip.organizer = user_id
-		@trip.from_date = params["from_date"]
-		@trip.to_date = params["to_date"]
-		@trip.capacity = params["capacity"]
-		@trip.description = params["description"]
-		@trip
+	def name
+		"#{activity.activity_name} in #{place.city}"
 	end
 
-	def generate_trip_name
-		place = Place.find(self.place_id).city
-		activity = Activity.find(self.activity_id).activity_name
-		self.name = "#{activity} in #{place}"
-		self.save
-	end
+	private
 
-	def self.check_place city
+	def check_place city
 		city.capitalize!
 		current_place = Place.where(city: city)
 		if current_place.exists?
@@ -120,7 +109,7 @@ class Trip < ActiveRecord::Base
 		end
 	end
 
-	def self.check_activity activity
+	def check_activity activity
 		activity = activity.capitalize
 		current_activity = Activity.where(activity_name: activity)
 		if current_activity.exists?

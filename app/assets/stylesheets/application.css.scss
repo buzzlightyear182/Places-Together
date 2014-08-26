@@ -118,6 +118,19 @@ button a {
   color: white;
 }
 
+.search-and-submit {
+  padding-left: 30px;
+}
+
+.search-and-submit label {
+  border: 1px solid black;
+  padding-top: 10px;
+}
+
+.search-and-submit button{
+  text-align: right;
+}
+
 .device_form {
   @include span-columns(4 of 9);
 }
