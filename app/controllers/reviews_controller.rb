@@ -17,9 +17,11 @@ class ReviewsController < ApplicationController
     @review = Review.create_review(review_params, current_user.id, params[:profile_id])
     if @review.save
       @profile.update_rating
+      @profile.reload
+      flash[:notice] = "Your review has been saved. Thank you!"
       redirect_to action:'show', controller:'profiles', id: @profile.id
     else
-      @errors = @review.errors.full_messages
+      flash[:alert] = @reviews.error.full_messages
       render 'new'
     end
   end

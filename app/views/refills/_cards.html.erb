@@ -1,0 +1,66 @@
+<div class="cards">
+<%if @trips != nil %>
+<% @trips.each do |trip| %>
+    <div class="card">
+    <div class="card-image">
+      <img src="https://raw.github.com/Magnus-G/Random/master/mountains.png" alt="">
+    </div>
+
+    <div class="card-header">
+      <%=link_to trip.name, trip_path(:id => trip.id)%>
+    </div>
+    <div class="card-copy">
+      <p><%= trip.description %></p>
+    </div>
+    <div class="card-stats">
+      <ul>
+        <li>From Date: <%= trip.from_date %></li>
+        <li>To Date: <%= trip.to_date %></li>
+        <!-- <li>923<span>Objects</span></li> -->
+      </ul>
+    </div>
+    <% end %>
+  </div>
+    <% else %>
+      <%= "Sorry no results found!" %>
+      <% end %>
+
+  <!-- <div class="card">
+    <div class="ribbon-wrapper"><div class="ribbon">RIBBON</div></div>
+    <div class="card-image">
+      <img src="https://raw.github.com/Magnus-G/Random/master/mountains-4.png" alt="">
+    </div>
+    <div class="card-header">
+      Another Card
+    </div>
+    <div class="card-copy">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, officiis sunt neque facilis culpa molestiae necessitatibus delectus veniam provident.</p>
+    </div>
+    <div class="card-stats">
+      <ul>
+        <li>98<span>Items</span></li>
+        <li>298<span>Things</span></li>
+        <li>923<span>Objects</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-image">
+      <img src="https://raw.github.com/Magnus-G/Random/master/mountains-3.png" alt="">
+    </div>
+    <div class="card-header">
+      The Last Card
+    </div>
+    <div class="card-copy">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, officiis sunt neque facilis culpa molestiae necessitatibus delectus veniam provident.</p>
+    </div>
+    <div class="card-stats">
+      <ul>
+        <li>98<span>Items</span></li>
+        <li>298<span>Things</span></li>
+        <li>923<span>Objects</span></li>
+      </ul>
+    </div>
+  </div> -->
+</div>

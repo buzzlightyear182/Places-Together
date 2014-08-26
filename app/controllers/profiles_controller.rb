@@ -2,7 +2,6 @@ class ProfilesController < ApplicationController
 
     before_action :authenticate_user!, except: [:show]
 
-
   def show
     @search = Search.new
     @profile = Profile.find(params[:id])
@@ -25,7 +24,7 @@ class ProfilesController < ApplicationController
       flash[:notice] = "Profile updated!"
       redirect_to action: 'show', id: @profile.id
     else
-      @errors = @profile.errors.full_messages
+      flash[:alert] = @profile.errors.full_messages
       render 'edit'
     end
   end

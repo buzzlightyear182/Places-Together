@@ -52,9 +52,11 @@ class TripsController < ApplicationController
 			if @trip.save
 				@trip.create_participation current_user
 				@trip.generate_trip_name
+				@trip.reload
+				flash[:notice] = "Trip has been created!"
 				redirect_to action: 'show', id: @trip.id
 			else
-			@errors = @trip.errors.full_messages
+			flash[:alert] = @trip.errors.full_messages
 			render 'new'
 			end
 	end
@@ -82,15 +84,16 @@ class TripsController < ApplicationController
 				redirect_to	action: 'show', id: @trip.id
 				flash[:notice] = "Trip updated!"
 		else
-				@trip	=	@trip.errors.full_messages
+				flash[:alert]	=	@trip.errors.full_messages
 				render 'edit'
 		end
 	end
 
 	def destroy
 		@trip = Trip.find(params[:id])
-		participation = Participation.destroy_all(trip_id: @trip.id)
+		Participation.destroy_all(trip_id: @trip.id)
 		@trip.destroy
+		flash[:notice] = "Trip has been cancelled!"
 		redirect_to action: 'index', controller: 'places'
 	end
 

@@ -5,3 +5,9 @@
 <script src='lib/jquery.min.js'></script>
 <script src='lib/moment.min.js'></script>
 <script src='fullcalendar/fullcalendar.js'></script>
+
+.trip_card a {
+  background-color: $blue;
+  color: white;
+  padding: 10px 0px;
+}

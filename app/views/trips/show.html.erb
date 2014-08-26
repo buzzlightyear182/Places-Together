@@ -1,6 +1,4 @@
-This is the Trip show page
-
-<h3><%= @trip.name %></h3>
+<h1><%= @trip.name %></h1>
 
 Organized by: <%= link_to User.find(@trip.organizer).username, profile_path(:id => Profile.where(user_id: @trip.organizer).first.user_id) %><br/>
 From Date: <%= @trip.from_date %><br/>

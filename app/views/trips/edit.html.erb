@@ -1,29 +1,27 @@
-This is the edit a trip form!
-
 <%= form_for @trip do |f| %>
-  <%= f.label "Where do you want to go?" %></br>
-  <%= f.text_field :place, :value => @trip.place.city %></br></br>
+  <%= f.label "Where do you want to go?" %>
+  <%= f.text_field :place, :value => @trip.place.city %>
 
-  <%= f.label "What do you want to do?" %></br>
+  <%= f.label "What do you want to do?" %>
   <% @activities.each do |a| %>
     <%= f.radio_button :activity, a.activity_name %>
-    <%= a.activity_name %> <br/>
+    <%= a.activity_name %>
     <% end %>
     <%= f.radio_button :activity, "" %>
-    <%= "Or create your own:"%> <br/>
+    <%= "Or create your own:"%>
     <%= f.text_field :activity_create, :value => @trip.activity.activity_name  %>
 
-  <%= f.label "From when?" %></br>
-  <%= f.date_field :from_date %> <br/>
+  <%= f.label "From when?" %>
+  <%= f.date_field :from_date %>
 
-  <%= f.label "Until when?" %></br>
-  <%= f.date_field :to_date %> <br/></br>
+  <%= f.label "Until when?" %>
+  <%= f.date_field :to_date %>
 
-  <%= f.label "How many people do you need?" %></br>
-  <%= f.text_field :capacity %></br>
+  <%= f.label "How many people do you need?" %>
+  <%= f.text_field :capacity %>
 
-  <%= f.label "Write something about your trip" %></br>
-  <%= f.text_area :description %></br>
+  <%= f.label "Write something about your trip" %>
+  <%= f.text_area :description %>
 
   <%= f.submit "Save" %>
 <% end %>

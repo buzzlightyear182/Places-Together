@@ -116,6 +116,61 @@ button a {
 .submenu a:hover {
   background-color: $blue;
   color: white;
-  // border-bottom: 1px solid white;
+}
 
+.device_form {
+  @include span-columns(4 of 9);
+}
+
+.trip_form {
+  @include span-columns(6 of 9);
+}
+
+.trip_card {
+  @include span-columns(6);
+}
+
+.trip_text {
+  background-color: $blue;
+}
+
+.trip_image {
+  margin-bottom: 0px;
+  z-index: 9999;
+}
+
+.trip_title {
+  color: $blue;
+  background-color: white;
+  padding: 5px 0px;
+  width: 100%;
+  text-align: center;
+  margin-top: 0px;
+  font-weight: bold;
+  border: 2px solid $blue;
+}
+
+// .trip_title a {
+//   color: $blue;
+//   font-family: $accent-font-family;
+// }
+
+
+// .trip_title:hover {
+//   color: white;
+//   background-color: $blue;
+// }
+
+// .trip_title a:hover {
+//   color: white;
+//   background-color: $blue;
+//   width: 100%;
+//   text-align: center;
+//   margin-top: 0px;
+//   font-weight: bold;
+// }
+
+.trip_info {
+  margin: 0px 10px 0px 10px;
+  color: white;
 }

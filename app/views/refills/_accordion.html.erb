@@ -22,6 +22,15 @@
       </li>
     </ul>
   </li>
+  <% if user_signed_in? && current_user %>
+  <li class="accordion_first">
+    <a href="javascript:void(0)" class="js-accordion-trigger">Profile</a>
+    <ul class="submenu">
+      <li><%= link_to "View my profile", profile_path(id: Profile.where(user_id: current_user.id).first.id) %></li>
+      <li><%= link_to "Edit my profile", edit_profile_path(id: Profile.where(user_id: current_user.id).first.id) %></li>
+    </ul>
+  </li>
+  <% end %>
 </ul>
 
 <script>

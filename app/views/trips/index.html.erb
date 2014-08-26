@@ -1,30 +1,27 @@
-Welcome! This is the Trips index page
-<ul>
-
-<% if @trips != nil %>
-<% @trips.each do |trip| %>
-	<li>
-		<h3>
-			<%=link_to trip.name, trip_path(:id => trip.id)%>
-		</h3>
-		From Date: <%= trip.from_date %><br/>
-		To Date: <%= trip.to_date %><br/>
-	</li>
-<% end %>
-<% else %>
-  <%= "Sorry no results found!" %>
-<% end %>
-</ul>
-
 <button><%=link_to "Calendar view", @link, method: 'get' %></button>
 
 <button><%=link_to "Create a new trip", new_trip_path%></button>
 
 <button><%=link_to "Go back to main", places_path %></button>
 
-
-<% if user_signed_in? && current_user %>
-  <button>
-    <%= link_to "Edit my profile", edit_profile_path(id: Profile.where(user_id: current_user.id).first.id) %>
-  </button>
-<% end %>
+<div class="trips_container">
+  <%if @trips != nil %>
+    <% @trips.each do |trip| %>
+    <div class="trip_card">
+      <img class="trip_image" src="https://raw.github.com/Magnus-G/Random/master/mountains.png" alt="">
+      <div class="trip_text">
+        <div class="trip_title">
+          <%=link_to trip.name, trip_path(:id => trip.id)%>
+        </div>
+      <ul class="trip_info">
+        <li><p><%= trip.description %></p></li>
+        <li><p>Starting on:<%= trip.from_date %></p></li>
+        <li><p>Ends on:<%= trip.to_date %></p></li>
+      </ul>
+      </div>
+    </div>
+    <% end %>
+  <% else %>
+    <p><%= "Sorry no results found!" %></p>
+  <% end %>
+</div>
