@@ -73,3 +73,7 @@ gem 'refills'
 gem 'normalize-rails'
 
 gem 'mandrill-api'
+
+gem 'fullcalendar-rails'
+
+gem "autoprefixer-rails"

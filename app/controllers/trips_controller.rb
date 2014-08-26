@@ -1,9 +1,23 @@
 class TripsController < ApplicationController
+	respond_to :json, :html
 
 	before_action :authenticate_user!, except: [:index]
 
 	def index
 		 @search = Search.new
+		if params[:place_id]
+			@place = Place.find(params[:place_id])
+			@trips = Trip.where(place_id: @place.id).all
+			@link = '/places/'+params[:place_id]+'/trips/calendar'
+		elsif params[:activity_id]
+			@activity= Activity.find(params[:activity_id])
+			@trips = Trip.where(activity_id: @activity.id).all
+			@link = '/activities/'+params[:activity_id]+'/trips/calendar'
+		end
+	end
+
+	def calendar
+		@search = Search.new
 		if params[:place_id]
 			@place = Place.find(params[:place_id])
 			@trips = Trip.where(place_id: @place.id).all

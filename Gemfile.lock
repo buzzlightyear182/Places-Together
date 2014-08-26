@@ -29,6 +29,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
+    autoprefixer-rails (3.0.0.20140821)
+      execjs
     awesome_print (1.2.0)
     bcrypt (3.1.7)
     bourbon (4.0.2)
@@ -59,6 +61,7 @@ GEM
     erubis (2.7.0)
     excon (0.39.5)
     execjs (2.2.1)
+    fullcalendar-rails (1.6.4.0)
     hike (1.2.3)
     i18n (0.6.11)
     jbuilder (2.1.3)
@@ -179,10 +182,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   awesome_print
   bourbon
   capybara
   devise
+  fullcalendar-rails
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener

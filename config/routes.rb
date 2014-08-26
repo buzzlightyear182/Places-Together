@@ -26,6 +26,9 @@ end
 resources :profiles, only: [:edit, :update, :show] do resources :reviews, only: [:index, :new, :create, :edit, :update, :destroy]
 end
 
+get '/places/:place_id/trips/calendar' => 'trips#calendar'
+get '/activities/:activity_id/trips/calendar' => 'trips#calendar'
+
 post 'search' => 'search#create'
 
 get 'confirm_joiner/:id' => 'participations#add_joiner'

@@ -16,6 +16,8 @@ Welcome! This is the Trips index page
 <% end %>
 </ul>
 
+<button><%=link_to "Calendar view", @link, method: 'get' %></button>
+
 <button><%=link_to "Create a new trip", new_trip_path%></button>
 
 <button><%=link_to "Go back to main", places_path %></button>
