@@ -13,11 +13,21 @@
         <div class="trip_title">
           <%=link_to trip.name, trip_path(:id => trip.id)%>
         </div>
-      <ul class="trip_info">
-        <li><p><%= trip.description %></p></li>
-        <li><p>Starting on:<%= trip.from_date %></p></li>
-        <li><p>Ends on:<%= trip.to_date %></p></li>
-      </ul>
+      <table class="trip_info">
+        <tbody>
+          <tr>
+            <td colspan='2'><%= trip.description %></td>
+          </tr>
+          <tr>
+            <th>Starting on:</th>
+            <td><%= trip.from_date %></td>
+          </tr>
+          <tr>
+            <th>Until:</th>
+            <td><%= trip.to_date %></td>
+          </tr>
+        </tbody>
+      </table>
       </div>
     </div>
     <% end %>

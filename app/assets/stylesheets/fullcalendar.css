@@ -29,20 +29,20 @@ body .fc { /* extra precedence to overcome jqui */
 .fc-unthemed tbody,
 .fc-unthemed .fc-row,
 .fc-unthemed .fc-popover {
-	border-color: #ddd;
+	border-color: white;
 }
 
 .fc-unthemed .fc-popover {
-	background-color: #fff;
+	background-color: $red;
 }
 
 .fc-unthemed hr,
 .fc-unthemed .fc-popover .fc-header {
-	background: #eee;
+	background: $red;
 }
 
 .fc-unthemed .fc-popover .fc-header .fc-close {
-	color: #666;
+	color: $red;
 }
 
 .fc-unthemed .fc-today {
@@ -54,6 +54,7 @@ body .fc { /* extra precedence to overcome jqui */
 	opacity: .3;
 	filter: alpha(opacity=30); /* for IE */
 }
+
 
 
 /* Icons (inline elements with styled text that mock arrow icons)
@@ -102,7 +103,7 @@ body .fc { /* extra precedence to overcome jqui */
 	/* dimensions */
 	margin: 0;
 	height: 2.1em;
-	padding: 0 .6em;
+	padding: 10px .6em;
 
 	/* text & cursor */
 	font-size: 1em; /* normalize */
@@ -112,9 +113,9 @@ body .fc { /* extra precedence to overcome jqui */
 
 /* Firefox has an annoying inner border */
 .fc button::-moz-focus-inner { margin: 0; padding: 0; }
-	
+
 .fc-state-default { /* non-theme */
-	border: 1px solid;
+	border: white;
 }
 
 .fc-state-default.fc-corner-left { /* non-theme */
@@ -128,19 +129,18 @@ body .fc { /* extra precedence to overcome jqui */
 }
 
 /* icons in buttons */
-
 .fc button .fc-icon { /* non-theme */
 	position: relative;
 	top: .05em; /* seems to be a good adjustment across browsers */
 	margin: 0 .1em;
 }
-	
+
 /*
   button states
   borrowed from twitter bootstrap (http://twitter.github.com/bootstrap/)
 */
 
-.fc-state-default {
+/*.fc-state-default {
 	background-color: #f5f5f5;
 	background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
@@ -153,14 +153,24 @@ body .fc { /* extra precedence to overcome jqui */
 	color: #333;
 	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	padding: 5px 10px;
+}*/
+
+.fc-state-default {
+	background-color: #F9BF3B;
+	text-align: center;
+	padding: 1px 20px;
+	font-size: 2em;
+	line-height: 2em;
+	color: white;
 }
 
 .fc-state-hover,
 .fc-state-down,
 .fc-state-active,
 .fc-state-disabled {
-	color: #333333;
-	background-color: #e6e6e6;
+	color: #white;
+	background-color: #FFCC33;
 }
 
 .fc-state-hover {
@@ -244,7 +254,7 @@ previous button's border...
 /* unthemed */
 
 .fc-unthemed .fc-popover {
-	border-width: 1px;
+	border-width: 0px;
 	border-style: solid;
 }
 
@@ -269,6 +279,8 @@ previous button's border...
 	padding: 0 0 2px; /* height is unreliable across browsers, so use padding */
 	border-style: solid;
 	border-width: 1px 0;
+	border-color: $light-gray;
+
 }
 
 .fc-clear {
@@ -301,24 +313,32 @@ previous button's border...
 	width: 100%;
 	table-layout: fixed;
 	border-collapse: collapse;
+	font-family: 'Roboto Condensed', sans-serif;
 	border-spacing: 0;
-	font-size: 1em; /* normalize cross-browser */
+	font-size: 1.2em; /* normalize cross-browser */
 }
 
 .fc th {
 	text-align: center;
+	background-color: #3399FF;
+	color: white;
 }
 
 .fc th,
 .fc td {
 	border-style: solid;
+	border-color: white;
 	border-width: 1px;
 	padding: 0;
 	vertical-align: top;
+	padding: 5px;
 }
 
 .fc td.fc-today {
-	border-style: double; /* overcome neighboring borders */
+	/*color: white;*/
+	color: #03c9a9;
+	font-family: 'Roboto Condensed', sans-serif;
+	background-color: white; /* overcome neighboring borders */
 }
 
 
@@ -338,7 +358,7 @@ previous button's border...
 	border-right: 0 hidden transparent;
 
 	/* no bottom borders on rows */
-	border-bottom: 0 hidden transparent; 
+	border-bottom: 0 hidden transparent;
 }
 
 .fc-row:first-child table {
@@ -425,11 +445,13 @@ temporary rendered events).
 .fc-event {
 	position: relative; /* for resize handle and other inner positioning */
 	display: block; /* make the <a> tag block */
-	font-size: .85em;
-	line-height: 1.3;
+	font-size: 1em;
+	/*line-height: 1.3;*/
+	padding-left: 3px;
 	border-radius: 3px;
-	border: 1px solid #3a87ad; /* default BORDER color */
-	background-color: #3a87ad; /* default BACKGROUND color */
+	border: 2px solid $light-gray; /* default BORDER color */
+	background-color: #03c9a9; /* default BACKGROUND color */
+	color: white;
 	font-weight: normal; /* undo jqui's ui-widget-header bold */
 }
 
@@ -437,15 +459,15 @@ temporary rendered events).
 .fc-event,
 .fc-event:hover,
 .ui-widget .fc-event {
-	color: #fff; /* default TEXT color */
+	color: white; /* default TEXT color */
 	text-decoration: none; /* if <a> has an href */
+	font-weight: bold;
 }
 
 .fc-event[href],
 .fc-event.fc-draggable {
 	cursor: pointer; /* give events with links and draggable events a hand mouse pointer */
 }
-
 
 /* DayGrid events
 ----------------------------------------------------------------------------------------------------
@@ -572,7 +594,7 @@ a.fc-more:hover {
 .fc .fc-toolbar > * > :first-child { /* extra precedence to override button border margins */
 	margin-left: 0;
 }
-	
+
 /* title text */
 
 .fc-toolbar h2 {
@@ -589,7 +611,7 @@ a.fc-more:hover {
 .fc-toolbar .ui-state-hover {
 	z-index: 2;
 }
-	
+
 .fc-toolbar .fc-state-down {
 	z-index: 3;
 }
@@ -931,3 +953,21 @@ be a descendant of the grid when it is being dragged.
 .fc-time-grid-event .fc-resizer:after {
 	content: "=";
 }
+
+.fc-event-time {
+	display: none;
+}
+
+.fc-header-left {
+	width: 100px;
+}
+
+.fc-header-right {
+	width: 100px;
+}
+
+.fc-header-center {
+	text-align: center;
+}
+
+

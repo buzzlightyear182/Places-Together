@@ -6,7 +6,7 @@ class CreateTrips < ActiveRecord::Migration
 			t.integer :activity_id
 			t.date :from_date
 			t.date :to_date
-			t.string :description
+			t.text :description
 			t.integer :capacity
       t.timestamps
     end
