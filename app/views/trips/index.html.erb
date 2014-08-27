@@ -5,7 +5,7 @@
 <button><%=link_to "Go back to main", places_path %></button>
 
 <div class="trips_container">
-  <%if @trips != nil %>
+  <% unless @trips.size == 0 %>
     <% @trips.each do |trip| %>
     <div class="trip_card">
       <img class="trip_image" src="https://raw.github.com/Magnus-G/Random/master/mountains.png" alt="">
