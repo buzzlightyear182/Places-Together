@@ -57,6 +57,7 @@ $(document).ready(function () {
         }]
 
     })
+
     $('#calendar').addClass('table-responsive');
 
 });

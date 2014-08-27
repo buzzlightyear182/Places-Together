@@ -30,10 +30,9 @@ class TripsController < ApplicationController
 	def show
 		@search = Search.new
 		@trip = Trip.find(params[:id])
-		pending_people = @trip.get_trip_participants false
-		confirmed_people = @trip.get_trip_participants true
-		@count_of_people = [pending_people.length, confirmed_people.length]
+		@count = @trip.get_count_of_people
 		@review_members = @trip.reviewable? current_user
+		@can_join = @trip.joinable? current_user
 	end
 
 	def new

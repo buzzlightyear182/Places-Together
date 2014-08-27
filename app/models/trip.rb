@@ -14,8 +14,8 @@ class Trip < ActiveRecord::Base
 	validate :from_date_is_in_future
 	validate :from_date_before_to_date
 
-  def create_participation organizer
-    Participation.create user_id: organizer.id, trip_id: self.id, confirmed: true
+  def create_participation current_user
+    Participation.create user_id: current_user.id, trip_id: id, confirmed: true
   end
 
 	def from_date_is_in_future
@@ -42,6 +42,21 @@ class Trip < ActiveRecord::Base
 		else
 			[]
 		end
+	end
+
+	def joinable? current_user
+		get_count_of_people
+		current_trip_size = @count[:confirmed_people]
+		if (if_participant? current_user) && (capacity <= current_trip_size)
+			false
+		end
+	end
+
+	def get_count_of_people
+		@count = {}
+		@count[:pending_people] = (get_trip_participants false).length
+		@count[:confirmed_people] = (get_trip_participants true).length
+		@count
 	end
 
 	def has_passed

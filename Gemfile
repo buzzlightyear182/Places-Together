@@ -46,7 +46,7 @@ gem 'pry', group: [:test]
 
 gem 'capybara', group: [:test, :development]
 
-# gem 'factory_girl_rails', group: [:test, :development]
+gem 'factory_girl_rails', group: [:test, :development]
 
 # gem 'carmen-rails', '~> 1.0.0'
 
@@ -77,3 +77,5 @@ gem 'mandrill-api', require: 'mandrill'
 gem 'fullcalendar-rails'
 
 gem "autoprefixer-rails"
+
+# gem 'database_cleaner'

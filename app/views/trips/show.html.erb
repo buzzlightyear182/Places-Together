@@ -6,8 +6,8 @@ To Date: <%= @trip.to_date %><br/>
 Capacity: <%= @trip.capacity %><br/>
 
 Status: <br/>
-Pending: <%= @count_of_people[0] %></br>
-Confirmed: <%= @count_of_people[1] %><br/>
+Pending: <%= @count[:pending_people] %></br>
+Confirmed: <%= @count[:confirmed_people] %><br/>
 
 <% if @review_members.length >= 2 %>
 Review your tripmates:<br/>
@@ -18,12 +18,12 @@ Review your tripmates:<br/>
   <% end %>
 <% end %>
 
-<% unless (@count_of_people[1] == nil) && @trip.capacity > @count_of_people[1] %>
+<% if @can_join %>
 <button>
 	<%=link_to "Join this trip", trip_participations_path(:trip_id => @trip.id), method: 'post' %>
 </button>
 <% else %>
-  <%= "Sorry this trip is full!" %>
+  <% flash[:notice] = "Sorry this trip is full!" %>
 <% end %>
 
 <% if @trip.organizer == current_user.id %>

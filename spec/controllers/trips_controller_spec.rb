@@ -1,15 +1,14 @@
 require 'rails_helper'
-require 'pry'
 RSpec.describe TripsController, :type => :controller do
 
-	before(:each)do
-		@test_user = User.create(username: "username01", password: "12345678", email: "test_user@gmail.com")
-		@place = Place.create(city: "Barcelona", country: "Spain")
-		@activity = Activity.create(activity_name: "Ironhack", category: "Studies")
+  before(:each)do
+    @test_user = User.create(username: "username01", password: "12345678", email: "test_user@gmail.com")
+    @place = Place.create(city: "Barcelona", country: "Spain")
+    @activity = Activity.create(activity_name: "Ironhack", category: "Studies")
     sign_in @test_user
-	end
+  end
 
-	it "shows all the trips from a specific place" do
+  it "shows all the trips from a specific place" do
     get :index, place_id: @place.id
     expect(response).to render_template(:index)
   end
@@ -19,8 +18,8 @@ RSpec.describe TripsController, :type => :controller do
     expect(response).to render_template(:index)
   end
 
-	it "show the trip details from a specific trip" do
-  	trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
+  it "show the trip details from a specific trip" do
+    trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
     get :show, id: trip.id
     expect(response).to render_template(:show)
   end
@@ -28,18 +27,18 @@ RSpec.describe TripsController, :type => :controller do
   it "will not create a trip if the user isn't logged-in" do
     organizer_id = nil
     trip_params = {
-    	"place" => @place.city,
+      "place" => @place.city,
       "activity" => "",
-    	"activity_create" => @activity.activity_name,
+      "activity_create" => @activity.activity_name,
       "from_date"=>"2015-10-21",
       "to_date"=>"2015-11-21",
-    	"capacity" => "3",
-    	"description" => "Web Development Intensive Bootcamp"
-    	}
+      "capacity" => "3",
+      "description" => "Web Development Intensive Bootcamp"
+      }
 
     previous_trip_count = Trip.all.count
-  	@trip = Trip.create_new_trip(trip_params, organizer_id)
-  	@trip.save
+    @trip = Trip.create_new_trip(trip_params, organizer_id)
+    @trip.save
     expect(Trip.all.count).to eq(previous_trip_count)
   end
 
@@ -49,18 +48,18 @@ RSpec.describe TripsController, :type => :controller do
     organizer_id = @test_user.id
     @new_place = Place.create city: "Madrid", country: "Spain"
     trip_params = {
-    	"place" => @new_place.city,
+      "place" => @new_place.city,
       "activity" => @activity.activity_name,
-    	"activity_create" => "",
-			"from_date"=>"2015-10-21",
+      "activity_create" => "",
+      "from_date"=>"2015-10-21",
       "to_date"=>"2015-11-21",
-    	"capacity" => "3",
-    	"description" => "Web Development Intensive Bootcamp"
-    	}
+      "capacity" => "3",
+      "description" => "Web Development Intensive Bootcamp"
+      }
 
     previous_trip_count = Trip.all.count
-  	@trip = Trip.create_new_trip(trip_params, organizer_id)
-  	@trip.save
+    @trip = Trip.create_new_trip(trip_params, organizer_id)
+    @trip.save
 
     expect(Place.last.city).to eq(@new_place.city)
     expect(Trip.all.count).to eq(previous_trip_count+1)
@@ -73,6 +72,49 @@ RSpec.describe TripsController, :type => :controller do
       "place" => @new_place.city,
       "activity" => @activity.activity_name,
       "activity_create" => "",
+      "from_date"=>"2015-10-21",
+      "to_date"=>"2015-11-21",
+      "capacity" => "3",
+      "description" => "Web Development Intensive Bootcamp"
+      }
+
+    previous_trip_count = Trip.all.count
+
+    @trip = Trip.create_new_trip(trip_params, organizer_id)
+    @trip.save
+
+    expect(Place.last.city).to eq(@place.city)
+    expect(Trip.all.count).to eq(previous_trip_count+1)
+  end
+
+  it "and an activity when activity is not existing" do
+    organizer_id = @test_user.id
+    @new_activity = Activity.create activity_name: "Writing code", category: "Geek"
+    trip_params = {
+      "place" => @place.city,
+      "activity" => "",
+      "activity_create" => @new_activity.activity_name,
+      "from_date"=>"2015-10-21",
+      "to_date"=>"2015-11-21",
+      "capacity" => "3",
+      "description" => "Web Development Intensive Bootcamp"
+      }
+    previous_trip_count = Trip.all.count
+
+    @trip = Trip.create_new_trip(trip_params, organizer_id)
+    @trip.save
+
+    expect(Activity.last.activity_name).to eq(@new_activity.activity_name)
+    expect(Trip.all.count).to eq(previous_trip_count+1)
+  end
+
+  it "but doesn't create the activity because of case difference" do
+    organizer_id = @test_user.id
+    @new_activity = Activity.create activity_name: "ironhack", category: "Geek"
+    trip_params = {
+      "place" => @place.city,
+      "activity" => "",
+      "activity_create" => @new_activity.activity_name,
       "from_date"=>"2015-10-21",
       "to_date"=>"2015-11-21",
       "capacity" => "3",
@@ -205,7 +247,6 @@ end
     end
 
     it "and number of people confirmed and pending approval" do
-
       trip_params = {
         "place" => @place.city,
         "activity" => @activity.activity_name,
@@ -215,17 +256,16 @@ end
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
-
       @trip = Trip.create_new_trip(trip_params, @organizer.id)
       @trip.save
       @trip.create_participation @organizer
+      @trip.reload
 
       @pending = Participation.create trip_id: @trip.id, user_id: @p_user.id, confirmed: false
       @sure = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
-      pending_people = @trip.get_trip_participants false
-      confirmed_people = @trip.get_trip_participants true
-      expect(pending_people.length).to eq(1)
-      expect(confirmed_people.length).to eq(2)
+      @count = @trip.get_count_of_people
+      expect(@count[:pending_people]).to eq(1)
+      expect(@count[:confirmed_people]).to eq(2)
     end
 
     it "but not reviewable members when to_date is not passed" do
@@ -240,8 +280,9 @@ end
         }
 
       @trip = Trip.create_new_trip(trip_params, @organizer.id)
-      @trip.create_participation @organizer
       @trip.save
+      @trip.create_participation @organizer
+      @trip.reload
 
       @pending = Participation.create trip_id: @trip.id, user_id: @p_user.id, confirmed: false
       @sure = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: false
@@ -289,6 +330,46 @@ end
       @review_members = @trip.reviewable? @organizer
       expect(@review_members.size).to eq(3)
     end
+
+  it "but doesn't allow the organizer to manually join own trip" do
+      trip_params = {
+        "place" => @place.city,
+        "activity" => @activity.activity_name,
+        "activity_create" => "",
+        "from_date"=>"2014-08-28",
+        "to_date"=>"2014-08-29",
+        "capacity" => "5",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+
+      @trip = Trip.create_new_trip(trip_params, @organizer.id)
+      @trip.save
+      @trip.create_participation @organizer
+
+      @can_join = @trip.joinable? @organizer
+      expect(@can_join).to be_falsy
   end
+
+  it "and doesn't allow people to join if trip is full" do
+      trip_params = {
+        "place" => @place.city,
+        "activity" => @activity.activity_name,
+        "activity_create" => "",
+        "from_date"=>"2014-08-28",
+        "to_date"=>"2014-08-29",
+        "capacity" => "2",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+
+      @trip = Trip.create_new_trip(trip_params, @p_user.id)
+      @trip.save
+      @trip.create_participation @p_user
+
+      confirmed = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
+
+      @can_join = @trip.joinable? @test_user
+      expect(@can_join).to be_falsy
+  end
+end
 
 end
