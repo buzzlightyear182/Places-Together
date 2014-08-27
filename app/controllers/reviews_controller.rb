@@ -20,7 +20,8 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Your review has been saved. Thank you!"
       redirect_to action:'show', controller:'profiles', id: @profile.id
     else
-      flash[:alert] = @reviews.error.full_messages
+      @errors = @reviews.error.full_messages
+      flash[:error] = @errors.first
       render 'new'
     end
   end

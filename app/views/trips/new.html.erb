@@ -1,11 +1,5 @@
 <h1> Create your own trip! </h1>
 
-<% if @errors != nil %>
-  <% @errors.each do |e| %>
-    <%= e %>
-  <% end %>
-<% end %>
-
 <div class="trip_form">
 <%= form_for @trip do |f| %>
   <%= f.label "Where do you want to go?" %>

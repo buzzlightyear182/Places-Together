@@ -51,11 +51,12 @@ class TripsController < ApplicationController
 		@trip = Trip.create_new_trip(trip_params, organizer_id)
 			if @trip.save
 				@trip.create_participation current_user
-				flash[:notice] = "Trip has been created!"
+				flash[:success] = "Trip has been created!"
 				redirect_to action: 'show', id: @trip.id
 			else
-			flash[:alert] = @trip.errors.full_messages
-			render 'new'
+			@errors = @trip.errors.full_messages
+			flash[:error] = @errors.first
+			redirect_to action: 'new'
 			end
 	end
 
@@ -68,7 +69,7 @@ class TripsController < ApplicationController
 			@activity = @trip.activity.activity_name
 			render 'edit'
 		else
-			flash[:alert] = "Sorry you are not the organizer of this trip."
+			flash[:error] = "Sorry you are not the organizer of this trip."
 			redirect_to action: 'show', id: @trip.id
 		end
 	end
@@ -78,11 +79,12 @@ class TripsController < ApplicationController
 		organizer_id = current_user.id
 		@trip = Trip.update_trip(trip_params, params[:id], organizer_id)
 		if @trip.save
+				flash[:success] = "Trip updated!"
 				redirect_to	action: 'show', id: @trip.id
-				flash[:notice] = "Trip updated!"
 		else
-				flash[:alert]	=	@trip.errors.full_messages
-				render 'edit'
+			@errors	=	@trip.errors.full_messages
+			flash[:error] = @errors.first
+			render 'edit'
 		end
 	end
 
@@ -90,7 +92,7 @@ class TripsController < ApplicationController
 		@trip = Trip.find(params[:id])
 		Participation.destroy_all(trip_id: @trip.id)
 		@trip.destroy
-		flash[:notice] = "Trip has been cancelled!"
+		flash[:success] = "Trip has been cancelled!"
 		redirect_to action: 'index', controller: 'places'
 	end
 
