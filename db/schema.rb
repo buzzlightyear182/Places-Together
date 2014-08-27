@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 20140824165338) do
     t.integer  "capacity"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
   end
 
   create_table "user_profiles", force: true do |t|

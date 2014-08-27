@@ -35,15 +35,15 @@ activity3 = Activity.create activity_name: "Fiesta", category: "Nightlife"
 activity4 = Activity.create activity_name: "Trek", category: "Outdoor"
 activity5 = Activity.create activity_name: "Tourism", category: "Leisure"
 
-trip1 = Trip.create organizer: user1.id, place_id: place1.id, activity_id: activity1.id, from_date: Date.today+30, to_date: Date.today+32, description: "Wreck dive", capacity: 10, name: "#{activity1.activity_name} in #{place1.city}"
+trip1 = Trip.create organizer: user1.id, place_id: place1.id, activity_id: activity1.id, from_date: Date.today+30, to_date: Date.today+32, description: "Wreck dive", capacity: 10
 
-trip2 = Trip.create organizer: user2.id, place_id: place3.id, activity_id: activity2.id, from_date: Date.today+1, to_date: Date.today+2, description: "Code kata", capacity: 6, name: "#{activity2.activity_name} in #{place3.city}"
+trip2 = Trip.create organizer: user2.id, place_id: place3.id, activity_id: activity2.id, from_date: Date.today+1, to_date: Date.today+2, description: "Code kata", capacity: 6
 
-trip3 = Trip.create organizer: user3.id, place_id: place5.id, activity_id: activity3.id, from_date: Date.today+2, to_date: Date.today+3, description: "Night out", capacity: 8, name: "#{activity3.activity_name} in #{place5.city}"
+trip3 = Trip.create organizer: user3.id, place_id: place5.id, activity_id: activity3.id, from_date: Date.today+2, to_date: Date.today+3, description: "Night out", capacity: 8
 
-trip4 = Trip.create organizer: user6.id, place_id: place4.id, activity_id: activity4.id, from_date: Date.today+6, to_date: Date.today+9, description: "Climb mountains", capacity: 6, name: "#{activity4.activity_name} in #{place4.city}"
+trip4 = Trip.create organizer: user6.id, place_id: place4.id, activity_id: activity4.id, from_date: Date.today+6, to_date: Date.today+9, description: "Climb mountains", capacity: 6
 
-trip5 = Trip.create organizer: user4.id, place_id: place2.id, activity_id: activity5.id, from_date: Date.today+4, to_date: Date.today+7, description: "Eat french cheese", capacity: 4, name: "#{activity5.activity_name} in #{place2.city}"
+trip5 = Trip.create organizer: user4.id, place_id: place2.id, activity_id: activity5.id, from_date: Date.today+4, to_date: Date.today+7, description: "Eat french cheese", capacity: 4
 
 Participation.create user_id: user1.id, trip_id: trip1.id, confirmed: true
 Participation.create user_id: user2.id, trip_id: trip1.id, confirmed: true
