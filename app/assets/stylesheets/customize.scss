@@ -11,6 +11,31 @@ button a {
   color: white;
 }
 
+.ribbon-wrapper {
+  $ribbon-size: 85px;
+  $ribbon-background: $base-accent-color;
+  @include size($ribbon-size);
+  overflow: hidden;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+
+  .ribbon {
+    font-size: .8em;
+    font-weight: 800;
+    text-align: center;
+    @include transform(rotate(45deg));
+    position: relative;
+    padding: 2px 7px;
+    left: -5px;
+    top: 15px;
+    width: 120px;
+    background-color: $ribbon-background;
+    color: white;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  }
+}
+
 .header_wrapper {
   background-color: $red;
   color: white;
@@ -110,4 +135,8 @@ button a {
   padding-top: 10px;
   color: $medium-gray;
   margin-top: 5px;
+}
+
+.pending_trips_text{
+  padding: 15px 0px;
 }

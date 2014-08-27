@@ -1,0 +1,40 @@
+<ul class="spec_bar">
+  <li><%=link_to "Show only pending trips", my_pending_trips_path, method: 'get', :style=>"padding: 15px 20px" %></li>
+  <li><%=link_to "Create a new trip", new_trip_path%></li>
+  <li><%=link_to "See other places", places_path %></li>
+</ul>
+
+<div class="trips_container">
+  <% unless @trips == nil %>
+    <% @trips.each do |trip| %>
+    <div class="trip_card">
+      <% if trip.to_date < Date.today %>
+        <div class="ribbon-wrapper">
+          <div class="ribbon">COMPLETED</div>
+        </div>
+      <% end %>
+      <img class="trip_image" src="https://raw.github.com/Magnus-G/Random/master/mountains.png" alt="">
+      <div class="trip_text">
+        <div class="trip_title">
+          <%=link_to trip.name, trip_path(:id => trip.id)%>
+        </div>
+      <table class="trip_info">
+        <tbody>
+          <tr>
+            <td colspan='2'><%= trip.description %></td>
+          </tr>
+          <tr>
+            <th>Starting on:</th>
+            <td><%= trip.from_date %></td>
+          </tr>
+          <tr>
+            <th>Until:</th>
+            <td><%= trip.to_date %></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+</div>

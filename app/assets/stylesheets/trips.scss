@@ -5,10 +5,8 @@
 // <script src='lib/jquery.min.js'></script>
 // <script src='lib/moment.min.js'></script>
 // <script src='fullcalendar/fullcalendar.js'></script>
-.trip_form {
-  @include span-columns(6 of 9);
-}
 
+//TRIPS INDEX
 .trip_card {
   @include span-columns(6);
   border: 2px solid $blue;
@@ -70,4 +68,87 @@
 .spec_bar a:hover {
   background-color: $green;
   color: white;
+}
+
+//TRIP FORMS NEW and EDIT
+.trip_form input,textarea{
+  border: 1px solid $yellow;
+  background-color: white;
+  box-shadow: none;
+}
+
+.trip_form input:focus, textarea:focus{
+  border: 2px solid $green;
+  box-shadow: none;
+  color: $green;
+}
+
+.trip_form_place input, textarea{
+  @include span-columns(5 of 9);
+}
+
+.trip_form_activity {
+  display: block;
+  @include span-columns(12);
+}
+
+.activity_list li {
+  display: inline-block;
+  height: 100px;
+  @include span-columns(2 of 12);
+}
+
+.activity_list input{
+  display: inline;
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+
+.activity_list input:indeterminate{
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.activity_list input[type="radio"]:checked+label{
+  font-weight: bold;
+  color: $green;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.activity_list label {
+  display: inline;
+  position: relative;
+  margin: 0px;
+  padding: 0px 5px;
+}
+
+.activity_list img {
+  display: block;
+  // text-align: center;
+}
+
+
+.addtl_activity {
+  @include span-columns(12 of 12);
+  @include clearfix;
+}
+
+.trip_form_more {
+  @include span-columns(12 of 12);
+  @include clearfix;
+}
+
+.trip_form_more label {
+  @include span-columns(4 of 12);
+}
+
+.trip_form_more input,textarea{
+  @include span-columns(4 of 12);
+}
+
+.form_submit {
+  @include span-columns(8 of 12);
+  text-align: right;
 }

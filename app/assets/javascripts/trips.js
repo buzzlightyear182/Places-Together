@@ -60,8 +60,8 @@ $(document).ready(function () {
 
     $('#calendar').addClass('table-responsive');
 
-var closeForm = function(){
+  var closeForm = function(){
       $('#side-event').addClass('sr-only').removeClass('sidebar-left-active');
-    };
+  };
 
 });

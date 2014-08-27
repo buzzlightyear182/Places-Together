@@ -1,33 +1,40 @@
 <div class="trip_form">
 <%= form_for @trip do |f| %>
-  <%= f.label "Where do you want to go?" %>
-  <%= f.text_field :place, :value => (@trip.place == nil ? params[:place] : @trip.place.city) %>
+  <div class='trip_form_place'>
+    <%= f.label "Where do you want to go?" %>
+    <%= f.text_field :place, :value => (@trip.place == nil ? params[:place] : @trip.place.city) %>
+  </div>
+  <div class='trip_form_activity'>
+    <label>What do you want to do?</label>
+    <ul class='activity_list'>
+      <% @activities.each do |a| %>
+      <li>
+        <%= f.radio_button :activity, a.activity_name %>
+        <%= f.label :activity, a.activity_name %>
+        <%= image_tag("#{a.activity_name}.png",:id => "listed #{a.activity_name}") %>
+        <% end %>
+      </li>
+    </ul>
+    <div class='addtl_activity'>
+      <label>Or create your own activity:</label>
+      <%= f.text_field :activity_create, :value => (@trip.activity == nil ? params[:activity_create] : @trip.activity.activity_name)  %>
+    </div>
+  </div>
+  <div class='trip_form_more'>
+    <%= f.label "Starting on?" %>
+    <%= f.date_field :from_date %>
 
-<%= f.label :activity, "Where do you want to go?" %>
-  <ul class='activity_list'>
-    <% @activities.each do |a| %>
-    <li>
-      <% selected = (@trip.activity == a ? true : false) %>
-      <%= f.radio_button :activity,  a.activity_name, :selected => selected %><%= f.label :activity, a.activity_name %>
-      <%= image_tag("#{a.activity_name.downcase}.png") %>
-      <% end %>
-    </li>
-  </ul>
-  <%= "Or create your own:"%>
-  <%= f.text_field :activity_create, :value => (@trip.activity == nil ? params[:activity_create] : @trip.activity.activity_name)  %>
+    <%= f.label "Until when?" %>
+    <%= f.date_field :to_date %> <br/>
 
-  <%= f.label "From when?" %>
-  <%= f.date_field :from_date %>
+    <%= f.label "How many people do you need?" %>
+    <%= f.text_field :capacity %>
 
-  <%= f.label "Until when?" %>
-  <%= f.date_field :to_date %> <br/>
-
-  <%= f.label "How many people do you need?" %>
-  <%= f.text_field :capacity %>
-
-  <%= f.label "Write something about your trip" %>
-  <%= f.text_area :description %>
-
-  <%= f.submit "Save" %>
+    <%= f.label "Write something about your trip" %>
+    <%= f.text_area :description %>
+  </div>
+  <div class='form_submit'>
+    <%= f.submit "Save" %>
+  </div>
 <% end %>
 </div>

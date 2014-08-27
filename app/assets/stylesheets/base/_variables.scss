@@ -2,8 +2,8 @@
 $sans-serif: 'Source Sans Pro', Helvetica, Arial;
 $serif: Georgia;
 $base-font-family: $sans-serif;
-$header-font-family: $base-font-family;
 $accent-font-family: 'Roboto Condensed', $sans-serif;
+$header-font-family: $accent-font-family;
 
 // Sizes
 $base-font-size: 1em;
@@ -19,6 +19,7 @@ $red: #F64747;
 $blue: #22A7F0;
 $navy: #2C3E50;
 $green: #03c9a9;
+$yellow: #F9BF3B;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #DDD;

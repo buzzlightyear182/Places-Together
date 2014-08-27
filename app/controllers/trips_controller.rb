@@ -27,17 +27,6 @@ class TripsController < ApplicationController
 		end
 	end
 
-	def my_trips
-		@search = Search.new
-		@trips = Trip.where(organizer: current_user.id)
-		if @trips == nil
-			flash[:notice] = "You don't have any trips yet! Why not create one?"
-		else
-			@trips
-		end
-		render 'trips/index'
-	end
-
 	def show
 		@search = Search.new
 		@trip = Trip.find(params[:id])
