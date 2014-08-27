@@ -1,13 +1,18 @@
-<button><%=link_to "Calendar view", @link, method: 'get' %></button>
-
-<button><%=link_to "Create a new trip", new_trip_path%></button>
-
-<button><%=link_to "Go back to main", places_path %></button>
+<ul class="spec_bar">
+  <li><%=link_to "Calendar view", @link, method: 'get' %></li>
+  <li><%=link_to "Create a new trip", new_trip_path%></li>
+  <li><%=link_to "See other places", places_path %></li>
+</ul>
 
 <div class="trips_container">
   <% unless @trips == nil %>
     <% @trips.each do |trip| %>
     <div class="trip_card">
+      <% if trip.to_date < Date.today %>
+        <div class="ribbon-wrapper">
+          <div class="ribbon">COMPLETED</div>
+        </div>
+      <% end %>
       <img class="trip_image" src="https://raw.github.com/Magnus-G/Random/master/mountains.png" alt="">
       <div class="trip_text">
         <div class="trip_title">

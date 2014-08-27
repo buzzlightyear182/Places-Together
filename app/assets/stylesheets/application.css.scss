@@ -86,10 +86,6 @@ button a {
   float: left;
 }
 
-#sidemenu li{
-  // padding: 10px;
-}
-
 .body_container {
   float: right;
   display: inline;
@@ -100,9 +96,10 @@ button a {
   background-color: white;
   color: $blue;
   @include span-columns(3 of 3);
-  padding: 20px 15px;
+  padding: 15px 15px;
   border-bottom: 1px solid $blue;
   font-family: $accent-font-family;
+  font-size: $base-font-size * 1.25;
 }
 
 .js-accordion-trigger:hover {
@@ -113,8 +110,7 @@ button a {
 
 .submenu a {
   @include span-columns(3 of 3);
-  padding: 20px 30px;
-  // border-bottom: 1px solid $blue;
+  padding: 15px 30px;
 }
 
 .submenu a:hover {
@@ -126,12 +122,14 @@ button a {
   padding-left: 30px;
 }
 
-.search-and-submit label {
-  padding-top: 10px;
-}
-
 .search-and-submit button{
   text-align: right;
+}
+
+.search_label{
+  padding-top: 10px;
+  color: $medium-gray;
+  margin-top: 5px;
 }
 
 .device_form {
@@ -169,20 +167,6 @@ button a {
   font-size: $base-font-size * 2;
 }
 
-// .trip_title:hover {
-//   color: white;
-//   background-color: $blue;
-// }
-
-// .trip_title a:hover {
-//   color: white;
-//   background-color: $blue;
-//   width: 100%;
-//   text-align: center;
-//   margin-top: 0px;
-//   font-weight: bold;
-// }
-
 .trip_info {
   color: white;
   margin-bottom: 0px;
@@ -198,4 +182,23 @@ button a {
 
 .trip_info th {
   padding-left: 10px;
+}
+
+.spec_bar li {
+  display: inline;
+  @include span-columns(4);
+  text-align: center;
+  padding: 15px 0;
+  font-family: $accent-font-family;
+  font-size: $base-font-size * 1.25;
+}
+
+.spec_bar a{
+  color: $green;
+  padding: 15px 50px;
+}
+
+.spec_bar a:hover {
+  background-color: $green;
+  color: white;
 }

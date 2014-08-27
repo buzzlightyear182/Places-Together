@@ -11,7 +11,7 @@ RSpec.describe SendEmail, :type => :mailer do
 
     @activity = Activity.create(activity_name: "Ironhack", category: "Studies")
 
-    @trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp", name: "#{@activity.activity_name} in #{@place.city}"
+    @trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
 
     @participation = Participation.create(trip_id: @trip.id, user_id: @p_user.id, confirmed: false)
 

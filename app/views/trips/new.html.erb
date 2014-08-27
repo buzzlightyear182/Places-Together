@@ -3,7 +3,7 @@
 <div class="trip_form">
 <%= form_for @trip do |f| %>
   <%= f.label "Where do you want to go?" %>
-  <%= f.text_field :place, :value => @filler[0] %>
+  <%= f.text_field :place, :value => params[:place] %>
 
   <%= f.label "What do you want to do?" %>
   <% @activities.each do |a| %>
@@ -12,7 +12,7 @@
     <% end %>
     <%= f.radio_button :activity, "" %>
     <%= "Or create your own:"%>
-    <%= f.text_field :activity_create, :value => @filler[1]  %>
+    <%= f.text_field :activity_create, :value => params[:activity]  %>
 
   <%= f.label "From when?" %>
   <%= f.date_field :from_date %>

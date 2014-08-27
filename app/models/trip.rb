@@ -9,6 +9,7 @@ class Trip < ActiveRecord::Base
 	validates :activity_id, presence: true
 	validates :from_date, presence: true
 	validates :to_date, presence: true
+	validates :description, presence: true
 	validates :capacity, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
 
 	validate :from_date_is_in_future
@@ -47,8 +48,10 @@ class Trip < ActiveRecord::Base
 	def joinable? current_user
 		get_count_of_people
 		current_trip_size = @count[:confirmed_people]
-		if (if_participant? current_user) && (capacity <= current_trip_size)
+		if (if_participant? current_user) || (capacity == current_trip_size)
 			false
+		else
+			true
 		end
 	end
 

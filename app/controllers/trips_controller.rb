@@ -6,12 +6,12 @@ class TripsController < ApplicationController
 	def index
 		 @search = Search.new
 		if params[:place_id]
-			@place = Place.find(params[:place_id])
-			@trips = Trip.where(place_id: @place.id).all
+			place = Place.find(params[:place_id])
+			@trips = Trip.where(place_id: place.id).all
 			@link = '/places/'+params[:place_id]+'/trips/calendar'
 		elsif params[:activity_id]
-			@activity= Activity.find(params[:activity_id])
-			@trips = Trip.where(activity_id: @activity.id).all
+			activity= Activity.find(params[:activity_id])
+			@trips = Trip.where(activity_id: activity.id).all
 			@link = '/activities/'+params[:activity_id]+'/trips/calendar'
 		end
 	end
@@ -19,28 +19,33 @@ class TripsController < ApplicationController
 	def calendar
 		@search = Search.new
 		if params[:place_id]
-			@place = Place.find(params[:place_id])
-			@trips = Trip.where(place_id: @place.id).all
+			place = Place.find(params[:place_id])
+			@trips = Trip.where(place_id: place.id).all
 		elsif params[:activity_id]
-			@activity= Activity.find(params[:activity_id])
-			@trips = Trip.where(activity_id: @activity.id).all
+			activity= Activity.find(params[:activity_id])
+			@trips = Trip.where(activity_id: activity.id).all
 		end
+	end
+
+	def my_trips
+		@search = Search.new
+		@trips = Trip.where(organizer: current_user.id)
+		if @trips == nil
+			flash[:notice] = "You don't have any trips yet! Why not create one?"
+		else
+			@trips
+		end
+		render 'trips/index'
 	end
 
 	def show
 		@search = Search.new
 		@trip = Trip.find(params[:id])
-		@count = @trip.get_count_of_people
-		@review_members = @trip.reviewable? current_user
-		@can_join = @trip.joinable? current_user
 	end
 
 	def new
 		@search = Search.new
 		@trip = Trip.new
-		place = params[:place]
-		activity = params[:activity]
-		@filler = [place, activity]
 		@activities = Activity.all.limit(10)
 	end
 

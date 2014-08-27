@@ -13,7 +13,7 @@
       <div class="search-bar">
         <div class="search-and-submit">
           <%= form_for @search do |f| %>
-            <%= f.label "Find by city or activity" %>
+            <%= f.label "Find by city or activity", :class => "search_label" %>
             <%= f.text_field :keyword, type: "search", placeholder: "Enter search" %>
             <%= f.submit "Find me a trip!"%>
         </div>
@@ -35,7 +35,7 @@
     <a href="javascript:void(0)" class="js-accordion-trigger">Trips</a>
     <ul class="submenu">
       <li><%=link_to "Create a new trip", new_trip_path%></li>
-      <li><%= link_to "View my trips", activities_path %></li>
+      <li><%= link_to "View my trips", my_trips_path, method: 'get' %></li>
     </ul>
   </li>
 </ul>

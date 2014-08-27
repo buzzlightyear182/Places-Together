@@ -6,19 +6,21 @@ To Date: <%= @trip.to_date %><br/>
 Capacity: <%= @trip.capacity %><br/>
 
 Status: <br/>
-Pending: <%= @count[:pending_people] %></br>
-Confirmed: <%= @count[:confirmed_people] %><br/>
+<% count = @trip.get_count_of_people %>
+Pending: <%= count[:pending_people] %></br>
+Confirmed: <%= count[:confirmed_people] %><br/>
 
-<% if @review_members.length >= 2 %>
+<% review_members = @trip.reviewable? current_user %>
+<% if review_members.length >= 2 %>
 Review your tripmates:<br/>
-  <% @review_members.each do |profile| %>
+  <% review_members.each do |profile| %>
     <% if profile != current_user.id %>
       <%=link_to User.find(profile).username, new_profile_review_path(:profile_id => Profile.where(user_id: profile).first) %><br/>
      <% end %>
   <% end %>
 <% end %>
 
-<% if @can_join %>
+<% if @trip.joinable? current_user %>
 <button>
 	<%=link_to "Join this trip", trip_participations_path(:trip_id => @trip.id), method: 'post' %>
 </button>

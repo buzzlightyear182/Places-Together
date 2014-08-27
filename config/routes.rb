@@ -33,6 +33,7 @@ post 'search' => 'search#create'
 
 get 'confirm_joiner/:id' => 'participations#add_joiner'
 
+get 'my_trips' => 'trips#my_trips'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
