@@ -1,10 +1,11 @@
 require 'rails_helper'
 RSpec.describe TripsController, :type => :controller do
 
-  before(:each)do
+  before :each do
     @test_user = User.create(username: "username01", password: "12345678", email: "test_user@gmail.com")
     @place = Place.create(city: "Barcelona", country: "Spain")
     @activity = Activity.create(activity_name: "Ironhack", category: "Studies")
+    @fake_user = User.create(username: "fake_user", password: "12345678", email: "fake_user@gmail.com")
     sign_in @test_user
   end
 
@@ -24,8 +25,8 @@ RSpec.describe TripsController, :type => :controller do
     expect(response).to render_template(:show)
   end
 
-  it "will not create a trip if the user isn't logged-in" do
-    organizer_id = nil
+  it "is not created if the user isn't logged-in" do
+    organizer_id = @fake_user.id
     trip_params = {
       "place" => @place.city,
       "activity" => "",
@@ -42,203 +43,203 @@ RSpec.describe TripsController, :type => :controller do
     expect(Trip.all.count).to eq(previous_trip_count)
   end
 
-  describe "creates a trip" do
+  describe "creates trips" do
 
     it "and a place when place is not existing" do
-    organizer_id = @test_user.id
-    @new_place = Place.create city: "Madrid", country: "Spain"
-    trip_params = {
-      "place" => @new_place.city,
-      "activity" => @activity.activity_name,
-      "activity_create" => "",
-      "from_date"=>"2015-10-21",
-      "to_date"=>"2015-11-21",
-      "capacity" => "3",
-      "description" => "Web Development Intensive Bootcamp"
-      }
+      organizer_id = @test_user.id
+      @new_place = FactoryGirl.build(:place, city: "Madrid")
+      trip_params = {
+        "place" => @new_place.city,
+        "activity" => @activity.activity_name,
+        "activity_create" => "",
+        "from_date"=>"2015-10-21",
+        "to_date"=>"2015-11-21",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
 
-    previous_trip_count = Trip.all.count
-    @trip = Trip.create_new_trip(trip_params, organizer_id)
-    @trip.save
+      previous_trip_count = Trip.all.count
+      @trip = Trip.create_new_trip(trip_params, organizer_id)
+      @trip.save
 
-    expect(Place.last.city).to eq(@new_place.city)
-    expect(Trip.all.count).to eq(previous_trip_count+1)
+      expect(Place.last.city).to eq(@new_place.city)
+      expect(Trip.all.count).to eq(previous_trip_count+1)
+    end
+
+    it "but doesn't create the place because of case difference" do
+      organizer_id = @test_user.id
+      @new_place = Place.create city: "barcelona", country: "Spain"
+      trip_params = {
+        "place" => @new_place.city,
+        "activity" => @activity.activity_name,
+        "activity_create" => "",
+        "from_date"=>"2015-10-21",
+        "to_date"=>"2015-11-21",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+
+      previous_trip_count = Trip.all.count
+
+      @trip = Trip.create_new_trip(trip_params, organizer_id)
+      @trip.save
+
+      expect(Place.last.city).to eq(@place.city)
+      expect(Trip.all.count).to eq(previous_trip_count+1)
+    end
+
+    it "and an activity when activity is not existing" do
+      organizer_id = @test_user.id
+      @new_activity = Activity.create activity_name: "Writing code", category: "Geek"
+      trip_params = {
+        "place" => @place.city,
+        "activity" => "",
+        "activity_create" => @new_activity.activity_name,
+        "from_date"=>"2015-10-21",
+        "to_date"=>"2015-11-21",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+      previous_trip_count = Trip.all.count
+
+      @trip = Trip.create_new_trip(trip_params, organizer_id)
+      @trip.save
+
+      expect(Activity.last.activity_name).to eq(@new_activity.activity_name)
+      expect(Trip.all.count).to eq(previous_trip_count+1)
+    end
+
+    it "but doesn't create the activity because of case difference" do
+      organizer_id = @test_user.id
+      @new_activity = Activity.create activity_name: "ironhack", category: "Geek"
+      trip_params = {
+        "place" => @place.city,
+        "activity" => "",
+        "activity_create" => @new_activity.activity_name,
+        "from_date"=>"2015-10-21",
+        "to_date"=>"2015-11-21",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+
+      previous_trip_count = Trip.all.count
+
+      @trip = Trip.create_new_trip(trip_params, organizer_id)
+      @trip.save
+
+      expect(Place.last.city).to eq(@place.city)
+      expect(Trip.all.count).to eq(previous_trip_count+1)
+    end
+
+    it "and an activity when activity is not existing" do
+      organizer_id = @test_user.id
+      @new_activity = Activity.create activity_name: "Writing code", category: "Geek"
+      trip_params = {
+        "place" => @place.city,
+        "activity" => "",
+        "activity_create" => @new_activity.activity_name,
+        "from_date"=>"2015-10-21",
+        "to_date"=>"2015-11-21",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+      previous_trip_count = Trip.all.count
+
+      @trip = Trip.create_new_trip(trip_params, organizer_id)
+      @trip.save
+
+      expect(Activity.last.activity_name).to eq(@new_activity.activity_name)
+      expect(Trip.all.count).to eq(previous_trip_count+1)
+    end
+
+    it "but doesn't create the activity because of case difference" do
+      organizer_id = @test_user.id
+      @new_activity = Activity.create activity_name: "ironhack", category: "Geek"
+      trip_params = {
+        "place" => @place.city,
+        "activity" => "",
+        "activity_create" => @new_activity.activity_name,
+        "from_date"=>"2015-10-21",
+        "to_date"=>"2015-11-21",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+
+      previous_trip_count = Trip.all.count
+
+      @trip = Trip.create_new_trip(trip_params, organizer_id)
+      @trip.save
+
+      expect(Activity.last.activity_name).to eq(@activity.activity_name)
+      expect(Trip.all.count).to eq(previous_trip_count+1)
+    end
+
+    it "place and an activity when both place and activity is not existing" do
+      organizer_id = @test_user.id
+      @new_place = Place.create city: "Madrid", country: "Spain"
+      @new_activity = Activity.create activity_name: "Writing code", category: "Geek"
+      trip_params = {
+        "place" => @new_place.city,
+        "activity" => "",
+        "activity_create" => @new_activity.activity_name,
+        "from_date"=>"2015-10-21",
+        "to_date"=>"2015-11-21",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+
+      previous_trip_count = Trip.all.count
+
+      @trip = Trip.create_new_trip(trip_params, organizer_id)
+      @trip.save
+
+      expect(Activity.last.activity_name).to eq(@new_activity.activity_name)
+      expect(Place.last.city).to eq(@new_place.city)
+      expect(Trip.all.count).to eq(previous_trip_count+1)
+    end
+
+    it "and not create any place or activity since both options exist already" do
+      organizer_id = @test_user.id
+      trip_params = {
+        "place" => @place.city,
+        "activity" => @activity.activity_name,
+        "activity_create" => "",
+        "from_date"=>"2015-10-21",
+        "to_date"=>"2015-11-21",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+
+      previous_trip_count = Trip.all.count
+
+      @trip = Trip.create_new_trip(trip_params, organizer_id)
+      @trip.save
+
+      expect(Activity.last.activity_name).to eq(@activity.activity_name)
+      expect(Place.last.city).to eq(@place.city)
+      expect(Trip.all.count).to eq(previous_trip_count+1)
+    end
+
+    it "and automatically generates a trip name" do
+      organizer_id = @test_user.id
+      trip_params = {
+        "place" => @place.city,
+        "activity" => @activity.activity_name,
+        "activity_create" => "",
+        "from_date"=>"2015-10-21",
+        "to_date"=>"2015-11-21",
+        "capacity" => "3",
+        "description" => "Web Development Intensive Bootcamp"
+        }
+
+      @trip = Trip.create_new_trip(trip_params, organizer_id)
+      @trip.save
+
+      expect(@trip.name).to eq("Ironhack in Barcelona")
+    end
   end
 
-  it "but doesn't create the place because of case difference" do
-    organizer_id = @test_user.id
-    @new_place = Place.create city: "barcelona", country: "Spain"
-    trip_params = {
-      "place" => @new_place.city,
-      "activity" => @activity.activity_name,
-      "activity_create" => "",
-      "from_date"=>"2015-10-21",
-      "to_date"=>"2015-11-21",
-      "capacity" => "3",
-      "description" => "Web Development Intensive Bootcamp"
-      }
-
-    previous_trip_count = Trip.all.count
-
-    @trip = Trip.create_new_trip(trip_params, organizer_id)
-    @trip.save
-
-    expect(Place.last.city).to eq(@place.city)
-    expect(Trip.all.count).to eq(previous_trip_count+1)
-  end
-
-  it "and an activity when activity is not existing" do
-    organizer_id = @test_user.id
-    @new_activity = Activity.create activity_name: "Writing code", category: "Geek"
-    trip_params = {
-      "place" => @place.city,
-      "activity" => "",
-      "activity_create" => @new_activity.activity_name,
-      "from_date"=>"2015-10-21",
-      "to_date"=>"2015-11-21",
-      "capacity" => "3",
-      "description" => "Web Development Intensive Bootcamp"
-      }
-    previous_trip_count = Trip.all.count
-
-    @trip = Trip.create_new_trip(trip_params, organizer_id)
-    @trip.save
-
-    expect(Activity.last.activity_name).to eq(@new_activity.activity_name)
-    expect(Trip.all.count).to eq(previous_trip_count+1)
-  end
-
-  it "but doesn't create the activity because of case difference" do
-    organizer_id = @test_user.id
-    @new_activity = Activity.create activity_name: "ironhack", category: "Geek"
-    trip_params = {
-      "place" => @place.city,
-      "activity" => "",
-      "activity_create" => @new_activity.activity_name,
-      "from_date"=>"2015-10-21",
-      "to_date"=>"2015-11-21",
-      "capacity" => "3",
-      "description" => "Web Development Intensive Bootcamp"
-      }
-
-    previous_trip_count = Trip.all.count
-
-    @trip = Trip.create_new_trip(trip_params, organizer_id)
-    @trip.save
-
-    expect(Place.last.city).to eq(@place.city)
-    expect(Trip.all.count).to eq(previous_trip_count+1)
-  end
-
-  it "and an activity when activity is not existing" do
-    organizer_id = @test_user.id
-    @new_activity = Activity.create activity_name: "Writing code", category: "Geek"
-    trip_params = {
-    	"place" => @place.city,
-      "activity" => "",
-    	"activity_create" => @new_activity.activity_name,
-			"from_date"=>"2015-10-21",
-      "to_date"=>"2015-11-21",
-    	"capacity" => "3",
-    	"description" => "Web Development Intensive Bootcamp"
-    	}
-    previous_trip_count = Trip.all.count
-
-  	@trip = Trip.create_new_trip(trip_params, organizer_id)
-  	@trip.save
-
-    expect(Activity.last.activity_name).to eq(@new_activity.activity_name)
-    expect(Trip.all.count).to eq(previous_trip_count+1)
-  end
-
-  it "but doesn't create the activity because of case difference" do
-    organizer_id = @test_user.id
-    @new_activity = Activity.create activity_name: "ironhack", category: "Geek"
-    trip_params = {
-      "place" => @place.city,
-      "activity" => "",
-      "activity_create" => @new_activity.activity_name,
-      "from_date"=>"2015-10-21",
-      "to_date"=>"2015-11-21",
-      "capacity" => "3",
-      "description" => "Web Development Intensive Bootcamp"
-      }
-
-    previous_trip_count = Trip.all.count
-
-    @trip = Trip.create_new_trip(trip_params, organizer_id)
-    @trip.save
-
-    expect(Activity.last.activity_name).to eq(@activity.activity_name)
-    expect(Trip.all.count).to eq(previous_trip_count+1)
-  end
-
-  it "place and an activity when both place and activity is not existing" do
-    organizer_id = @test_user.id
-    @new_place = Place.create city: "Madrid", country: "Spain"
-    @new_activity = Activity.create activity_name: "Writing code", category: "Geek"
-    trip_params = {
-    	"place" => @new_place.city,
-      "activity" => "",
-    	"activity_create" => @new_activity.activity_name,
-			"from_date"=>"2015-10-21",
-      "to_date"=>"2015-11-21",
-    	"capacity" => "3",
-    	"description" => "Web Development Intensive Bootcamp"
-    	}
-
-    previous_trip_count = Trip.all.count
-
-  	@trip = Trip.create_new_trip(trip_params, organizer_id)
-  	@trip.save
-
-    expect(Activity.last.activity_name).to eq(@new_activity.activity_name)
-    expect(Place.last.city).to eq(@new_place.city)
-    expect(Trip.all.count).to eq(previous_trip_count+1)
-  end
-
-	it "and not create any place or activity since both options exist already" do
-    organizer_id = @test_user.id
-    trip_params = {
-    	"place" => @place.city,
-      "activity" => @activity.activity_name,
-    	"activity_create" => "",
-			"from_date"=>"2015-10-21",
-      "to_date"=>"2015-11-21",
-    	"capacity" => "3",
-    	"description" => "Web Development Intensive Bootcamp"
-    	}
-
-    previous_trip_count = Trip.all.count
-
-  	@trip = Trip.create_new_trip(trip_params, organizer_id)
-  	@trip.save
-
-  	expect(Activity.last.activity_name).to eq(@activity.activity_name)
-    expect(Place.last.city).to eq(@place.city)
-    expect(Trip.all.count).to eq(previous_trip_count+1)
-  end
-
-  it "and automatically generates a trip name" do
-    organizer_id = @test_user.id
-    trip_params = {
-      "place" => @place.city,
-      "activity" => @activity.activity_name,
-      "activity_create" => "",
-      "from_date"=>"2015-10-21",
-      "to_date"=>"2015-11-21",
-      "capacity" => "3",
-      "description" => "Web Development Intensive Bootcamp"
-      }
-
-    @trip = Trip.create_new_trip(trip_params, organizer_id)
-    @trip.save
-
-    expect(@trip.name).to eq("Ironhack in Barcelona")
-  end
-end
-
-  describe "display trip details" do
+  describe "Display trip details" do
 
     before :each do
       @organizer = @test_user
@@ -331,45 +332,45 @@ end
       expect(@review_members.size).to eq(3)
     end
 
-  it "but doesn't allow the organizer to manually join own trip" do
-      trip_params = {
-        "place" => @place.city,
-        "activity" => @activity.activity_name,
-        "activity_create" => "",
-        "from_date"=>"2014-08-28",
-        "to_date"=>"2014-08-29",
-        "capacity" => "5",
-        "description" => "Web Development Intensive Bootcamp"
-        }
+    it "but doesn't allow the organizer to manually join own trip" do
+        trip_params = {
+          "place" => @place.city,
+          "activity" => @activity.activity_name,
+          "activity_create" => "",
+          "from_date"=>"2014-08-28",
+          "to_date"=>"2014-08-29",
+          "capacity" => "5",
+          "description" => "Web Development Intensive Bootcamp"
+          }
 
-      @trip = Trip.create_new_trip(trip_params, @organizer.id)
-      @trip.save
-      @trip.create_participation @organizer
+        @trip = Trip.create_new_trip(trip_params, @organizer.id)
+        @trip.save
+        @trip.create_participation @organizer
 
-      @can_join = @trip.joinable? @organizer
-      expect(@can_join).to be_falsy
+        @can_join = @trip.joinable? @organizer
+        expect(@can_join).to be_falsy
+    end
+
+    it "and doesn't allow people to join if trip is full" do
+        trip_params = {
+          "place" => @place.city,
+          "activity" => @activity.activity_name,
+          "activity_create" => "",
+          "from_date"=>"2014-08-28",
+          "to_date"=>"2014-08-29",
+          "capacity" => "2",
+          "description" => "Web Development Intensive Bootcamp"
+          }
+
+        @trip = Trip.create_new_trip(trip_params, @p_user.id)
+        @trip.save
+        @trip.create_participation @p_user
+
+        confirmed = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
+
+        @can_join = @trip.joinable? @test_user
+        expect(@can_join).to be_falsy
+    end
   end
-
-  it "and doesn't allow people to join if trip is full" do
-      trip_params = {
-        "place" => @place.city,
-        "activity" => @activity.activity_name,
-        "activity_create" => "",
-        "from_date"=>"2014-08-28",
-        "to_date"=>"2014-08-29",
-        "capacity" => "2",
-        "description" => "Web Development Intensive Bootcamp"
-        }
-
-      @trip = Trip.create_new_trip(trip_params, @p_user.id)
-      @trip.save
-      @trip.create_participation @p_user
-
-      confirmed = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
-
-      @can_join = @trip.joinable? @test_user
-      expect(@can_join).to be_falsy
-  end
-end
 
 end

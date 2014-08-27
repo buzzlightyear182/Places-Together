@@ -1,0 +1,33 @@
+<div class="trip_form">
+<%= form_for @trip do |f| %>
+  <%= f.label "Where do you want to go?" %>
+  <%= f.text_field :place, :value => (@trip.place == nil ? params[:place] : @trip.place.city) %>
+
+<%= f.label :activity, "Where do you want to go?" %>
+  <ul class='activity_list'>
+    <% @activities.each do |a| %>
+    <li>
+      <% selected = (@trip.activity == a ? true : false) %>
+      <%= f.radio_button :activity,  a.activity_name, :selected => selected %><%= f.label :activity, a.activity_name %>
+      <%= image_tag("#{a.activity_name.downcase}.png") %>
+      <% end %>
+    </li>
+  </ul>
+  <%= "Or create your own:"%>
+  <%= f.text_field :activity_create, :value => (@trip.activity == nil ? params[:activity_create] : @trip.activity.activity_name)  %>
+
+  <%= f.label "From when?" %>
+  <%= f.date_field :from_date %>
+
+  <%= f.label "Until when?" %>
+  <%= f.date_field :to_date %> <br/>
+
+  <%= f.label "How many people do you need?" %>
+  <%= f.text_field :capacity %>
+
+  <%= f.label "Write something about your trip" %>
+  <%= f.text_area :description %>
+
+  <%= f.submit "Save" %>
+<% end %>
+</div>

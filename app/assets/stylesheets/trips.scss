@@ -1,0 +1,73 @@
+// Place all the styles related to the trips controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+// <script src='lib/jquery.min.js'></script>
+// <script src='lib/moment.min.js'></script>
+// <script src='fullcalendar/fullcalendar.js'></script>
+.trip_form {
+  @include span-columns(6 of 9);
+}
+
+.trip_card {
+  @include span-columns(6);
+  border: 2px solid $blue;
+  margin: 4px;
+}
+
+.trip_text {
+  background-color: $blue;
+}
+
+.trip_image {
+  margin-bottom: 0px;
+  z-index: 9999;
+}
+
+.trip_title {
+  color: $blue;
+  background-color: white;
+  padding: 5px 0px;
+  width: 100%;
+  text-align: center;
+  margin-top: 0px;
+  font-weight: bold;
+  font-family: $accent-font-family;
+  font-size: $base-font-size * 2;
+}
+
+.trip_info {
+  color: white;
+  margin-bottom: 0px;
+  border-collapse: collapse;
+  border-spacing: 0px;
+  padding-left: 0px;
+  font-family: $accent-font-family;
+}
+
+.trip_info td {
+  padding-left: 10px;
+}
+
+.trip_info th {
+  padding-left: 10px;
+}
+
+.spec_bar li {
+  display: inline;
+  @include span-columns(4);
+  text-align: center;
+  padding: 15px 0;
+  font-family: $accent-font-family;
+  font-size: $base-font-size * 1.25;
+}
+
+.spec_bar a{
+  color: $green;
+  padding: 15px 50px;
+}
+
+.spec_bar a:hover {
+  background-color: $green;
+  color: white;
+}

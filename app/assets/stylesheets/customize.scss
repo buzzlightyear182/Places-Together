@@ -1,0 +1,113 @@
+body {
+  @include outer-container;
+  margin-top: 0px;
+}
+
+table {
+  border: none;
+}
+
+button a {
+  color: white;
+}
+
+.header_wrapper {
+  background-color: $red;
+  color: white;
+  padding: 10px;
+  margin: 0px;
+  text-align: right;
+  @include clearfix;
+  @include outer-container;
+  position: relative;
+  z-index: 9999;
+  $horizontal-bar-mode: $large-screen;
+
+  .logo {
+    float: left;
+    max-height: $navigation-height;
+    // padding-left: $navigation-padding;
+    // padding-right: 2em;
+
+    img {
+      max-height: $navigation-height;
+      // padding: .8em 0;
+    }
+  }
+}
+
+.user_signin {
+  vertical-align: middle;
+  margin-top: 15px;
+}
+
+.user_signin a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-family: $accent-font-family;
+  margin: 0px 5px;
+  // border-radius: 10px;
+}
+
+.user_signin a:hover{
+  color: $red;
+  background-color: white;
+}
+
+.main_container {
+  @include clearfix;
+  @include outer-container;
+}
+
+#sidemenu {
+  @include span-columns(3 of 12);
+  display: inline;
+  float: left;
+}
+
+.body_container {
+  float: right;
+  display: inline;
+  @include span-columns(9 of 12);
+}
+
+.js-accordion-trigger {
+  background-color: white;
+  color: $blue;
+  @include span-columns(3 of 3);
+  padding: 15px 15px;
+  border-bottom: 1px solid $blue;
+  font-family: $accent-font-family;
+  font-size: $base-font-size * 1.25;
+}
+
+.js-accordion-trigger:hover {
+  background-color: $blue;
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.submenu a {
+  @include span-columns(3 of 3);
+  padding: 15px 30px;
+}
+
+.submenu a:hover {
+  background-color: $blue;
+  color: white;
+}
+
+.search-and-submit {
+  padding-left: 30px;
+}
+
+.search-and-submit button{
+  text-align: right;
+}
+
+.search_label{
+  padding-top: 10px;
+  color: $medium-gray;
+  margin-top: 5px;
+}

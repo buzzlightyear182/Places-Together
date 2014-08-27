@@ -21,6 +21,7 @@ require 'rspec/rails'
 
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'database_cleaner'
 
 RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
@@ -86,18 +87,22 @@ RSpec.configure do |config|
   end
 =end
 
-# config.before(:suite) do
-#   DatabaseCleaner[:active_record].strategy = :transaction
-#   DatabaseCleaner.clean_with(:truncation)
-# end
+  config.before(:suite) do
+    DatabaseCleaner[:active_record].strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
-# config.before(:each) do
-#   DatabaseCleaner.start
-# end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
 
-# config.after(:each) do
-#   DatabaseCleaner.clean
-# end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
+  config.after(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
 end
 
 def unsaved_test_trip
@@ -111,6 +116,5 @@ end
 def test_trip
   t = unsaved_test_trip
   t.save!
-
   t
 end

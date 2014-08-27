@@ -1,27 +1,3 @@
-<%= form_for @trip do |f| %>
-  <%= f.label "Where do you want to go?" %>
-  <%= f.text_field :place, :value => @trip.place.city %>
+<h1><%= @trip.name %></h1>
 
-  <%= f.label "What do you want to do?" %>
-  <% @activities.each do |a| %>
-    <%= f.radio_button :activity, a.activity_name %>
-    <%= a.activity_name %>
-    <% end %>
-    <%= f.radio_button :activity, "" %>
-    <%= "Or create your own:"%>
-    <%= f.text_field :activity_create, :value => @trip.activity.activity_name  %>
-
-  <%= f.label "From when?" %>
-  <%= f.date_field :from_date %>
-
-  <%= f.label "Until when?" %>
-  <%= f.date_field :to_date %>
-
-  <%= f.label "How many people do you need?" %>
-  <%= f.text_field :capacity %>
-
-  <%= f.label "Write something about your trip" %>
-  <%= f.text_area :description %>
-
-  <%= f.submit "Save" %>
-<% end %>
+<%= render '/shared/formtrips' %>

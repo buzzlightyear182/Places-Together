@@ -1,43 +1,44 @@
-# require 'rails_helper'
+require 'rails_helper'
 
 RSpec.describe Trip, :type => :model do
 
-	describe "should be valid when" do
+  before :each do
+    @test_user = FactoryGirl.build(:user)
+    @place = FactoryGirl.build(:place)
+    @activity = FactoryGirl.build(:activity)
+  end
 
-	before(:each)do
-		@test_user = User.create(username: "username01", password: "12345678", email: "test_user@gmail.com")
-		@place = Place.create(city: "Barcelona", country: "Spain")
-		@activity = Activity.create(activity_name: "Ironhack", category: "Studies")
-	end
+	describe "should not be valid when it" do
 
-	it "it has_one place" do
-		trip = Trip.create organizer: @test_user.id, place_id: nil, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
-		expect(trip.errors.full_messages).to eq(["Place can't be blank"])
-	end
+  	it "does not have any place" do
+      trip = FactoryGirl.build(:trip, place: nil)
+  		expect(trip).to be_invalid
+  	end
 
-	it "it has_one activity" do
-		trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: nil, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
-		expect(trip.errors.full_messages).to eq(["Activity can't be blank"])
-	end
+  	it "does not have any activity" do
+  		trip = FactoryGirl.build(:trip, activity: nil)
+  		expect(trip).to be_invalid
+  	end
 
-	it "it belongs_to an organizer" do
-		trip = Trip.create organizer: nil, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
-		expect(trip.errors.full_messages).to eq(["Organizer can't be blank"])
-	end
+  	it "there is no organizer" do
+  		trip = FactoryGirl.build(:trip, organizer: nil)
+      expect(trip).to be_invalid
+  	end
 
-	it "from_date is not in the future" do
-		trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today-2, to_date: Date.today+3, capacity: 3, description: "Web Development Intensive Bootcamp"
-		expect(trip.errors.full_messages).to eq(["From date should be in the future"])
-	end
+  	it "from_date is not in the future" do
+      trip = FactoryGirl.build(:trip, from_date: Date.today-2)
+  		expect(trip).to be_invalid
+  	end
 
-	it "to_date should be before from_date" do
-		trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today-5, capacity: 3, description: "Web Development Intensive Bootcamp"
-		expect(trip.errors.full_messages).to eq(["To date should be after its beginning"])
-	end
+  	it "to_date should be before from_date" do
+      trip = FactoryGirl.build(:trip, to_date: Date.today-5)
+  		expect(trip).to be_invalid
+  	end
 
-	it "capacity should be greater than 0" do
-		trip = Trip.create organizer: @test_user.id, place_id: @place.id, activity_id: @activity.id, from_date: Date.today+1, to_date: Date.today+5, capacity: 0, description: "Web Development Intensive Bootcamp"
-		expect(trip.errors.full_messages).to eq(["Capacity must be greater than or equal to 1",])
-	end
-end
+  	it "capacity should be greater than 0" do
+      trip = FactoryGirl.build(:trip, capacity: 0)
+      expect(trip).to be_invalid
+  	end
+  end
+
 end
