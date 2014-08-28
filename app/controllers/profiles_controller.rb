@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
 
-    before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show]
 
   def show
     @search = Search.new
@@ -33,7 +33,7 @@ class ProfilesController < ApplicationController
 private
 
   def profile_params
-    params.require(:profile).permit(:first_name, :surname, :hometown, :birthday, :occupation, :languages, :facebook, :twitter, :instagram, :google, :blog)
+    params.require(:profile).permit(:first_name, :surname, :hometown, :birthday, :occupation, :file, :languages, :facebook, :twitter, :instagram, :google, :blog)
   end
 
 end

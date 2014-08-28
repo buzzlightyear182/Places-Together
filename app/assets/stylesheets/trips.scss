@@ -79,18 +79,18 @@
 }
 
 //TRIP FORMS NEW and EDIT
-.trip_form input,textarea{
+.trip_form input[type='text'], input[type='date'],textarea{
   border: 1px solid $yellow;
   background-color: white;
   box-shadow: none;
 }
 
-.trip_form input:hover, textarea:hover{
+.trip_form input[type='text']:hover, input[type='date']:hover, textarea:hover {
   border: 1px solid $green;
   box-shadow: none;
 }
 
-.trip_form input:focus, textarea:focus{
+.trip_form input[type='text']:focus, input[type='date']:focus, textarea:focus{
   border: 2px solid $green;
   box-shadow: none;
   color: $green;
@@ -105,39 +105,55 @@
   @include span-columns(12);
 }
 
-.activity_list li {
+.trip_form_place input[type='file'] {
+  border: 0px;
+}
+
+#activity_list li {
   display: inline-block;
   height: 100px;
   @include span-columns(2 of 12);
 }
 
-.activity_list input{
+#activity_list input{
   display: inline;
   position: relative;
   margin: 0px;
   padding: 0px;
 }
 
-.activity_list input:indeterminate{
+#activity_list input:indeterminate{
   text-shadow: none;
   box-shadow: none;
 }
 
-.activity_list input[type="radio"]:checked+label{
-  font-weight: bold;
-  color: $green;
-  text-shadow: none;
-  box-shadow: none;
+#activity_list input[type="radio"]{
+  display: none;
 }
 
-.activity_list label {
+#activity_list label {
   display: inline;
   position: relative;
   margin: 0px;
   padding: 0px 5px;
+  text-align: center;
 }
 
-.activity_list img {
+#activity_list label:hover{
+  font-weight: bold;
+  color: $blue;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+#activity_list input[type="radio"]:checked+label{
+  font-weight: bold;
+  color: $blue;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+#activity_list img {
   display: block;
 }
 

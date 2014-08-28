@@ -5,4 +5,8 @@ class ActivitiesController < ApplicationController
     @search = Search.new
   end
 
+  def filter
+    @activities = Activity.where(category: params[:category])
+  end
+
 end
