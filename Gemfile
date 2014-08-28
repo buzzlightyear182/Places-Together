@@ -62,8 +62,6 @@ gem 'devise'
 
 gem 'simple_form'
 
-# gem 'postmark-rails'
-
 gem 'bourbon'
 
 gem 'neat', '~> 1.6.0'
@@ -79,3 +77,5 @@ gem 'fullcalendar-rails'
 gem "autoprefixer-rails"
 
 gem 'database_cleaner'
+
+gem 'carrierwave'
