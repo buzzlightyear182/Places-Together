@@ -72,7 +72,6 @@ button a {
   padding: 10px;
   font-family: $accent-font-family;
   margin: 0px 5px;
-  // border-radius: 10px;
 }
 
 .user_signin a:hover{
@@ -116,6 +115,7 @@ button a {
 .submenu a {
   @include span-columns(3 of 3);
   padding: 15px 30px;
+  color: $blue;
 }
 
 .submenu a:hover {

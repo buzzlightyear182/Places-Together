@@ -1,19 +1,18 @@
-Welcome! This is the Activities index page
-
-<p>What do you want to do?</p>
-
-<ul>
-<% @activities.each do |activity| %>
-<li><%= link_to activity.activity_name, activity_trips_path(activity.id) %></li>
-<% end %>
+<ul class="spec_bar">
+  <li class='current_spec'>ACTIVITIES</li>
+  <li><%=link_to "Create a new trip", new_trip_path%></li>
+  <li><%=link_to "See other places", places_path %></li>
 </ul>
 
-<button><%=link_to "Create a new trip", new_trip_path%></button>
-
-
-<% if user_signed_in? && current_user %>
-  <button>
-  <%= link_to "Edit my profile", edit_profile_path(id: current_user.id) %>
-  </button>
-<% end %>
-
+<h1>What do you want to do?</h1>
+<p>Click on the activities to see all the trips!</p>
+<ul class='index_list'>
+  <% @activities.each do |activity| %>
+  <li class='index_item'>
+    <%= link_to image_tag("#{activity.activity_name}.png"), activity_trips_path(activity.id) %>
+    <label class='index_item_label'>
+    <%= link_to activity.activity_name, activity_trips_path(activity.id) %>
+    </label>
+    </li>
+  <% end %>
+</ul>

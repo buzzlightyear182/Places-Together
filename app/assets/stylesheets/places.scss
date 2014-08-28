@@ -1,3 +1,40 @@
-// Place all the styles related to the places controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.index_list {
+  @include span-columns(12 of 12);
+}
+
+.index_list li {
+  display: inline;
+  @include span-columns (2 of 12);
+  text-align: center;
+  vertical-align: baseline;
+  height: 120px;
+  @include transition(all 0.1s linear);
+  color: $base-link-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $hover-link-color;
+  }
+
+  &:active, &:focus {
+    color: $hover-link-color;
+    outline: none;
+  }
+}
+
+.index_list label{
+  vertical-align: bottom;
+  padding: 3px 10px;
+  display: block;
+}
+
+.current_spec{
+  color: $green;
+  border-bottom: 2px solid $green;
+  padding: 14px 40px;
+  margin-bottom: 5px;
+}
+
+.calendar_button a {
+  padding: 15px 60px;
+}

@@ -51,18 +51,26 @@
   padding-left: 10px;
 }
 
+.spec_bar {
+  @include span-columns(12 of 12);
+}
+
 .spec_bar li {
   display: inline;
   @include span-columns(4);
   text-align: center;
-  padding: 15px 0;
+  padding: 15px 0px;
   font-family: $accent-font-family;
   font-size: $base-font-size * 1.25;
 }
 
 .spec_bar a{
   color: $green;
-  padding: 15px 50px;
+  padding: 20px 60px;
+}
+
+.spec_smaller a {
+  padding: 20px 40px
 }
 
 .spec_bar a:hover {
@@ -74,6 +82,11 @@
 .trip_form input,textarea{
   border: 1px solid $yellow;
   background-color: white;
+  box-shadow: none;
+}
+
+.trip_form input:hover, textarea:hover{
+  border: 1px solid $green;
   box-shadow: none;
 }
 
@@ -126,9 +139,7 @@
 
 .activity_list img {
   display: block;
-  // text-align: center;
 }
-
 
 .addtl_activity {
   @include span-columns(12 of 12);

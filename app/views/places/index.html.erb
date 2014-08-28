@@ -1,9 +1,18 @@
-<h1>Where are you planning to go?</h1>
-
-<ul>
-  <% @places.each do |place| %>
-  <li><%= link_to place.city, place_trips_path(place.id) %></li>
-  <% end %>
+<ul class="spec_bar">
+  <li class='current_spec'>CITIES</li>
+  <li><%=link_to "Create a new trip", new_trip_path%></li>
+  <li class='spec_smaller'><%=link_to "See other activities", activities_path %></li>
 </ul>
 
-<button><%=link_to "Create a new trip", new_trip_path%></button>
+<h1>Where are you planning to go?</h1>
+<p>Click on the places to see all the trips!</p>
+<ul class='index_list'>
+  <% @places.each do |place| %>
+  <li class='index_item'>
+    <%= link_to image_tag("#{place.city}.png"), place_trips_path(place.id) %>
+    <label class='index_item_label'>
+      <%= link_to place.city, place_trips_path(place.id) %>
+    </label>
+  </li>
+  <% end %>
+</ul>
