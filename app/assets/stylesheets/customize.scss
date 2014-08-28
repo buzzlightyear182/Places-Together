@@ -11,6 +11,20 @@ button a {
   color: white;
 }
 
+.main {
+  background-color: $yellow;
+  text-align: center;
+  color: white;
+}
+
+.main img{
+  margin: 40px 190px 10px 190px;
+}
+
+.main h1{
+  padding-bottom: 40px;
+}
+
 .ribbon-wrapper {
   $ribbon-size: 85px;
   $ribbon-background: $base-accent-color;
