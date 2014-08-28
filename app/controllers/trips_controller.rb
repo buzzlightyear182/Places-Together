@@ -35,7 +35,8 @@ class TripsController < ApplicationController
 	def new
 		@search = Search.new
 		@trip = Trip.new
-		@activities = Activity.all.limit(10)
+		@activities = Activity.all
+		@categories = Activity.categories
 	end
 
 	def create

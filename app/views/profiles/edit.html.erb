@@ -5,6 +5,9 @@
       <%= f.label :first_name %><%= f.text_field :first_name %>
       <%= f.label :surname %> <%= f.text_field :surname %>
 
+      <%= f.label :file, "Profile photo" %>
+      <%= f.file_field :file, :class =>'img_upload'%>
+
       <%= f.label "Where do you live?" %>
       <%= f.text_field :hometown %>
 
@@ -12,7 +15,7 @@
       <%= f.date_field :birthday %>
 
       <%= f.label "What do you do?" %>
-     <%= f.text_field :occupation %>
+      <%= f.text_field :occupation %>
 
       <%= f.label "What do you speak?" %>
       <%= f.text_field :languages, value: @profile.languages.join(',') %>

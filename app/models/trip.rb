@@ -10,7 +10,7 @@ class Trip < ActiveRecord::Base
 	validates :from_date, presence: true
 	validates :to_date, presence: true
 	validates :description, presence: true
-	validates :capacity, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+	validates :capacity, numericality: { only_integer: true, greater_than_or_equal_to: 1 }, allow_blank: true
 
 	validate :from_date_is_in_future
 	validate :from_date_before_to_date
@@ -46,6 +46,8 @@ class Trip < ActiveRecord::Base
 	end
 
 	def joinable? current_user
+		return true if capacity.nil?
+
 		get_count_of_people
 		current_trip_size = @count[:confirmed_people]
 		if (if_participant? current_user) || (capacity == current_trip_size)
@@ -63,8 +65,8 @@ class Trip < ActiveRecord::Base
 	end
 
 	def has_passed
-		# to_date <= Date.today + 1
-		Date.today <= Date.today+1
+		to_date < Date.today
+		# Date.today <= Date.today+1
 	end
 
 	def if_participant? current_user
@@ -133,7 +135,7 @@ class Trip < ActiveRecord::Base
 		if current_activity.exists?
 			current_activity[0].id
 		else
-			new_activity = Activity.create(activity_name: activity)
+			new_activity = Activity.create(activity_name: activity, category: "Others")
 			new_activity.id
 		end
 	end

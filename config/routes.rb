@@ -35,6 +35,9 @@ get 'confirm_joiner/:id' => 'participations#add_joiner'
 
 get 'my_trips' => 'home#my_trips'
 get 'my_pending_trips' => 'home#my_pending_trips'
+
+get 'filter_activities/:category' => 'activities#filter'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
