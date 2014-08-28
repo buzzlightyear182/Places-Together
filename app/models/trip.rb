@@ -64,7 +64,7 @@ class Trip < ActiveRecord::Base
 
 	def has_passed
 		# to_date <= Date.today + 1
-		Date.today-1 <= Date.today+1
+		Date.today <= Date.today+1
 	end
 
 	def if_participant? current_user

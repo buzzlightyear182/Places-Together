@@ -1,29 +1,37 @@
 <h1>Edit your profile </h1>
-
 <%= form_for @profile do |f| %>
-  <%= f.label "What's your name?" %>
-  First name: <%= f.text_field :first_name %>
-  Last name: <%= f.text_field :surname %>
+  <div class="trip_form">
+    <div class='profile_form_more'>
+      <%= f.label :first_name %><%= f.text_field :first_name %>
+      <%= f.label :surname %> <%= f.text_field :surname %>
 
-  <%= f.label "Where do you live?" %>
-  <%= f.text_field :hometown %>
+      <%= f.label "Where do you live?" %>
+      <%= f.text_field :hometown %>
 
-  <%= f.label "When is your birthday?" %>
-  <%= f.date_field :birthday %>
+      <%= f.label "When is your birthday?" %>
+      <%= f.date_field :birthday %>
 
-  <%= f.label "What do you do?" %>
-  <%= f.text_field :occupation %>
+      <%= f.label "What do you do?" %>
+     <%= f.text_field :occupation %>
 
-  <%= f.label "What do you speak?" %>
-  <%= f.text_field :languages, value: @profile.languages.join(',') %>
-
-  <h3>Share your links:</h3>
-  <%= f.label "Facebook" %><%= f.text_field :facebook %>
-  <%= f.label "Twitter" %><%= f.text_field :twitter %>
-  <%= f.label "Instagram" %><%= f.text_field :instagram %>
-  <%= f.label "Google+" %><%= f.text_field :google %>
-  <%= f.label "Blog" %><%= f.text_field :blog %>
-  <%= f.label "Others" %><%= f.text_field :others %>
-
-  <%= f.submit "Save" %>
+      <%= f.label "What do you speak?" %>
+      <%= f.text_field :languages, value: @profile.languages.join(',') %>
+    </div>
+    <div class='profile_links'>
+      <h3>Share your links:</h3>
+      <div class='link_item'>
+        <%= image_tag("facebook.png") %><%= f.text_field :facebook %></div>
+      <div class='link_item'>
+        <%= image_tag("twitter.png") %><%= f.text_field :twitter %></div>
+      <div class="link_item">
+        <%= image_tag("instagram.png") %><%= f.text_field :instagram %></div>
+      <div class="link_item">
+        <%= image_tag("google.png") %><%= f.text_field :google %></div>
+      <div class="link_item">
+        <%= image_tag("blog.png") %><%= f.text_field :blog %></div>
+      <div class="link_item">
+        <%= f.label :others, :class => 'others_link' %><%= f.text_field :others %></div>
+    </div>
+  </div>
+  <%= f.submit "Save", :class => 'form_submit' %>
 <% end %>
