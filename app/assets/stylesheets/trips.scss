@@ -105,28 +105,8 @@
   @include span-columns(12);
 }
 
-.trip_form_activity p {
-  display: inline;
-  @include span-columns(6);
-  margin-left: 20px;
-  font-style: italic;
-}
-
 .trip_form_place input[type='file'] {
   border: 0px;
-}
-
-#category {
-  background-color: white;
-  border: 1px solid $yellow;
-  margin-bottom: 10px;
-  font-size: 1.2em;
-}
-
-#category:focus {
-  border-style: none;
-  box-shadow:0px;
-  text-shadow: 0px;
 }
 
 #activity_list li {

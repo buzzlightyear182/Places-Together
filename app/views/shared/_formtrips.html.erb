@@ -6,17 +6,13 @@
     </div>
     <div class='trip_form_activity'>
       <label>What do you want to do?</label>
-      <p>Select a category and click on the activity that you want</p>
-
-      <%= select_tag(:category, options_for_select(@categories)) %>
-
       <ul id='activity_list'>
         <% @activities.each do |a| %>
         <li>
           <%= f.radio_button :activity, a.activity_name %>
-          <%= f.label :activity, a.activity_name %>
-          <%= image_tag("#{a.activity_name}.png",:id => "listed #{a.activity_name}") %>
-
+          <label for='trip_activity_#{a.activity_name}'><%= a.activity_name %>
+            <%= image_tag("#{a.activity_name}.png",:id => "listed #{a.activity_name}") %>
+            </label>
           </li>
         <% end %>
       </ul>
