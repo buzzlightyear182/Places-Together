@@ -64,10 +64,6 @@ $(document).ready(function () {
       $('#side-event').addClass('sr-only').removeClass('sidebar-left-active');
   };
 
-  $(document).ajaxComplete(function() {
-  });
-
-
   $('#category').change(function(event){
     resetList();
     getActivities(event.target.value);

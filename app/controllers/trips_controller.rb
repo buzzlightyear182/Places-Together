@@ -37,6 +37,8 @@ class TripsController < ApplicationController
 		@trip = Trip.new
 		@activities = Activity.all
 		@categories = Activity.categories
+		@categories << "All"
+		@categories.sort!
 	end
 
 	def create
