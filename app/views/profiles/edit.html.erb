@@ -5,8 +5,9 @@
       <%= f.label :first_name %><%= f.text_field :first_name %>
       <%= f.label :surname %> <%= f.text_field :surname %>
 
-      <%= f.label :avatar, "Profile photo" %>
-      <%= f.file_field :avatar, :class =>'img_upload'%>
+      <%= f.label "Profile photo" %>
+      <input type="file" accept="image/jpg,image/gif">
+      <!-- <%= f.file_field :avatar, :class =>'img_upload'%> -->
 
       <%= f.label "Where do you live?" %>
       <%= f.text_field :hometown %>
