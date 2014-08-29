@@ -1,42 +1,51 @@
-<h1><%= @trip.name %></h1>
-
-Organized by: <%= link_to User.find(@trip.organizer).username, profile_path(:id => Profile.where(user_id: @trip.organizer).first.user_id) %><br/>
-From Date: <%= @trip.from_date %><br/>
-To Date: <%= @trip.to_date %><br/>
-Capacity: <%= @trip.capacity %><br/>
-
-Status: <br/>
-<% count = @trip.get_count_of_people %>
-Pending: <%= count[:pending_people] %></br>
-Confirmed: <%= count[:confirmed_people] %><br/>
-
-<% review_members = @trip.reviewable? current_user %>
-<% if review_members.length >= 2 %>
-Review your tripmates:<br/>
-  <% review_members.each do |profile| %>
-    <% if profile != current_user.id %>
-      <%=link_to User.find(profile).username, new_profile_review_path(:profile_id => Profile.where(user_id: profile).first) %><br/>
-     <% end %>
+<ul class="spec_bar">
+  <li class='calendar_button'>
+    <% if @trip.joinable? current_user %>
+      <%=link_to "Join this trip", trip_participations_path(:trip_id => @trip.id), method: 'post' %>
+      <% else %>
+        <span class='fulltrip'>FULL TRIP</span><% flash[:notice] = "Sorry this trip is full!" %>
+      <% end %>
+  </li>
+  <% if @trip.organizer == current_user.id %>
+  <li>
+    <%=link_to "Edit this trip", edit_trip_path(@trip.id) %>
+  </li>
+  <li><%=link_to "Cancel this trip", trip_path(@trip.id), method: 'delete', confirm: 'Are you sure?' %>
+  </li>
+  <% else %>
+    <li id='colspan2'><%=link_to "See other trips in the same place", place_trips_path(@trip.place_id) %></li>
   <% end %>
-<% end %>
+</ul>
 
-<% if @trip.joinable? current_user %>
-<button>
-	<%=link_to "Join this trip", trip_participations_path(:trip_id => @trip.id), method: 'post' %>
-</button>
-<% else %>
-  <% flash[:notice] = "Sorry this trip is full!" %>
-<% end %>
+<div class='trip_display'>
+  <h1><span class='trip_name'><%= @trip.name %></span></h1>
 
-<% if @trip.organizer == current_user.id %>
-<button>
-  <%=link_to "Edit this trip", edit_trip_path(@trip.id) %>
-</button>
-<button>
-  <%=link_to "Cancel this trip", trip_path(@trip.id), method: 'delete', confirm: 'Are you sure?' %>
-</button>
-<% end %>
+<div class='trip_info_on_show'>
+<div><span class="trip_text_on_show ">Organized by:</span> <h4><%= link_to User.find(@trip.organizer).username, profile_path(:id => Profile.where(user_id: @trip.organizer).first.user_id) %></h4></<div>
+<div><span class="trip_text_on_show  block_it">From Date:</span> <h4><%= @trip.from_date %></h4></div>
+<div><span class="trip_text_on_show  block_it">To Date:</span> <h4><%= @trip.to_date %></h4><br></div>
+<div><span class="trip_text_on_show  block_it">Capacity: </span><h4><%= @trip.capacity %></h4></div>
+<div><p><span class="
+.trip_text_on_show "><%= @trip.description %></span></p></div>
+</div>
 
-<button>
-	<%=link_to "See other trips in the same place", place_trips_path(@trip.place_id) %>
-</button>
+<div class='trip_status'>
+  <span class="trip_text_on_show"><h2>Status</h2></span>
+  <% count = @trip.get_count_of_people %>
+  <div><span class="trip_text_on_show">Pending:</span><h4><%= count[:pending_people] %></h4></div>
+  <div><span class="trip_text_on_show">Confirmed:</span><h4><%= count[:confirmed_people] %></h4></div>
+</div>
+
+<div class='reviewables'>
+  <% review_members = @trip.reviewable? current_user %>
+  <% if review_members.length >= 2 %>
+  <span class="trip_text_on_show"><h2>Review your tripmates:</h2></span>
+    <% review_members.each do |profile| %>
+      <% if profile != current_user.id %>
+        <ul>
+        <li><%=link_to User.find(profile).username, new_profile_review_path(:profile_id => Profile.where(user_id: profile).first) %></li>
+        </ul>
+       <% end %>
+    <% end %>
+  <% end %>
+</div>

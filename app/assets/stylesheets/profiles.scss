@@ -35,3 +35,122 @@ display: inline;
   @include span-columns(1 of 14);
   display: inline;
 }
+
+.profile_photo{
+  border-radius: 100px;
+  margin: auto;
+  margin-bottom: 20px;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border: 2px solid $yellow;
+}
+
+.profile_photo img{
+  width: 100%;
+}
+
+.profile_display h4 {
+  color: $green;
+  display: inline;
+  padding: 0 4px;
+}
+
+.profile_info {
+  margin: auto;
+  @include span-columns(8 of 12);
+}
+
+.profile_info div {
+  padding: 5px;
+}
+
+.profile_text {
+  font-size: 1.2em;
+  font-family: $accent-font-family;
+  display: inline-block;
+}
+
+.profile_links img{
+  margin: auto;
+  padding: 0px 5px;
+}
+
+.profile_rating {
+  @include span-columns(4 of 12);
+  margin-top: 20px;
+}
+
+.profile_rating p {
+  display: inline-block;
+  font-family: $accent-font-family;
+  font-size: 1.4em;
+  background-color: $red;
+  color: white;
+  padding: 10px 10px;
+  margin-left: 10px;
+}
+
+.profile_boxes{
+  @include span-columns(7 of 12);
+  h4 {
+    margin-bottom: 10px;
+  }
+}
+
+.profile_username {
+  color: $yellow;
+}
+
+.previous_trips_done {
+  ul {
+    margin-top: 10px;
+  }
+  li {
+    color: $blue;
+    // background-color: $blue;
+    margin: 1px;
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px 10px;
+  }
+  a {
+    color: $blue;
+    position: relative;
+    font-size: 1em;
+    text-align: center;
+    font-family: $accent-font-family;
+    vertical-align: middle;
+  }
+}
+
+.profile_edit{
+  @include span-columns(12 of 12);
+  text-align: center;
+}
+
+.profile_edit a{
+  font-family: $accent-font-family;
+}
+
+.profile_edit a:hover{
+  color: white;
+}
+
+.review_list {
+  color: $blue;
+  padding-left: 20px;
+
+  quote {
+    font-style: italic;
+    font-size: 1.2em;
+  }
+}
+
+.profile_info .block_it{
+  display: block;
+}

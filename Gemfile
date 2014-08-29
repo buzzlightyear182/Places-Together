@@ -79,3 +79,5 @@ gem "autoprefixer-rails"
 gem 'database_cleaner'
 
 gem 'carrierwave'
+
+gem 'mini_magick'

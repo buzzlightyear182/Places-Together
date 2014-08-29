@@ -179,3 +179,51 @@
   @include span-columns(8 of 12);
   text-align: center;
 }
+
+.trip_status {
+  @include span-columns(3 of 12);
+}
+
+.fulltrip {
+  color: $red;
+}
+
+#colspan2 {
+  @include span-columns(8 of 12);
+}
+
+.reviewables {
+  @include span-columns(8 of 12);
+}
+
+.trip_display h4 {
+  color: $blue;
+  background-color: white;
+  display: inline;
+  padding: 0 4px;
+}
+
+.trip_display p{
+  margin-top: 20px;
+}
+
+.trip_info_on_show {
+  margin: auto;
+  @include span-columns(8 of 12);
+}
+
+.trip_info_on_show div {
+  padding: 5px;
+}
+
+.trip_text_on_show {
+  font-size: 1.2em;
+  font-family: $accent-font-family;
+  display: inline-block;
+  background-color: white;
+  color: $dark-gray;
+}
+
+.trip_name {
+  color: $yellow;
+}

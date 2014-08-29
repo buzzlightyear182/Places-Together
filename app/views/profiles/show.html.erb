@@ -1,31 +1,79 @@
-This is the profile show page
-<br/>
-First name <%= @profile.first_name %><br/>
-Last name <%= @profile.surname %><br/>
-Rating <%= @profile.rating %><br/>
-Occupation <%= @profile.occupation %><br/>
-Birthday <%= @profile.birthday %><br/>
-Hometown <%= @profile.hometown %><br/>
-Languages <%= @profile.languages.join(",") %><br/>
-<br/>
-Links:<br/>
-Facebook <%= @profile.facebook %><br/>
-Twitter <%= @profile.twitter %><br/>
-Instagram <%= @profile.instagram %><br/>
-Google <%= @profile.google %><br/>
-Blog <%= @profile.blog %><br/>
-Others <%= @profile.others %><br/>
+<div class='profile_display'>
+<h1>Something about <span class='profile_username'><%= @profile.user.username %></span>:</h1>
 
-Previous trips completed:<br/>
-<% @profile_trips.each do |key, value| %>
-<%= link_to key, trip_path(value) %></br>
-<% end %>
+<div class='profile_info'>
+  <div>
+    <h4><%= @profile.first_name%> <%= @profile.surname %></h4><span class="profile_text"> is currently a/an </span><h4><%= @profile.occupation %>.</h4>
+  </div>
+  <div>
+    <span class="profile_text">Born on</span><h4><%= @profile.birthday %>,</h4><span class="profile_text"> <%= @profile.first_name%> is from </span><h4><%= @profile.hometown %>.</h4>
+  </div>
+  <div>
+    <span class="profile_text"> You can communicate with each other in </span><h4><%= @profile.languages.join(",") %>.</h4>
+  </div>
 
-<% @reviews.each do |review| %>
-  <%= review.content %><br/>
-  by <%= User.find(review.author_id).username %><br/><br/>
-<% end %>
+  <div class='profile_links'>
+      <% if @profile.facebook? %>
+        <a href='http://www.facebook.com/'<%=@profile.facebook %> >
+        <%= image_tag("facebook.png") %></a>
+      <% end %>
 
+      <% if @profile.twitter? %>
+        <a href='http://www.twitter.com/'<%=@profile.twitter %> >
+        <%= image_tag("twitter.png") %></a>
+      <% end %>
+
+      <% if @profile.instagram? %>
+        <a href='http://www.instagram.com/'<%=@profile.instagram %> >
+        <%= image_tag("instagram.png") %></a>
+      <% end %>
+
+      <% if @profile.google? %>
+        <a href='https://plus.google.com/+'<%=@profile.google %>'/posts' >
+        <%= image_tag("google.png") %></a>
+      <% end %>
+
+      <% if @profile.blog? %>
+        <a href= <%=@profile.blog %> ><%= image_tag("blog.png") %></a>
+      <% end %>
+
+      <% if @profile.others? %>
+        <a href= <%=@profile.others %> ><label for="others">Others</label></a>
+      <% end %>
+  </div>
+</div>
+
+<div class='profile_photo'>
+  <% if @profile.avatar? %>
+    <%= image_tag(@profile.avatar) %>
+  <% end %>
+</div>
+
+<div class='profile_rating'>
+<h4>Rating</h4><p><%= @profile.rating == nil ? "Not yet rated" : @profile.rating %></p>
+</div>
+
+<div class='profile_boxes'>
+  <h4>Previous trips completed:</h4>
+  <ul class='previous_trips_done'>
+  <% @profile_trips.each do |key, value| %>
+    <li><%= link_to key, trip_path(value) %></li>
+  <% end %>
+  </ul>
+</div>
+
+<div class='profile_boxes'>
+  <h4>Reviews:</h4>
+  <ul class='review_list'>
+  <% @reviews.each do |review| %>
+    <li><quote><%= review.content %></quote>
+      <p>by <%= User.find(review.author_id).username %></p></li>
+  <% end %>
+  </ul>
+</div>
+
+<div class='profile_edit'>
 <% if @profile.user_id == current_user.id %>
   <button><%= link_to "Edit my profile", edit_profile_path(@profile.id) %></button>
 <% end %>
+</div>

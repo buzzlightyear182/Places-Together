@@ -14,11 +14,13 @@ class Trip < ActiveRecord::Base
 
 	validate :from_date_is_in_future
 	validate :from_date_before_to_date
-	validate :no_duplicates
+	# validate :no_duplicates
 
-	def no_duplicates
-
-	end
+	# def no_duplicates
+	# 	Trip.all.each do |trip|
+	# 		check here all attributes
+	# 	end
+	# end
 
   def create_participation current_user
     Participation.create user_id: current_user.id, trip_id: id, confirmed: true
@@ -142,5 +144,4 @@ class Trip < ActiveRecord::Base
 			new_activity.id
 		end
 	end
-
 end
