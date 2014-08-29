@@ -3,7 +3,7 @@
     <% if @trip.joinable? current_user %>
       <%=link_to "Join this trip", trip_participations_path(:trip_id => @trip.id), method: 'post' %>
       <% else %>
-        <span class='fulltrip'>FULL TRIP</span><% flash[:notice] = "Sorry this trip is full!" %>
+        <span class='fulltrip'>CANNOT JOIN</span><% flash[:notice] = "Sorry this trip is full!" %>
       <% end %>
   </li>
   <% if @trip.organizer == current_user.id %>
