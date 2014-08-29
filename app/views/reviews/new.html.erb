@@ -1,17 +1,16 @@
-This is the create a new review form!
-<br/>
-<% if @errors != nil %>
-  <% @errors.each do |e| %>
-    <%= e %>
-  <% end %>
-<% end %>
+<h1>Review your trip mate </h1>
 
+<div class='make_review'>
 <%= form_for [@profile, @review] do |f| %>
-  You are reviewing: <%= @reviewee.username %> for trip:
-  <%= f.select :trip, options_for_select(@common_trips) %>
+  <p>You are reviewing: </p>
+    <h3><%= @reviewee.username %> </h3> <p>for trip:</p>
+    <%= f.select :trip, options_for_select(@common_trips) %>
   <%= f.label "Please leave an honest review" %>
   <%= f.text_field :content %>
   <%= f.label "How would you rate this person?" %>
-  1<%= f.range_field :rating, in: 1..10 %>10
+
+  <div class='rating_range'>
+  <span class='rating_score'>1</span><%= f.range_field :rating, in: 1..10 %><span class='rating_score'>10</span></div>
   <%= f.button :submit %>
 <% end %>
+</div>

@@ -33,7 +33,7 @@ class ProfilesController < ApplicationController
 private
 
   def profile_params
-    params.require(:profile).permit(:first_name, :surname, :hometown, :birthday, :occupation, :avatar, :languages, :facebook, :twitter, :instagram, :google, :blog)
+    params.require(:profile).permit(:first_name, :surname, :hometown, :birthday, :occupation, :languages, :facebook, :twitter, :instagram, :google, :blog)
   end
 
 end

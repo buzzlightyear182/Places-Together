@@ -1,3 +1,57 @@
-// Place all the styles related to the reviews controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.make_review h3{
+  display: inline;
+  margin: 0 5px;
+}
+
+.make_review p{
+  font-family: $accent-font-family;
+  font-size: 1.2em;
+  display: inline;
+}
+
+.make_review h3{
+  color: $yellow;
+}
+
+.make_review select {
+  border: 1px solid $yellow;
+  background-color: white;
+  box-shadow: none;
+  display: inline;
+    margin: 0 5px;
+}
+
+.make_review input {
+  border: 1px solid $yellow;
+  background-color: white;
+ box-shadow: none;
+}
+
+.make_review input:hover {
+  border: 1px solid $green;
+   box-shadow: none;
+}
+
+.make_review input:focus {
+  border: 2px solid $green;
+   box-shadow: none;
+}
+
+.rating_range{
+  margin-bottom: 10px;
+}
+
+.rating_score {
+  font-family: $accent-font-family;
+  display: inline;
+  font-size: 1.5em;
+  color: white;
+  background-color: $yellow;
+  padding: 0 8px;
+  border-radius: 20px;
+}
+
+.rating_range input {
+  display: inline;
+    background-color: $yellow;
+}

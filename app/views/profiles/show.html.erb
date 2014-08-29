@@ -44,7 +44,11 @@
 </div>
 
 <div class='profile_photo'>
-  <%= image_tag("profile.jpg") %>
+  <% if @profile.id == 1 %>
+    <%= image_tag("profile.jpg") %>
+  <% else %>
+    <%= image_tag("profile_default.png") %>
+  <%end%>
 </div>
 
 <div class='profile_rating'>
