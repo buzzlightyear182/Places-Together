@@ -30,7 +30,6 @@
       <li><%= link_to "Edit my profile", edit_profile_path(id: Profile.where(user_id: current_user.id).first.id) %></li>
     </ul>
   </li>
-  <% end %>
   <li = "accordion_first">
     <a href="javascript:void(0)" class="js-accordion-trigger">Trips</a>
     <ul class="submenu">
@@ -38,6 +37,7 @@
       <li><%= link_to "View my trips", my_trips_path, method: 'get' %></li>
     </ul>
   </li>
+  <% end %>
 </ul>
 
 <script>

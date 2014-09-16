@@ -1,7 +1,7 @@
 <%= form_for @trip do |f| %>
   <div class="trip_form">
     <div class='trip_form_place'>
-      <%= f.label "Wherace do you want to go?" %>
+      <%= f.label "Where do you want to go?" %>
       <%= f.text_field :place, :value => (@trip.place == nil ? params[:place] : @trip.place.city) %>
     </div>
     <div class='trip_form_activity'>

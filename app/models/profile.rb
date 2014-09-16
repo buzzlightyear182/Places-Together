@@ -1,4 +1,4 @@
-# require 'carrierwave/processing/mini_magick'
+require 'carrierwave/processing/mini_magick'
 
 class Profile < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader

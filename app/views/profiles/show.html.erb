@@ -11,6 +11,9 @@
   <div>
     <span class="profile_text"> You can communicate with each other in </span><h4><%= @profile.languages.join(",") %>.</h4>
   </div>
+  <div>
+    <span class="profile_text"> Write an email to </span><h4><%= link_to @profile.user.email, mailto:@profile.user.email %>.</h4>
+  </div>
 
   <div class='profile_links'>
       <% if @profile.facebook? %>
@@ -44,11 +47,7 @@
 </div>
 
 <div class='profile_photo'>
-  <% if @profile.id == 1 %>
-    <%= image_tag("profile.jpg") %>
-  <% else %>
-    <%= image_tag("profile_default.png") %>
-  <%end%>
+    <%= image_tag(@profile.avatar) %>
 </div>
 
 <div class='profile_rating'>
@@ -56,7 +55,7 @@
 </div>
 
 <div class='profile_boxes'>
-  <h4>Previous trips completed:</h4>
+  <h4>Trips:</h4>
   <ul class='previous_trips_done'>
   <% @profile_trips.each do |key, value| %>
     <li><%= link_to key, trip_path(value) %></li>

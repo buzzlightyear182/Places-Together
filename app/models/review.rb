@@ -11,7 +11,7 @@ class Review < ActiveRecord::Base
 
   def check_to_date_of_trip
     unless trip.has_passed
-      errors.add(:trip, "Must be finished")
+      errors.add(:trip, "Must be finished, Please select another trip")
     end
   end
 
