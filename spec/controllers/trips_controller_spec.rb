@@ -31,8 +31,8 @@ RSpec.describe TripsController, :type => :controller do
       "place" => @place.city,
       "activity" => "",
       "activity_create" => @activity.activity_name,
-      "from_date"=>"2015-10-21",
-      "to_date"=>"2015-11-21",
+      "from_date"=>Date.today+1,
+      "to_date"=>Date.today+3,
       "capacity" => "3",
       "description" => "Web Development Intensive Bootcamp"
       }
@@ -52,8 +52,8 @@ RSpec.describe TripsController, :type => :controller do
         "place" => @new_place.city,
         "activity" => @activity.activity_name,
         "activity_create" => "",
-        "from_date"=>"2015-10-21",
-        "to_date"=>"2015-11-21",
+        "from_date"=>Date.today+1,
+        "to_date"=>Date.today+3,
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
@@ -73,8 +73,8 @@ RSpec.describe TripsController, :type => :controller do
         "place" => @new_place.city,
         "activity" => @activity.activity_name,
         "activity_create" => "",
-        "from_date"=>"2015-10-21",
-        "to_date"=>"2015-11-21",
+        "from_date"=>Date.today+1,
+        "to_date"=>Date.today+3,
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
@@ -95,8 +95,8 @@ RSpec.describe TripsController, :type => :controller do
         "place" => @place.city,
         "activity" => "",
         "activity_create" => @new_activity.activity_name,
-        "from_date"=>"2015-10-21",
-        "to_date"=>"2015-11-21",
+        "from_date"=>Date.today+1,
+        "to_date"=>Date.today+3,
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
@@ -116,8 +116,8 @@ RSpec.describe TripsController, :type => :controller do
         "place" => @place.city,
         "activity" => "",
         "activity_create" => @new_activity.activity_name,
-        "from_date"=>"2015-10-21",
-        "to_date"=>"2015-11-21",
+        "from_date"=>Date.today+1,
+        "to_date"=>Date.today+3,
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
@@ -138,8 +138,8 @@ RSpec.describe TripsController, :type => :controller do
         "place" => @place.city,
         "activity" => "",
         "activity_create" => @new_activity.activity_name,
-        "from_date"=>"2015-10-21",
-        "to_date"=>"2015-11-21",
+        "from_date"=>Date.today+1,
+        "to_date"=>Date.today+3,
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
@@ -159,8 +159,8 @@ RSpec.describe TripsController, :type => :controller do
         "place" => @place.city,
         "activity" => "",
         "activity_create" => @new_activity.activity_name,
-        "from_date"=>"2015-10-21",
-        "to_date"=>"2015-11-21",
+        "from_date"=>Date.today+1,
+        "to_date"=>Date.today+3,
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
@@ -182,8 +182,8 @@ RSpec.describe TripsController, :type => :controller do
         "place" => @new_place.city,
         "activity" => "",
         "activity_create" => @new_activity.activity_name,
-        "from_date"=>"2015-10-21",
-        "to_date"=>"2015-11-21",
+        "from_date"=>Date.today+1,
+        "to_date"=>Date.today+3,
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
@@ -204,8 +204,8 @@ RSpec.describe TripsController, :type => :controller do
         "place" => @place.city,
         "activity" => @activity.activity_name,
         "activity_create" => "",
-        "from_date"=>"2015-10-21",
-        "to_date"=>"2015-11-21",
+        "from_date"=>Date.today+1,
+        "to_date"=>Date.today+3,
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
@@ -226,8 +226,8 @@ RSpec.describe TripsController, :type => :controller do
         "place" => @place.city,
         "activity" => @activity.activity_name,
         "activity_create" => "",
-        "from_date"=>"2015-10-21",
-        "to_date"=>"2015-11-21",
+        "from_date"=>Date.today+1,
+        "to_date"=>Date.today+3,
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
@@ -245,15 +245,13 @@ RSpec.describe TripsController, :type => :controller do
       @organizer = @test_user
       @p_user = User.create(username: "participant", password: "12345678", email: "p_user@gmail.com")
       @sure_user = User.create(username: "surejoiner", password: "12345678", email: "sure_user@gmail.com")
-    end
 
-    it "and number of people confirmed and pending approval" do
       trip_params = {
         "place" => @place.city,
         "activity" => @activity.activity_name,
         "activity_create" => "",
-        "from_date"=>"2014-09-01",
-        "to_date"=>"2014-09-03",
+        "from_date"=> Date.today+1,
+        "to_date"=> Date.today+3,
         "capacity" => "3",
         "description" => "Web Development Intensive Bootcamp"
         }
@@ -261,7 +259,9 @@ RSpec.describe TripsController, :type => :controller do
       @trip.save
       @trip.create_participation @organizer
       @trip.reload
+    end
 
+    it "and number of people confirmed and pending approval" do
       @pending = Participation.create trip_id: @trip.id, user_id: @p_user.id, confirmed: false
       @sure = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
       @count = @trip.get_count_of_people
@@ -270,21 +270,6 @@ RSpec.describe TripsController, :type => :controller do
     end
 
     it "but not reviewable members when to_date is not passed" do
-      trip_params = {
-        "place" => @place.city,
-        "activity" => @activity.activity_name,
-        "activity_create" => "",
-        "from_date"=>"2014-08-27",
-        "to_date"=>"2014-09-01",
-        "capacity" => "3",
-        "description" => "Web Development Intensive Bootcamp"
-        }
-
-      @trip = Trip.create_new_trip(trip_params, @organizer.id)
-      @trip.save
-      @trip.create_participation @organizer
-      @trip.reload
-
       @pending = Participation.create trip_id: @trip.id, user_id: @p_user.id, confirmed: false
       @sure = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: false
       @review_members = @trip.reviewable? @test_user
@@ -292,40 +277,12 @@ RSpec.describe TripsController, :type => :controller do
     end
 
     it "but not confirmed participants when current_user is not part of the trip" do
-      trip_params = {
-        "place" => @place.city,
-        "activity" => @activity.activity_name,
-        "activity_create" => "",
-        "from_date"=>"2014-08-22",
-        "to_date"=>"2014-08-24",
-        "capacity" => "3",
-        "description" => "Web Development Intensive Bootcamp"
-        }
-
-      @trip = Trip.create_new_trip(trip_params, @organizer.id)
-      @trip.save
-      @trip.create_participation @organizer
-
       @pending = Participation.create trip_id: @trip.id, user_id: @p_user.id, confirmed: false
       @review_members = @trip.reviewable? @sure_user
       expect(@review_members).to eq([])
     end
 
     it "and confirmed participants when reviewable" do
-      trip_params = {
-        "place" => @place.city,
-        "activity" => @activity.activity_name,
-        "activity_create" => "",
-        "from_date"=>"2014-08-28",
-        "to_date"=>"2014-08-29",
-        "capacity" => "3",
-        "description" => "Web Development Intensive Bootcamp"
-        }
-
-      @trip = Trip.create_new_trip(trip_params, @organizer.id)
-      @trip.save
-      @trip.create_participation @organizer
-
       @pending = Participation.create trip_id: @trip.id, user_id: @p_user.id, confirmed: true
       @sure = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
       @review_members = @trip.reviewable? @organizer
@@ -333,39 +290,11 @@ RSpec.describe TripsController, :type => :controller do
     end
 
     it "but doesn't allow the organizer to manually join own trip" do
-        trip_params = {
-          "place" => @place.city,
-          "activity" => @activity.activity_name,
-          "activity_create" => "",
-          "from_date"=>"2014-08-28",
-          "to_date"=>"2014-08-29",
-          "capacity" => "5",
-          "description" => "Web Development Intensive Bootcamp"
-          }
-
-        @trip = Trip.create_new_trip(trip_params, @organizer.id)
-        @trip.save
-        @trip.create_participation @organizer
-
         @can_join = @trip.joinable? @organizer
         expect(@can_join).to be_falsy
     end
 
     it "and doesn't allow people to join if trip is full" do
-        trip_params = {
-          "place" => @place.city,
-          "activity" => @activity.activity_name,
-          "activity_create" => "",
-          "from_date"=>"2014-08-28",
-          "to_date"=>"2014-08-29",
-          "capacity" => "2",
-          "description" => "Web Development Intensive Bootcamp"
-          }
-
-        @trip = Trip.create_new_trip(trip_params, @p_user.id)
-        @trip.save
-        @trip.create_participation @p_user
-
         confirmed = Participation.create trip_id: @trip.id, user_id: @sure_user.id, confirmed: true
 
         @can_join = @trip.joinable? @test_user
