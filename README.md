@@ -1,6 +1,7 @@
 Places-Together
 ===============
 
+**Updated repo [here](https://github.com/buzzlightyear182/More-places)**
 
 Final project for Ironhack Web Development Intensive Bootcamp. Built on HTML5, CSS and Javascript, I used Ruby on Rails and several gems such as rSpec for testing, Devise, fullCalendar. 
 
